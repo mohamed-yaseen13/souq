@@ -1,4 +1,4 @@
-package com.example.souq
+package com.engmo.souq
 
 import io.flutter.embedding.android.FlutterActivity
 

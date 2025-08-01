@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "851059657252",
+    "project_id": "souq-app-distribution",
+    "storage_bucket": "souq-app-distribution.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851059657252:android:491bdf0b7dd275d45f26b1",
+        "android_client_info": {
+          "package_name": "com.engmo.souq"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmCvqcmt-JMSPDSI7PLFnWTZsl1FqPO74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
