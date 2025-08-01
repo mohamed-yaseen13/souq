@@ -4,13 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
-import 'package:souq/features/signup/logic/cubit/signup_cubit.dart';
-import 'package:souq/features/signup/logic/cubit/signup_state.dart';
-import 'package:souq/features/signup/ui/widgets/already_have_an_account_row.dart';
-import 'package:souq/features/signup/ui/widgets/signup_form.dart';
+import 'package:souq/features/login/logic/cubit/login_cubit.dart';
+import 'package:souq/features/login/logic/cubit/login_state.dart';
+import 'package:souq/features/login/ui/widgets/dont_have_an_account_row.dart';
+import 'package:souq/features/login/ui/widgets/login_form.dart';
+import 'package:souq/features/login/ui/widgets/login_with_google.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,37 +24,30 @@ class SignupScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Sign up',
+                  'Login',
                   style: TextStyle(
                     fontSize: 32.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                verticalSpace(4),
-                Text(
-                  'Create an account to continue!',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
-                ),
-                BlocConsumer<SignupCubit, SignupState>(
+                BlocConsumer<LoginCubit, LoginState>(
                   listener: (context, state) {
-                    if (state is SignupSuccess) {
+                    if (state is LoginSuccess) {
                       context.pushReplacementNamed(AppRoutes.home);
-                    } else if (state is SignupError) {
+                    } else if (state is LoginError) {
                       ScaffoldMessenger.of(
                         context,
                       ).showSnackBar(SnackBar(content: Text(state.message)));
                     }
                   },
                   builder: (context, state) {
-                    return SignupForm(signupState: state);
+                    return LoginForm(loginState: state);
                   },
                 ),
-                verticalSpace(48),
-                AlreadyHaveAnAccountRow(),
+                verticalSpace(24),
+                LoginWithGoogle(),
+                verticalSpace(24),
+                DontHaveAnAccountRow(),
               ],
             ),
           ),

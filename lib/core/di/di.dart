@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
+import 'package:souq/features/login/data/login_repo.dart';
+import 'package:souq/features/login/logic/cubit/login_cubit.dart';
 import 'package:souq/features/signup/data/signup_repo.dart';
 import 'package:souq/features/signup/logic/cubit/signup_cubit.dart';
 
@@ -20,4 +22,10 @@ Future<void> setupGetIt() async {
   );
 
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt<SignupRepo>()));
+
+  getIt.registerLazySingleton<LoginRepo>(
+    () => LoginRepo(auth: getIt<FirebaseAuth>()),
+  );
+
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<LoginRepo>()));
 }

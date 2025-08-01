@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/core/di/di.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/home/home_screen.dart';
+import 'package:souq/features/login/logic/cubit/login_cubit.dart';
+import 'package:souq/features/login/ui/login_screen.dart';
 import 'package:souq/features/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/signup/ui/signup_screen.dart';
 
@@ -21,6 +23,15 @@ class AppRouter {
       case AppRoutes.home:
         return MaterialPageRoute(
           builder: (_) => HomeScreen(),
+          settings: settings,
+        );
+
+      case AppRoutes.loginScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: LoginScreen(),
+          ),
           settings: settings,
         );
 
