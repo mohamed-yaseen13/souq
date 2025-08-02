@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:souq/core/helpers/extensions.dart';
+import 'package:souq/core/routing/app_routes.dart';
 
 class ForgotPasswordRow extends StatelessWidget {
   const ForgotPasswordRow({super.key});
@@ -10,7 +12,9 @@ class ForgotPasswordRow extends StatelessWidget {
       children: [
         Spacer(),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(AppRoutes.resetPasswordScreen);
+          },
           child: Text(
             'Forgot Password ?',
             style: TextStyle(

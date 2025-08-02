@@ -5,6 +5,8 @@ import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/home/home_screen.dart';
 import 'package:souq/features/login/logic/cubit/login_cubit.dart';
 import 'package:souq/features/login/ui/login_screen.dart';
+import 'package:souq/features/reset_password/logic/cubit/reset_password_cubit.dart';
+import 'package:souq/features/reset_password/ui/reset_password_screen.dart';
 import 'package:souq/features/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/signup/ui/signup_screen.dart';
 
@@ -31,6 +33,15 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<LoginCubit>(),
             child: LoginScreen(),
+          ),
+          settings: settings,
+        );
+
+      case AppRoutes.resetPasswordScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ResetPasswordCubit>(),
+            child: ResetPasswordScreen(),
           ),
           settings: settings,
         );
