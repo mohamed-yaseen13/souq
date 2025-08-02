@@ -14,9 +14,13 @@ class LoginRepo {
       throw Exception("Email Doesn't Exist");
     }
 
-    await auth.signInWithEmailAndPassword(
-      email: request.email,
-      password: request.password,
-    );
+    try {
+      await auth.signInWithEmailAndPassword(
+        email: request.email,
+        password: request.password,
+      );
+    } on FirebaseAuthException {
+      throw Exception('Incorrect Password');
+    }
   }
 }
