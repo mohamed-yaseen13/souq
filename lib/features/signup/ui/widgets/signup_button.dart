@@ -8,14 +8,12 @@ class SignupButton extends StatelessWidget {
   final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  final String? selectedRole;
 
   const SignupButton({
     super.key,
     required this.emailController,
     required this.nameController,
     required this.passwordController,
-    required this.selectedRole,
     required this.formKey,
   });
 
@@ -28,7 +26,6 @@ class SignupButton extends StatelessWidget {
             name: nameController.text,
             email: emailController.text,
             password: passwordController.text,
-            role: selectedRole!,
           );
           context.read<SignupCubit>().signupWithEmail(request);
         }

@@ -28,7 +28,7 @@ class SignupRepo {
       name: request.name,
       email: request.email,
       phone: '',
-      role: request.role,
+      role: '',
     );
 
     await firestore.collection('users').doc(request.email).set(user.toJson());

@@ -7,13 +7,11 @@ class SignupRequestModel {
   final String name;
   final String email;
   final String password;
-  final String role;
 
   SignupRequestModel({
     required this.name,
     required this.email,
     required this.password,
-    required this.role,
   });
 
   factory SignupRequestModel.fromJson(Map<String, dynamic> json) =>

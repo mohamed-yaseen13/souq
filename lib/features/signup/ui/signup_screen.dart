@@ -42,7 +42,7 @@ class SignupScreen extends StatelessWidget {
                 BlocConsumer<SignupCubit, SignupState>(
                   listener: (context, state) {
                     if (state is SignupSuccess) {
-                      context.pushReplacementNamed(AppRoutes.home);
+                      context.pushReplacementNamed(AppRoutes.onBoardingScreen);
                     } else if (state is SignupError) {
                       ScaffoldMessenger.of(
                         context,

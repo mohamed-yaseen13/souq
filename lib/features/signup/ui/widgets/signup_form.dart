@@ -4,7 +4,6 @@ import 'package:souq/features/signup/logic/cubit/signup_state.dart';
 import 'package:souq/core/widgets/email_text_form_field.dart';
 import 'package:souq/core/widgets/name_text_form_field.dart';
 import 'package:souq/core/widgets/password_text_form_field.dart';
-import 'package:souq/features/signup/ui/widgets/role_drop_down.dart';
 import 'package:souq/features/signup/ui/widgets/signup_button.dart';
 
 class SignupForm extends StatefulWidget {
@@ -22,8 +21,6 @@ class _SignupFormState extends State<SignupForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  String? _selectedRole;
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -37,11 +34,6 @@ class _SignupFormState extends State<SignupForm> {
           verticalSpace(24),
           PasswordTextFormField(passwordController: _passwordController),
           verticalSpace(24),
-          RoleDropDown(
-            onChanged: (value) => setState(() => _selectedRole = value),
-            selectedRole: _selectedRole,
-          ),
-          verticalSpace(24),
           widget.signupState is SignupLoading
               ? const CircularProgressIndicator()
               : SignupButton(
@@ -49,7 +41,6 @@ class _SignupFormState extends State<SignupForm> {
                   nameController: _nameController,
                   emailController: _emailController,
                   passwordController: _passwordController,
-                  selectedRole: _selectedRole,
                 ),
         ],
       ),
