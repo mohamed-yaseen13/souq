@@ -37,6 +37,10 @@ class ResetPasswordScreen extends StatelessWidget {
                         ),
                       );
                       context.pop();
+                    } else if (state is ResetPasswordError) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(state.message)));
                     }
                   },
                   builder: (context, state) {

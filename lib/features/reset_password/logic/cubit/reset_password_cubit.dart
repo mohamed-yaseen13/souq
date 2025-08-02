@@ -13,7 +13,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     emit(const ResetPasswordState.loading());
 
     try {
-      resetPasswordRepo.sendResetPasswordLink(request);
+      await resetPasswordRepo.sendResetPasswordLink(request);
 
       emit(ResetPasswordState.success());
     } catch (e) {

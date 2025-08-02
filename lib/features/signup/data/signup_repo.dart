@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:souq/core/auth/auth_service.dart';
 import 'package:souq/core/helpers/google_credential.dart';
 import 'package:souq/core/models/user_model.dart';
 import 'package:souq/features/signup/data/signup_request_model.dart';
@@ -11,6 +12,12 @@ class SignupRepo {
   SignupRepo({required this.auth, required this.firestore});
 
   Future<void> signupWithEmail(SignupRequestModel request) async {
+    final bool emailExist = await AuthService.checkIfEmailExist(request.email);
+
+    if (emailExist) {
+      throw Exception("Email Already Exist");
+    }
+
     final userCred = await auth.createUserWithEmailAndPassword(
       email: request.email,
       password: request.password,
@@ -27,7 +34,7 @@ class SignupRepo {
       role: request.role,
     );
 
-    await firestore.collection('users').doc(id).set(user.toJson());
+    await firestore.collection('users').doc(request.email).set(user.toJson());
   }
 
   Future<void> signupWithGoogle() async {
