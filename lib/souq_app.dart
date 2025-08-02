@@ -4,7 +4,9 @@ import 'package:souq/core/routing/app_router.dart';
 import 'package:souq/core/routing/app_routes.dart';
 
 class SouqApp extends StatelessWidget {
-  const SouqApp({super.key});
+  final bool isUserLoggedIn;
+
+  const SouqApp({super.key, required this.isUserLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,9 @@ class SouqApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.signupScreen,
+          initialRoute: isUserLoggedIn
+              ? AppRoutes.home
+              : AppRoutes.signupScreen,
           onGenerateRoute: AppRouter.generateRoute,
         );
       },

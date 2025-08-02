@@ -1,24 +1,36 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
-  static bool isUserLoggedIn = false;
+  static final String isUserLoggedInKay = 'isUserLoggedIn';
 
-  static String userEmail = 'userEmail';
+  static Future<void> setIsUserLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setBool(isUserLoggedInKay, true);
+  }
+
+  static Future<bool> getIsUserLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.getBool(isUserLoggedInKay) ?? false;
+  }
+
+  static final String userEmailKey = 'userEmail';
 
   static Future<void> setUserEmail(String email) async {
     final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString(userEmail, email);
+    await prefs.setString(userEmailKey, email);
   }
 
   static Future<String> getUserEmail() async {
     final prefs = await SharedPreferences.getInstance();
 
-    return prefs.getString(userEmail) ?? '';
+    return prefs.getString(userEmailKey) ?? '';
   }
 
   static Future<void> saveUser(String email) async {
-    isUserLoggedIn = true;
+    await setIsUserLoggedIn();
 
     await setUserEmail(email);
   }

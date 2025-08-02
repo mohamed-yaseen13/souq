@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/constants/app_constants.dart';
 import 'package:souq/core/helpers/extensions.dart';
+import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/on_boarding/ui/widgets/role_card.dart';
@@ -55,7 +57,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       ElevatedButton(
                         onPressed: selectedRole == null
                             ? null
-                            : () {
+                            : () async {
+                                final email = await SharedPref.getUserEmail();
+                                await FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(email)
+                                    .update({'role': selectedRole?.name});
+                                if (!mounted) return;
+                                // ignore: use_build_context_synchronously
                                 context.pushNamed(AppRoutes.home);
                               },
                         child: Text('Get Started'),
