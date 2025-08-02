@@ -7,5 +7,6 @@ class SignupState with _$SignupState {
   const factory SignupState.initial() = _Initial;
   const factory SignupState.loading() = SignupLoading;
   const factory SignupState.success() = SignupSuccess;
+  const factory SignupState.emailAlreadyExist() = SignupEmailAlreadyExist;
   const factory SignupState.error(String message) = SignupError;
 }

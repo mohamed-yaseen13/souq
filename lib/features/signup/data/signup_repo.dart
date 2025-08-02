@@ -37,7 +37,7 @@ class SignupRepo {
     await firestore.collection('users').doc(request.email).set(user.toJson());
   }
 
-  Future<void> signupWithGoogle() async {
+  Future<bool> signupWithGoogle() async {
     final credential = await GoogleCredential.getGoogleCredential();
 
     final userCred = await auth.signInWithCredential(credential);
@@ -62,6 +62,8 @@ class SignupRepo {
           .collection('users')
           .doc(userCred.user!.email)
           .set(user.toJson());
+      return true;
     }
+    return false;
   }
 }

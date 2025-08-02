@@ -55,13 +55,14 @@ extension SignupStatePatterns on SignupState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( SignupLoading value)?  loading,TResult Function( SignupSuccess value)?  success,TResult Function( SignupError value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( SignupLoading value)?  loading,TResult Function( SignupSuccess value)?  success,TResult Function( SignupEmailAlreadyExist value)?  emailAlreadyExist,TResult Function( SignupError value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case SignupLoading() when loading != null:
 return loading(_that);case SignupSuccess() when success != null:
-return success(_that);case SignupError() when error != null:
+return success(_that);case SignupEmailAlreadyExist() when emailAlreadyExist != null:
+return emailAlreadyExist(_that);case SignupError() when error != null:
 return error(_that);case _:
   return orElse();
 
@@ -80,13 +81,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( SignupLoading value)  loading,required TResult Function( SignupSuccess value)  success,required TResult Function( SignupError value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( SignupLoading value)  loading,required TResult Function( SignupSuccess value)  success,required TResult Function( SignupEmailAlreadyExist value)  emailAlreadyExist,required TResult Function( SignupError value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case SignupLoading():
 return loading(_that);case SignupSuccess():
-return success(_that);case SignupError():
+return success(_that);case SignupEmailAlreadyExist():
+return emailAlreadyExist(_that);case SignupError():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -104,13 +106,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( SignupLoading value)?  loading,TResult? Function( SignupSuccess value)?  success,TResult? Function( SignupError value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( SignupLoading value)?  loading,TResult? Function( SignupSuccess value)?  success,TResult? Function( SignupEmailAlreadyExist value)?  emailAlreadyExist,TResult? Function( SignupError value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case SignupLoading() when loading != null:
 return loading(_that);case SignupSuccess() when success != null:
-return success(_that);case SignupError() when error != null:
+return success(_that);case SignupEmailAlreadyExist() when emailAlreadyExist != null:
+return emailAlreadyExist(_that);case SignupError() when error != null:
 return error(_that);case _:
   return null;
 
@@ -128,12 +131,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function()?  emailAlreadyExist,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case SignupLoading() when loading != null:
 return loading();case SignupSuccess() when success != null:
-return success();case SignupError() when error != null:
+return success();case SignupEmailAlreadyExist() when emailAlreadyExist != null:
+return emailAlreadyExist();case SignupError() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +156,13 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function()  emailAlreadyExist,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case SignupLoading():
 return loading();case SignupSuccess():
-return success();case SignupError():
+return success();case SignupEmailAlreadyExist():
+return emailAlreadyExist();case SignupError():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +180,13 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function()?  emailAlreadyExist,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case SignupLoading() when loading != null:
 return loading();case SignupSuccess() when success != null:
-return success();case SignupError() when error != null:
+return success();case SignupEmailAlreadyExist() when emailAlreadyExist != null:
+return emailAlreadyExist();case SignupError() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -277,6 +283,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'SignupState.success()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class SignupEmailAlreadyExist implements SignupState {
+  const SignupEmailAlreadyExist();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupEmailAlreadyExist);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SignupState.emailAlreadyExist()';
 }
 
 

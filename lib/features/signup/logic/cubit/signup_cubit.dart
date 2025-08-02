@@ -23,8 +23,12 @@ class SignupCubit extends Cubit<SignupState> {
     emit(const SignupState.loading());
 
     try {
-      await signupRepo.signupWithGoogle();
-      emit(SignupState.success());
+      final isNewUser = await signupRepo.signupWithGoogle();
+      if (isNewUser) {
+        emit(SignupState.success());
+      } else {
+        emit(SignupState.emailAlreadyExist());
+      }
     } catch (e) {
       emit(SignupState.error(e.toString()));
     }

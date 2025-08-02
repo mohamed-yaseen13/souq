@@ -43,6 +43,8 @@ class SignupScreen extends StatelessWidget {
                   listener: (context, state) {
                     if (state is SignupSuccess) {
                       context.pushReplacementNamed(AppRoutes.onBoardingScreen);
+                    } else if (state is SignupEmailAlreadyExist) {
+                      context.pushReplacementNamed(AppRoutes.home);
                     } else if (state is SignupError) {
                       ScaffoldMessenger.of(
                         context,
