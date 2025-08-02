@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:souq/core/auth/auth_service.dart';
 import 'package:souq/core/helpers/google_credential.dart';
+import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/models/user_model.dart';
 import 'package:souq/features/signup/data/signup_request_model.dart';
 
@@ -23,6 +24,8 @@ class SignupRepo {
       password: request.password,
     );
 
+    await SharedPref.saveUser(request.email);
+
     final user = UserModel(
       id: userCred.user!.uid,
       name: request.name,
@@ -38,6 +41,8 @@ class SignupRepo {
     final credential = await GoogleCredential.getGoogleCredential();
 
     final userCred = await auth.signInWithCredential(credential);
+
+    await SharedPref.saveUser(userCred.user!.email!);
 
     final userDoc = await firestore
         .collection('users')
