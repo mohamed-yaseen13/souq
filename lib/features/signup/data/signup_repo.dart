@@ -23,11 +23,8 @@ class SignupRepo {
       password: request.password,
     );
 
-    final id = userCred.user?.uid;
-    if (id == null) throw Exception('Failed to get user ID');
-
     final user = UserModel(
-      id: id,
+      id: userCred.user!.uid,
       name: request.name,
       email: request.email,
       phone: '',
@@ -42,19 +39,24 @@ class SignupRepo {
 
     final userCred = await auth.signInWithCredential(credential);
 
-    final id = userCred.user?.uid;
-    if (id == null) throw Exception('Failed to get user ID');
+    final userDoc = await firestore
+        .collection('users')
+        .doc(userCred.user!.email)
+        .get();
 
-    final userDoc = await firestore.collection('users').doc(id).get();
     if (!userDoc.exists) {
       final user = UserModel(
-        id: id,
-        name: userCred.user?.displayName ?? '',
-        email: userCred.user?.email ?? '',
+        id: userCred.user!.uid,
+        name: userCred.user!.displayName!,
+        email: userCred.user!.email!,
         phone: '',
         role: '',
       );
-      await firestore.collection('users').doc(id).set(user.toJson());
+
+      await firestore
+          .collection('users')
+          .doc(userCred.user!.email)
+          .set(user.toJson());
     }
   }
 }
