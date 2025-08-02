@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/features/signup/ui/widgets/continue_with_google.dart';
 import 'package:souq/features/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/signup/logic/cubit/signup_state.dart';
 import 'package:souq/features/signup/ui/widgets/already_have_an_account_row.dart';
@@ -49,7 +50,13 @@ class SignupScreen extends StatelessWidget {
                     }
                   },
                   builder: (context, state) {
-                    return SignupForm(signupState: state);
+                    return Column(
+                      children: [
+                        SignupForm(signupState: state),
+                        verticalSpace(24),
+                        ContinueWithGoogle(signupState: state),
+                      ],
+                    );
                   },
                 ),
                 verticalSpace(48),

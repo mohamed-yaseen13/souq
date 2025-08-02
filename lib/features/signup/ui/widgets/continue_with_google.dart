@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/features/signup/logic/cubit/signup_cubit.dart';
+import 'package:souq/features/signup/logic/cubit/signup_state.dart';
 
-class LoginWithGoogle extends StatelessWidget {
-  const LoginWithGoogle({super.key});
+class ContinueWithGoogle extends StatelessWidget {
+  final SignupState signupState;
+
+  const ContinueWithGoogle({super.key, required this.signupState});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,14 @@ class LoginWithGoogle extends StatelessWidget {
           ],
         ),
         verticalSpace(24),
-        ElevatedButton(onPressed: () {}, child: Text('Continue with Google')),
+        signupState is SignupLoading
+            ? CircularProgressIndicator()
+            : ElevatedButton(
+                onPressed: () {
+                  context.read<SignupCubit>().signupWithGoogle();
+                },
+                child: Text('Continue with Google'),
+              ),
       ],
     );
   }

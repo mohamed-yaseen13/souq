@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/features/reset_password/logic/cubit/reset_password_state.dart';
 import 'package:souq/features/reset_password/ui/widgets/reset_password_button.dart';
-import 'package:souq/features/signup/ui/widgets/email_text_form_field.dart';
+import 'package:souq/core/widgets/email_text_form_field.dart';
 
 class ResetPasswordForm extends StatefulWidget {
   final ResetPasswordState resetPasswordState;

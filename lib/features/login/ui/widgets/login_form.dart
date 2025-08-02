@@ -3,8 +3,8 @@ import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/features/login/logic/cubit/login_state.dart';
 import 'package:souq/features/login/ui/widgets/forgot_password_row.dart';
 import 'package:souq/features/login/ui/widgets/login_button.dart';
-import 'package:souq/features/signup/ui/widgets/email_text_form_field.dart';
-import 'package:souq/features/signup/ui/widgets/password_text_form_field.dart';
+import 'package:souq/core/widgets/email_text_form_field.dart';
+import 'package:souq/core/widgets/password_text_form_field.dart';
 
 class LoginForm extends StatefulWidget {
   final LoginState loginState;

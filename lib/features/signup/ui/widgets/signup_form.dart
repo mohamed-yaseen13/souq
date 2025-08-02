@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/features/signup/logic/cubit/signup_state.dart';
-import 'package:souq/features/signup/ui/widgets/email_text_form_field.dart';
-import 'package:souq/features/signup/ui/widgets/name_text_form_field.dart';
-import 'package:souq/features/signup/ui/widgets/password_text_form_field.dart';
+import 'package:souq/core/widgets/email_text_form_field.dart';
+import 'package:souq/core/widgets/name_text_form_field.dart';
+import 'package:souq/core/widgets/password_text_form_field.dart';
 import 'package:souq/features/signup/ui/widgets/role_drop_down.dart';
 import 'package:souq/features/signup/ui/widgets/signup_button.dart';
 

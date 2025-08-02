@@ -12,7 +12,20 @@
           "package_name": "com.engmo.souq"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "851059657252-egspv2c739h02b6atqtou565q38h4fp2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.engmo.souq",
+            "certificate_hash": "fa15d83fefeb6547f7d948f510599d2a131ede6f"
+          }
+        },
+        {
+          "client_id": "851059657252-kbe0ac3gvgsk88er2l49jg9oqs351qui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBmCvqcmt-JMSPDSI7PLFnWTZsl1FqPO74"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851059657252-kbe0ac3gvgsk88er2l49jg9oqs351qui.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "851059657252-pjufnifhj0dc55j82mfcth53cruepa6p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.engmo.souq"
+              }
+            }
+          ]
         }
       }
     }

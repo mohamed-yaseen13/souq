@@ -18,4 +18,15 @@ class SignupCubit extends Cubit<SignupState> {
       emit(SignupState.error(e.toString()));
     }
   }
+
+  void signupWithGoogle() async {
+    emit(const SignupState.loading());
+
+    try {
+      await signupRepo.signupWithGoogle();
+      emit(SignupState.success());
+    } catch (e) {
+      emit(SignupState.error(e.toString()));
+    }
+  }
 }

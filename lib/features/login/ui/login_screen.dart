@@ -8,7 +8,6 @@ import 'package:souq/features/login/logic/cubit/login_cubit.dart';
 import 'package:souq/features/login/logic/cubit/login_state.dart';
 import 'package:souq/features/login/ui/widgets/dont_have_an_account_row.dart';
 import 'package:souq/features/login/ui/widgets/login_form.dart';
-import 'package:souq/features/login/ui/widgets/login_with_google.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -44,8 +43,6 @@ class LoginScreen extends StatelessWidget {
                     return LoginForm(loginState: state);
                   },
                 ),
-                verticalSpace(24),
-                LoginWithGoogle(),
                 verticalSpace(24),
                 DontHaveAnAccountRow(),
               ],
