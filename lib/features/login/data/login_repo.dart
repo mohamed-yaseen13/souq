@@ -16,12 +16,12 @@ class LoginRepo {
     }
 
     try {
-      await auth.signInWithEmailAndPassword(
+      final userCred = await auth.signInWithEmailAndPassword(
         email: request.email,
         password: request.password,
       );
 
-      await SharedPref.saveUser(request.email);
+      await SharedPref.saveUser(userCred.user!.uid);
     } on FirebaseAuthException {
       throw Exception('Incorrect Password');
     }

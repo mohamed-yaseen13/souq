@@ -2,14 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService {
   static Future<bool> checkIfEmailExist(String email) async {
-    final userDoc = await FirebaseFirestore.instance
+    final snapshot = await FirebaseFirestore.instance
         .collection('users')
-        .doc(email)
+        .where('email', isEqualTo: email)
+        .limit(1)
         .get();
-
-    if (!userDoc.exists) {
-      return false;
-    }
-    return true;
+    return snapshot.docs.isNotEmpty;
   }
 }

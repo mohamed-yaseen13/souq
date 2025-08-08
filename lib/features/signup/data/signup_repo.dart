@@ -24,7 +24,7 @@ class SignupRepo {
       password: request.password,
     );
 
-    await SharedPref.saveUser(request.email);
+    await SharedPref.saveUser(userCred.user!.uid);
 
     final user = UserModel(
       id: userCred.user!.uid,
@@ -34,7 +34,7 @@ class SignupRepo {
       role: '',
     );
 
-    await firestore.collection('users').doc(request.email).set(user.toJson());
+    await firestore.collection('users').doc(user.id).set(user.toJson());
   }
 
   Future<bool> signupWithGoogle() async {
@@ -42,11 +42,9 @@ class SignupRepo {
 
     final userCred = await auth.signInWithCredential(credential);
 
-    await SharedPref.saveUser(userCred.user!.email!);
-
     final userDoc = await firestore
         .collection('users')
-        .doc(userCred.user!.email)
+        .doc(userCred.user!.uid)
         .get();
 
     if (!userDoc.exists) {
@@ -60,10 +58,15 @@ class SignupRepo {
 
       await firestore
           .collection('users')
-          .doc(userCred.user!.email)
+          .doc(userCred.user!.uid)
           .set(user.toJson());
+
+      await SharedPref.saveUser(userCred.user!.uid);
+
       return true;
     }
+    await SharedPref.saveUser(userCred.user!.uid);
+
     return false;
   }
 }

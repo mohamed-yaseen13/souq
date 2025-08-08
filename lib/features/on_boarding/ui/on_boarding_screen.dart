@@ -58,10 +58,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         onPressed: selectedRole == null
                             ? null
                             : () async {
-                                final email = await SharedPref.getUserEmail();
+                                final id = await SharedPref.getUserId();
                                 await FirebaseFirestore.instance
                                     .collection('users')
-                                    .doc(email)
+                                    .doc(id)
                                     .update({'role': selectedRole?.name});
                                 if (!mounted) return;
                                 // ignore: use_build_context_synchronously
