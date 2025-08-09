@@ -7,8 +7,10 @@ class RoleSelectionRepo {
   RoleSelectionRepo({required this.firestore});
 
   Future<void> setRole(String role) async {
-    final id = await SharedPref.getUserId();
+    final id = SharedPref.getUserId();
 
     await firestore.collection('users').doc(id).update({'role': role});
+
+    await SharedPref.setUserRole(role);
   }
 }

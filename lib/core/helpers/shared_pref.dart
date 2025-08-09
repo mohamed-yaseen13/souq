@@ -1,46 +1,85 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:souq/core/models/user_model.dart';
 
 class SharedPref {
-  static final String isUserLoggedInKay = 'isUserLoggedIn';
+  static SharedPreferences? _prefs;
 
+  static Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  // is user logged in key
+  static const String isUserLoggedInKay = 'isUserLoggedIn';
+
+  // set user logged in
   static Future<void> setIsUserLoggedIn() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    await prefs.setBool(isUserLoggedInKay, true);
+    await _prefs!.setBool(isUserLoggedInKay, true);
   }
 
-  static Future<bool> getIsUserLoggedIn() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    return prefs.getBool(isUserLoggedInKay) ?? false;
+  // get user logged in
+  static bool getIsUserLoggedIn() {
+    return _prefs!.getBool(isUserLoggedInKay) ?? false;
   }
-  //
-  //static final String userEmailKey = 'userEmail';
-  //
-  //static Future<void> setUserEmail(String email) async {
-  //  final prefs = await SharedPreferences.getInstance();
-  //
-  //  await prefs.setString(userEmailKey, email);
-  //}
-  //
-  //static Future<String> getUserEmail() async {
-  //  final prefs = await SharedPreferences.getInstance();
-  //
-  //  return prefs.getString(userEmailKey) ?? '';
-  //}
 
+  // user id key
   static const String userIdKey = 'userId';
 
+  // set user id
   static Future<void> setUserId(String id) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    await prefs.setString(userIdKey, id);
+    await _prefs!.setString(userIdKey, id);
   }
 
-  static Future<String> getUserId() async {
-    final prefs = await SharedPreferences.getInstance();
+  // get user id
+  static String getUserId() {
+    return _prefs!.getString(userIdKey) ?? '';
+  }
 
-    return prefs.getString(userIdKey) ?? '';
+  // user name key
+  static const String userNameKey = 'userNameKey';
+
+  // set user name
+  static Future<void> setUserName(String name) async {
+    await _prefs!.setString(userNameKey, name);
+  }
+
+  // get user name
+  static String getUserName() {
+    return _prefs!.getString(userNameKey) ?? '';
+  }
+
+  // user email key
+  static const String userEmailKey = 'userEmailKey';
+
+  // set user email
+  static Future<void> setUserEmail(String email) async {
+    await _prefs!.setString(userEmailKey, email);
+  }
+
+  // get user email
+  static String getUserEmail() {
+    return _prefs!.getString(userEmailKey) ?? '';
+  }
+
+  // user role key
+  static const String userRoleKey = 'userRole';
+
+  // set user role
+  static Future<void> setUserRole(String role) async {
+    await _prefs!.setString(userRoleKey, role);
+  }
+
+  // get user role
+  static String getUserRole() {
+    return _prefs!.getString(userRoleKey) ?? '';
+  }
+
+  // save user data
+  static Future<void> saveUserData({required UserModel user}) async {
+    await setIsUserLoggedIn();
+    await setUserId(user.id);
+    await setUserName(user.name);
+    await setUserEmail(user.email);
+    await setUserRole(user.role);
   }
 
   static Future<void> saveUser(String id) async {

@@ -32,7 +32,10 @@ Future<void> setupGetIt() async {
 
   //login
   getIt.registerLazySingleton<LoginRepo>(
-    () => LoginRepo(auth: getIt<FirebaseAuth>()),
+    () => LoginRepo(
+      auth: getIt<FirebaseAuth>(),
+      firestore: getIt<FirebaseFirestore>(),
+    ),
   );
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<LoginRepo>()));
 

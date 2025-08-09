@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
+import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/signup/ui/widgets/continue_with_google.dart';
@@ -42,9 +43,13 @@ class SignupScreen extends StatelessWidget {
                 BlocConsumer<SignupCubit, SignupState>(
                   listener: (context, state) {
                     if (state is SignupSuccess) {
-                      context.pushReplacementNamed(AppRoutes.onBoardingScreen);
-                    } else if (state is SignupEmailAlreadyExist) {
-                      context.pushReplacementNamed(AppRoutes.home);
+                      if (SharedPref.getUserRole().isEmpty) {
+                        context.pushReplacementNamed(
+                          AppRoutes.onBoardingScreen,
+                        );
+                      } else {
+                        context.pushReplacementNamed(AppRoutes.home);
+                      }
                     } else if (state is SignupError) {
                       ScaffoldMessenger.of(
                         context,

@@ -10,6 +10,6 @@ void main() async {
   await Firebase.initializeApp();
   await ScreenUtil.ensureScreenSize();
   await setupGetIt();
-  final isUserLoggedIn = await SharedPref.getIsUserLoggedIn();
-  runApp(SouqApp(isUserLoggedIn: isUserLoggedIn));
+  await SharedPref.init();
+  runApp(SouqApp());
 }

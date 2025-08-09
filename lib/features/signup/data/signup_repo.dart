@@ -16,15 +16,13 @@ class SignupRepo {
     final bool emailExist = await AuthService.checkIfEmailExist(request.email);
 
     if (emailExist) {
-      throw Exception("Email Already Exist");
+      throw Exception("Email Already Exist Try Login");
     }
 
     final userCred = await auth.createUserWithEmailAndPassword(
       email: request.email,
       password: request.password,
     );
-
-    await SharedPref.saveUser(userCred.user!.uid);
 
     final user = UserModel(
       id: userCred.user!.uid,
@@ -35,9 +33,11 @@ class SignupRepo {
     );
 
     await firestore.collection('users').doc(user.id).set(user.toJson());
+
+    await SharedPref.saveUserData(user: user);
   }
 
-  Future<bool> signupWithGoogle() async {
+  Future<void> signupWithGoogle() async {
     final credential = await GoogleCredential.getGoogleCredential();
 
     final userCred = await auth.signInWithCredential(credential);
@@ -61,12 +61,10 @@ class SignupRepo {
           .doc(userCred.user!.uid)
           .set(user.toJson());
 
-      await SharedPref.saveUser(userCred.user!.uid);
-
-      return true;
+      await SharedPref.saveUserData(user: user);
     }
-    await SharedPref.saveUser(userCred.user!.uid);
 
-    return false;
+    final user = UserModel.fromJson(userDoc.data()!);
+    await SharedPref.saveUserData(user: user);
   }
 }
