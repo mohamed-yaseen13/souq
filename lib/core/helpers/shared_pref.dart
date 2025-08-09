@@ -73,18 +73,25 @@ class SharedPref {
     return _prefs!.getString(userRoleKey) ?? '';
   }
 
+  // active account index key
+  static const String activeAccountIndexKey = 'activeAccountIndexKey';
+
+  // set active account index
+  static Future<void> setActiveAccountIndex(int index) async {
+    await _prefs!.setInt(activeAccountIndexKey, index);
+  }
+
+  // get active account index
+  static int getActiveAccountIndex() {
+    return _prefs!.getInt(activeAccountIndexKey) ?? 0;
+  }
+
   // save user data
   static Future<void> saveUserData({required UserModel user}) async {
     await setIsUserLoggedIn();
     await setUserId(user.id);
     await setUserName(user.name);
-    await setUserEmail(user.email);
-    await setUserRole(user.role);
-  }
-
-  static Future<void> saveUser(String id) async {
-    await setIsUserLoggedIn();
-
-    await setUserId(id);
+    await setUserEmail(user.activeAccount.email);
+    await setUserRole(user.activeAccount.role);
   }
 }

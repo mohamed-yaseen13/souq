@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:souq/core/auth/auth_service.dart';
 import 'package:souq/core/helpers/google_credential.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
+import 'package:souq/core/models/account_model.dart';
 import 'package:souq/core/models/user_model.dart';
 import 'package:souq/features/auth/signup/data/signup_request_model.dart';
 
@@ -27,9 +28,7 @@ class SignupRepo {
     final user = UserModel(
       id: userCred.user!.uid,
       name: request.name,
-      email: request.email,
-      phone: '',
-      role: '',
+      accounts: [AccountModel(email: request.email, phone: '', role: '')],
     );
 
     await firestore.collection('users').doc(user.id).set(user.toJson());
@@ -51,9 +50,9 @@ class SignupRepo {
       final user = UserModel(
         id: userCred.user!.uid,
         name: userCred.user!.displayName!,
-        email: userCred.user!.email!,
-        phone: '',
-        role: '',
+        accounts: [
+          AccountModel(email: userCred.user!.email!, phone: '', role: ''),
+        ],
       );
 
       await firestore
@@ -62,9 +61,9 @@ class SignupRepo {
           .set(user.toJson());
 
       await SharedPref.saveUserData(user: user);
+    } else {
+      final user = UserModel.fromJson(userDoc.data()!);
+      await SharedPref.saveUserData(user: user);
     }
-
-    final user = UserModel.fromJson(userDoc.data()!);
-    await SharedPref.saveUserData(user: user);
   }
 }

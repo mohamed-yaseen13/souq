@@ -1,22 +1,23 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:souq/core/models/account_model.dart';
 
 part 'user_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class UserModel {
   final String id;
   final String name;
-  final String email;
-  final String phone;
-  final String role;
+  final List<AccountModel> accounts;
+  final int activeAccountIndex;
 
   UserModel({
     required this.id,
-    required this.email,
     required this.name,
-    required this.phone,
-    required this.role,
+    required this.accounts,
+    this.activeAccountIndex = 0,
   });
+
+  AccountModel get activeAccount => accounts[activeAccountIndex];
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
