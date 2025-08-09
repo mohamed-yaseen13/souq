@@ -5,6 +5,7 @@ import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/home/home_screen.dart';
 import 'package:souq/features/login/logic/cubit/login_cubit.dart';
 import 'package:souq/features/login/ui/login_screen.dart';
+import 'package:souq/features/on_boarding/logic/cubit/role_selection_cubit.dart';
 import 'package:souq/features/on_boarding/ui/on_boarding_screen.dart';
 import 'package:souq/features/reset_password/logic/cubit/reset_password_cubit.dart';
 import 'package:souq/features/reset_password/ui/reset_password_screen.dart';
@@ -16,7 +17,10 @@ class AppRouter {
     switch (settings.name) {
       case AppRoutes.onBoardingScreen:
         return MaterialPageRoute(
-          builder: (_) => OnBoardingScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<RoleSelectionCubit>(),
+            child: OnBoardingScreen(),
+          ),
           settings: settings,
         );
 

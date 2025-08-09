@@ -1,11 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/constants/app_constants.dart';
 import 'package:souq/core/helpers/extensions.dart';
-import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/features/on_boarding/logic/cubit/role_selection_cubit.dart';
+import 'package:souq/features/on_boarding/logic/cubit/role_selection_state.dart';
 import 'package:souq/features/on_boarding/ui/widgets/role_card.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -31,45 +32,55 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w),
                 child: Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Select a Role',
-                        style: TextStyle(
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      verticalSpace(8),
-                      ...Role.values.map(
-                        (role) => Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
-                          child: RoleCard(
-                            role: role,
-                            isSelected: selectedRole == role,
-                            onTap: () {
-                              setState(() => selectedRole = role);
-                            },
+                  child: BlocConsumer<RoleSelectionCubit, RoleSelectionState>(
+                    listener: (context, state) {
+                      if (state is RoleSelectionSuccess) {
+                        context.pushReplacementNamed(AppRoutes.home);
+                      } else if (state is RoleSelectionError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Some thing went wrong')),
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      return Column(
+                        children: [
+                          Text(
+                            'Select a Role to complete your account',
+                            style: TextStyle(
+                              fontSize: 32.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ),
-                      verticalSpace(8),
-                      ElevatedButton(
-                        onPressed: selectedRole == null
-                            ? null
-                            : () async {
-                                final id = await SharedPref.getUserId();
-                                await FirebaseFirestore.instance
-                                    .collection('users')
-                                    .doc(id)
-                                    .update({'role': selectedRole?.name});
-                                if (!mounted) return;
-                                // ignore: use_build_context_synchronously
-                                context.pushReplacementNamed(AppRoutes.home);
-                              },
-                        child: Text('Get Started'),
-                      ),
-                    ],
+                          verticalSpace(8),
+                          ...Role.values.map(
+                            (role) => Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8.h),
+                              child: RoleCard(
+                                role: role,
+                                isSelected: selectedRole == role,
+                                onTap: () {
+                                  setState(() => selectedRole = role);
+                                },
+                              ),
+                            ),
+                          ),
+                          verticalSpace(8),
+                          state is RoleSelectionLoading
+                              ? CircularProgressIndicator()
+                              : ElevatedButton(
+                                  onPressed: selectedRole == null
+                                      ? null
+                                      : () {
+                                          context
+                                              .read<RoleSelectionCubit>()
+                                              .setRole(selectedRole!.name);
+                                        },
+                                  child: Text('Get Started'),
+                                ),
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
