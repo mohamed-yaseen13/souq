@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/core/di/di.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/home/home_screen.dart';
-import 'package:souq/features/login/logic/cubit/login_cubit.dart';
-import 'package:souq/features/login/ui/login_screen.dart';
-import 'package:souq/features/on_boarding/logic/cubit/role_selection_cubit.dart';
-import 'package:souq/features/on_boarding/ui/on_boarding_screen.dart';
-import 'package:souq/features/reset_password/logic/cubit/reset_password_cubit.dart';
-import 'package:souq/features/reset_password/ui/reset_password_screen.dart';
-import 'package:souq/features/signup/logic/cubit/signup_cubit.dart';
-import 'package:souq/features/signup/ui/signup_screen.dart';
+import 'package:souq/features/auth/login/logic/cubit/login_cubit.dart';
+import 'package:souq/features/auth/login/ui/login_screen.dart';
+import 'package:souq/features/auth/on_boarding/logic/cubit/role_selection_cubit.dart';
+import 'package:souq/features/auth/on_boarding/ui/on_boarding_screen.dart';
+import 'package:souq/features/auth/reset_password/logic/cubit/reset_password_cubit.dart';
+import 'package:souq/features/auth/reset_password/ui/reset_password_screen.dart';
+import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
+import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 
 class AppRouter {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
