@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:souq/core/helpers/json_converters.dart';
 import 'package:souq/core/models/account_model.dart';
 
 part 'user_model.freezed.dart';
@@ -13,7 +15,7 @@ abstract class UserModel with _$UserModel {
     @Default(0) int activeAccountIndex,
     @Default('') String imageUrl,
     @Default('') String address,
-    @Default(0) int createdAt,
+    @TimestampConverter() Timestamp? createdAt,
   }) = _UserModel;
 
   const UserModel._();

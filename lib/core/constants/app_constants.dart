@@ -36,3 +36,7 @@ enum Role {
     }
   }
 }
+
+class AppConstants {
+  static const String usersCollections = 'users';
+}

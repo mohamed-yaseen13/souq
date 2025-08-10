@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:souq/features/auth/login/data/login_repo.dart';
@@ -16,26 +15,15 @@ Future<void> setupGetIt() async {
   //firebase auth
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 
-  //firebase firestore
-  getIt.registerLazySingleton<FirebaseFirestore>(
-    () => FirebaseFirestore.instance,
-  );
-
   //sign up
   getIt.registerLazySingleton<SignupRepo>(
-    () => SignupRepo(
-      auth: getIt<FirebaseAuth>(),
-      firestore: getIt<FirebaseFirestore>(),
-    ),
+    () => SignupRepo(auth: getIt<FirebaseAuth>()),
   );
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt<SignupRepo>()));
 
   //login
   getIt.registerLazySingleton<LoginRepo>(
-    () => LoginRepo(
-      auth: getIt<FirebaseAuth>(),
-      firestore: getIt<FirebaseFirestore>(),
-    ),
+    () => LoginRepo(auth: getIt<FirebaseAuth>()),
   );
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<LoginRepo>()));
 
@@ -48,9 +36,8 @@ Future<void> setupGetIt() async {
   );
 
   //role selection
-  getIt.registerLazySingleton<RoleSelectionRepo>(
-    () => RoleSelectionRepo(firestore: getIt<FirebaseFirestore>()),
-  );
+  getIt.registerLazySingleton<RoleSelectionRepo>(() => RoleSelectionRepo());
+
   getIt.registerFactory<RoleSelectionCubit>(
     () => RoleSelectionCubit(getIt<RoleSelectionRepo>()),
   );

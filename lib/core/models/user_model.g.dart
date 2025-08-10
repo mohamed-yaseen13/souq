@@ -15,7 +15,10 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
   activeAccountIndex: (json['activeAccountIndex'] as num?)?.toInt() ?? 0,
   imageUrl: json['imageUrl'] as String? ?? '',
   address: json['address'] as String? ?? '',
-  createdAt: (json['createdAt'] as num?)?.toInt() ?? 0,
+  createdAt: _$JsonConverterFromJson<Object, Timestamp>(
+    json['createdAt'],
+    const TimestampConverter().fromJson,
+  ),
 );
 
 Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
@@ -26,5 +29,18 @@ Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
       'activeAccountIndex': instance.activeAccountIndex,
       'imageUrl': instance.imageUrl,
       'address': instance.address,
-      'createdAt': instance.createdAt,
+      'createdAt': _$JsonConverterToJson<Object, Timestamp>(
+        instance.createdAt,
+        const TimestampConverter().toJson,
+      ),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

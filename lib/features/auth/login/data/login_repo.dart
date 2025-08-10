@@ -1,18 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:souq/core/auth/auth_service.dart';
-import 'package:souq/core/helpers/shared_pref.dart';
-import 'package:souq/core/models/user_model.dart';
+import 'package:souq/core/database/database.dart';
 import 'package:souq/features/auth/login/data/login_request_model.dart';
 
 class LoginRepo {
   final FirebaseAuth auth;
-  final FirebaseFirestore firestore;
 
-  LoginRepo({required this.auth, required this.firestore});
+  LoginRepo({required this.auth});
 
   Future<void> loginWithEmail(LoginRequestModel request) async {
-    final bool emailExist = await AuthService.checkIfEmailExist(request.email);
+    final bool emailExist = await Database.checkIfEmailExist(request.email);
 
     if (!emailExist) {
       throw Exception("Email Doesn't Exist");
@@ -24,14 +20,7 @@ class LoginRepo {
         password: request.password,
       );
 
-      final doc = await firestore
-          .collection('users')
-          .doc(userCred.user!.uid)
-          .get();
-
-      final user = UserModel.fromJson(doc.data()!);
-
-      await SharedPref.saveUserData(user: user);
+      await Database.getUserFromDatabaseToSaveAtSharedPrefs(userCred.user!.uid);
     } on FirebaseAuthException {
       throw Exception('Incorrect Password');
     }

@@ -1,22 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:souq/core/auth/auth_service.dart';
+import 'package:souq/core/database/database.dart';
 import 'package:souq/core/helpers/google_credential.dart';
-import 'package:souq/core/helpers/shared_pref.dart';
-import 'package:souq/core/models/account_model.dart';
-import 'package:souq/core/models/user_model.dart';
 import 'package:souq/features/auth/signup/data/signup_request_model.dart';
 
 class SignupRepo {
   final FirebaseAuth auth;
-  final FirebaseFirestore firestore;
 
-  SignupRepo({required this.auth, required this.firestore});
-
-  final now = DateTime.now().millisecondsSinceEpoch;
+  SignupRepo({required this.auth});
 
   Future<void> signupWithEmail(SignupRequestModel request) async {
-    final bool emailExist = await AuthService.checkIfEmailExist(request.email);
+    final bool emailExist = await Database.checkIfEmailExist(request.email);
 
     if (emailExist) {
       throw Exception("Email Already Exist Try Login");
@@ -27,16 +20,15 @@ class SignupRepo {
       password: request.password,
     );
 
-    final user = UserModel(
-      id: userCred.user!.uid,
-      name: request.name,
-      accounts: {'0': AccountModel(email: request.email, createdAt: now)},
-      createdAt: now,
+    print(
+      'Providers: ${userCred.user!.providerData.map((p) => p.providerId).join(', ')}',
     );
 
-    await firestore.collection('users').doc(user.id).set(user.toJson());
-
-    await SharedPref.saveUserData(user: user);
+    await Database.setUserToDatabase(
+      userCred.user!.uid,
+      request.name,
+      request.email,
+    );
   }
 
   Future<void> signupWithGoogle() async {
@@ -44,30 +36,14 @@ class SignupRepo {
 
     final userCred = await auth.signInWithCredential(credential);
 
-    final userDoc = await firestore
-        .collection('users')
-        .doc(userCred.user!.uid)
-        .get();
+    print(
+      'Providers: ${userCred.user!.providerData.map((p) => p.providerId).join(', ')}',
+    );
 
-    if (!userDoc.exists) {
-      final user = UserModel(
-        id: userCred.user!.uid,
-        name: userCred.user!.displayName!,
-        accounts: {
-          '0': AccountModel(email: userCred.user!.email!, createdAt: now),
-        },
-        createdAt: now,
-      );
-
-      await firestore
-          .collection('users')
-          .doc(userCred.user!.uid)
-          .set(user.toJson());
-
-      await SharedPref.saveUserData(user: user);
-    } else {
-      final user = UserModel.fromJson(userDoc.data()!);
-      await SharedPref.saveUserData(user: user);
-    }
+    await Database.setUserToDatabase(
+      userCred.user!.uid,
+      userCred.user!.displayName ?? '',
+      userCred.user!.email!,
+    );
   }
 }

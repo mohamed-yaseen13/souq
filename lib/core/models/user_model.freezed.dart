@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
 
- String get id; String get name; Map<String, AccountModel> get accounts; int get activeAccountIndex; String get imageUrl; String get address; int get createdAt;
+ String get id; String get name; Map<String, AccountModel> get accounts; int get activeAccountIndex; String get imageUrl; String get address;@TimestampConverter() Timestamp? get createdAt;
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $UserModelCopyWith<$Res>  {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) = _$UserModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, Map<String, AccountModel> accounts, int activeAccountIndex, String imageUrl, String address, int createdAt
+ String id, String name, Map<String, AccountModel> accounts, int activeAccountIndex, String imageUrl, String address,@TimestampConverter() Timestamp? createdAt
 });
 
 
@@ -65,7 +65,7 @@ class _$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? accounts = null,Object? activeAccountIndex = null,Object? imageUrl = null,Object? address = null,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? accounts = null,Object? activeAccountIndex = null,Object? imageUrl = null,Object? address = null,Object? createdAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -73,8 +73,8 @@ as String,accounts: null == accounts ? _self.accounts : accounts // ignore: cast
 as Map<String, AccountModel>,activeAccountIndex: null == activeAccountIndex ? _self.activeAccountIndex : activeAccountIndex // ignore: cast_nullable_to_non_nullable
 as int,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
-as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as int,
+as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Timestamp?,
   ));
 }
 
@@ -159,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address,  int createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address, @TimestampConverter()  Timestamp? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address,_that.createdAt);case _:
@@ -180,7 +180,7 @@ return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address,  int createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address, @TimestampConverter()  Timestamp? createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _UserModel():
 return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address,_that.createdAt);case _:
@@ -200,7 +200,7 @@ return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address,  int createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address, @TimestampConverter()  Timestamp? createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
 return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address,_that.createdAt);case _:
@@ -215,7 +215,7 @@ return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_tha
 @JsonSerializable()
 
 class _UserModel extends UserModel {
-  const _UserModel({required this.id, required this.name, required final  Map<String, AccountModel> accounts, this.activeAccountIndex = 0, this.imageUrl = '', this.address = '', this.createdAt = 0}): _accounts = accounts,super._();
+  const _UserModel({required this.id, required this.name, required final  Map<String, AccountModel> accounts, this.activeAccountIndex = 0, this.imageUrl = '', this.address = '', @TimestampConverter() this.createdAt}): _accounts = accounts,super._();
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
 @override final  String id;
@@ -230,7 +230,7 @@ class _UserModel extends UserModel {
 @override@JsonKey() final  int activeAccountIndex;
 @override@JsonKey() final  String imageUrl;
 @override@JsonKey() final  String address;
-@override@JsonKey() final  int createdAt;
+@override@TimestampConverter() final  Timestamp? createdAt;
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
@@ -265,7 +265,7 @@ abstract mixin class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Re
   factory _$UserModelCopyWith(_UserModel value, $Res Function(_UserModel) _then) = __$UserModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, Map<String, AccountModel> accounts, int activeAccountIndex, String imageUrl, String address, int createdAt
+ String id, String name, Map<String, AccountModel> accounts, int activeAccountIndex, String imageUrl, String address,@TimestampConverter() Timestamp? createdAt
 });
 
 
@@ -282,7 +282,7 @@ class __$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? accounts = null,Object? activeAccountIndex = null,Object? imageUrl = null,Object? address = null,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? accounts = null,Object? activeAccountIndex = null,Object? imageUrl = null,Object? address = null,Object? createdAt = freezed,}) {
   return _then(_UserModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -290,8 +290,8 @@ as String,accounts: null == accounts ? _self._accounts : accounts // ignore: cas
 as Map<String, AccountModel>,activeAccountIndex: null == activeAccountIndex ? _self.activeAccountIndex : activeAccountIndex // ignore: cast_nullable_to_non_nullable
 as int,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
-as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as int,
+as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Timestamp?,
   ));
 }
 

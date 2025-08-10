@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:souq/core/helpers/json_converters.dart';
 
 part 'account_model.freezed.dart';
 part 'account_model.g.dart';
@@ -9,7 +11,7 @@ abstract class AccountModel with _$AccountModel {
     required String email,
     @Default('') String role,
     @Default('') String phone,
-    @Default(0) int createdAt,
+    @TimestampConverter() Timestamp? createdAt,
   }) = _AccountModel;
 
   factory AccountModel.fromJson(Map<String, dynamic> json) =>

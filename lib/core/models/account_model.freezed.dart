@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AccountModel {
 
- String get email; String get role; String get phone; int get createdAt;
+ String get email; String get role; String get phone;@TimestampConverter() Timestamp? get createdAt;
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $AccountModelCopyWith<$Res>  {
   factory $AccountModelCopyWith(AccountModel value, $Res Function(AccountModel) _then) = _$AccountModelCopyWithImpl;
 @useResult
 $Res call({
- String email, String role, String phone, int createdAt
+ String email, String role, String phone,@TimestampConverter() Timestamp? createdAt
 });
 
 
@@ -65,13 +65,13 @@ class _$AccountModelCopyWithImpl<$Res>
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,}) {
   return _then(_self.copyWith(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as int,
+as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Timestamp?,
   ));
 }
 
@@ -156,7 +156,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String role,  String phone,  int createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AccountModel() when $default != null:
 return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
@@ -177,7 +177,7 @@ return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String role,  String phone,  int createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _AccountModel():
 return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
@@ -197,7 +197,7 @@ return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String role,  String phone,  int createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _AccountModel() when $default != null:
 return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
@@ -212,13 +212,13 @@ return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
 @JsonSerializable()
 
 class _AccountModel implements AccountModel {
-  const _AccountModel({required this.email, this.role = '', this.phone = '', this.createdAt = 0});
+  const _AccountModel({required this.email, this.role = '', this.phone = '', @TimestampConverter() this.createdAt});
   factory _AccountModel.fromJson(Map<String, dynamic> json) => _$AccountModelFromJson(json);
 
 @override final  String email;
 @override@JsonKey() final  String role;
 @override@JsonKey() final  String phone;
-@override@JsonKey() final  int createdAt;
+@override@TimestampConverter() final  Timestamp? createdAt;
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
@@ -253,7 +253,7 @@ abstract mixin class _$AccountModelCopyWith<$Res> implements $AccountModelCopyWi
   factory _$AccountModelCopyWith(_AccountModel value, $Res Function(_AccountModel) _then) = __$AccountModelCopyWithImpl;
 @override @useResult
 $Res call({
- String email, String role, String phone, int createdAt
+ String email, String role, String phone,@TimestampConverter() Timestamp? createdAt
 });
 
 
@@ -270,13 +270,13 @@ class __$AccountModelCopyWithImpl<$Res>
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,}) {
   return _then(_AccountModel(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as int,
+as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Timestamp?,
   ));
 }
 
