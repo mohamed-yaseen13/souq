@@ -11,6 +11,7 @@ _AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String,
       role: json['role'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
+      createdAt: (json['createdAt'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$AccountModelToJson(_AccountModel instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$AccountModelToJson(_AccountModel instance) =>
       'email': instance.email,
       'role': instance.role,
       'phone': instance.phone,
+      'createdAt': instance.createdAt,
     };

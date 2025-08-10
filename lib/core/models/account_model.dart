@@ -9,6 +9,7 @@ abstract class AccountModel with _$AccountModel {
     required String email,
     @Default('') String role,
     @Default('') String phone,
+    @Default(0) int createdAt,
   }) = _AccountModel;
 
   factory AccountModel.fromJson(Map<String, dynamic> json) =>

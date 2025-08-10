@@ -15,6 +15,7 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
   activeAccountIndex: (json['activeAccountIndex'] as num?)?.toInt() ?? 0,
   imageUrl: json['imageUrl'] as String? ?? '',
   address: json['address'] as String? ?? '',
+  createdAt: (json['createdAt'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
@@ -25,4 +26,5 @@ Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
       'activeAccountIndex': instance.activeAccountIndex,
       'imageUrl': instance.imageUrl,
       'address': instance.address,
+      'createdAt': instance.createdAt,
     };

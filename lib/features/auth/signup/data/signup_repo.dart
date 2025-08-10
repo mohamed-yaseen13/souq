@@ -13,6 +13,8 @@ class SignupRepo {
 
   SignupRepo({required this.auth, required this.firestore});
 
+  final now = DateTime.now().millisecondsSinceEpoch;
+
   Future<void> signupWithEmail(SignupRequestModel request) async {
     final bool emailExist = await AuthService.checkIfEmailExist(request.email);
 
@@ -28,7 +30,8 @@ class SignupRepo {
     final user = UserModel(
       id: userCred.user!.uid,
       name: request.name,
-      accounts: {'0': AccountModel(email: request.email, phone: '', role: '')},
+      accounts: {'0': AccountModel(email: request.email, createdAt: now)},
+      createdAt: now,
     );
 
     await firestore.collection('users').doc(user.id).set(user.toJson());
@@ -51,8 +54,9 @@ class SignupRepo {
         id: userCred.user!.uid,
         name: userCred.user!.displayName!,
         accounts: {
-          '0': AccountModel(email: userCred.user!.email!, phone: '', role: ''),
+          '0': AccountModel(email: userCred.user!.email!, createdAt: now),
         },
+        createdAt: now,
       );
 
       await firestore

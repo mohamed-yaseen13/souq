@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
 
- String get id; String get name; Map<String, AccountModel> get accounts; int get activeAccountIndex; String get imageUrl; String get address;
+ String get id; String get name; Map<String, AccountModel> get accounts; int get activeAccountIndex; String get imageUrl; String get address; int get createdAt;
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UserModelCopyWith<UserModel> get copyWith => _$UserModelCopyWithImpl<UserModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.accounts, accounts)&&(identical(other.activeAccountIndex, activeAccountIndex) || other.activeAccountIndex == activeAccountIndex)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.address, address) || other.address == address));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.accounts, accounts)&&(identical(other.activeAccountIndex, activeAccountIndex) || other.activeAccountIndex == activeAccountIndex)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.address, address) || other.address == address)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(accounts),activeAccountIndex,imageUrl,address);
+int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(accounts),activeAccountIndex,imageUrl,address,createdAt);
 
 @override
 String toString() {
-  return 'UserModel(id: $id, name: $name, accounts: $accounts, activeAccountIndex: $activeAccountIndex, imageUrl: $imageUrl, address: $address)';
+  return 'UserModel(id: $id, name: $name, accounts: $accounts, activeAccountIndex: $activeAccountIndex, imageUrl: $imageUrl, address: $address, createdAt: $createdAt)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UserModelCopyWith<$Res>  {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) _then) = _$UserModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, Map<String, AccountModel> accounts, int activeAccountIndex, String imageUrl, String address
+ String id, String name, Map<String, AccountModel> accounts, int activeAccountIndex, String imageUrl, String address, int createdAt
 });
 
 
@@ -65,7 +65,7 @@ class _$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? accounts = null,Object? activeAccountIndex = null,Object? imageUrl = null,Object? address = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? accounts = null,Object? activeAccountIndex = null,Object? imageUrl = null,Object? address = null,Object? createdAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,8 @@ as String,accounts: null == accounts ? _self.accounts : accounts // ignore: cast
 as Map<String, AccountModel>,activeAccountIndex: null == activeAccountIndex ? _self.activeAccountIndex : activeAccountIndex // ignore: cast_nullable_to_non_nullable
 as int,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
-as String,
+as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address,  int createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
-return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address);case _:
+return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address,_that.createdAt);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address,  int createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _UserModel():
-return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address);case _:
+return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  Map<String, AccountModel> accounts,  int activeAccountIndex,  String imageUrl,  String address,  int createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _UserModel() when $default != null:
-return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address);case _:
+return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_that.imageUrl,_that.address,_that.createdAt);case _:
   return null;
 
 }
@@ -214,7 +215,7 @@ return $default(_that.id,_that.name,_that.accounts,_that.activeAccountIndex,_tha
 @JsonSerializable()
 
 class _UserModel extends UserModel {
-  const _UserModel({required this.id, required this.name, required final  Map<String, AccountModel> accounts, this.activeAccountIndex = 0, this.imageUrl = '', this.address = ''}): _accounts = accounts,super._();
+  const _UserModel({required this.id, required this.name, required final  Map<String, AccountModel> accounts, this.activeAccountIndex = 0, this.imageUrl = '', this.address = '', this.createdAt = 0}): _accounts = accounts,super._();
   factory _UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 
 @override final  String id;
@@ -229,6 +230,7 @@ class _UserModel extends UserModel {
 @override@JsonKey() final  int activeAccountIndex;
 @override@JsonKey() final  String imageUrl;
 @override@JsonKey() final  String address;
+@override@JsonKey() final  int createdAt;
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +245,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._accounts, _accounts)&&(identical(other.activeAccountIndex, activeAccountIndex) || other.activeAccountIndex == activeAccountIndex)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.address, address) || other.address == address));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._accounts, _accounts)&&(identical(other.activeAccountIndex, activeAccountIndex) || other.activeAccountIndex == activeAccountIndex)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.address, address) || other.address == address)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(_accounts),activeAccountIndex,imageUrl,address);
+int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(_accounts),activeAccountIndex,imageUrl,address,createdAt);
 
 @override
 String toString() {
-  return 'UserModel(id: $id, name: $name, accounts: $accounts, activeAccountIndex: $activeAccountIndex, imageUrl: $imageUrl, address: $address)';
+  return 'UserModel(id: $id, name: $name, accounts: $accounts, activeAccountIndex: $activeAccountIndex, imageUrl: $imageUrl, address: $address, createdAt: $createdAt)';
 }
 
 
@@ -263,7 +265,7 @@ abstract mixin class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Re
   factory _$UserModelCopyWith(_UserModel value, $Res Function(_UserModel) _then) = __$UserModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, Map<String, AccountModel> accounts, int activeAccountIndex, String imageUrl, String address
+ String id, String name, Map<String, AccountModel> accounts, int activeAccountIndex, String imageUrl, String address, int createdAt
 });
 
 
@@ -280,7 +282,7 @@ class __$UserModelCopyWithImpl<$Res>
 
 /// Create a copy of UserModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? accounts = null,Object? activeAccountIndex = null,Object? imageUrl = null,Object? address = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? accounts = null,Object? activeAccountIndex = null,Object? imageUrl = null,Object? address = null,Object? createdAt = null,}) {
   return _then(_UserModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -288,7 +290,8 @@ as String,accounts: null == accounts ? _self._accounts : accounts // ignore: cas
 as Map<String, AccountModel>,activeAccountIndex: null == activeAccountIndex ? _self.activeAccountIndex : activeAccountIndex // ignore: cast_nullable_to_non_nullable
 as int,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
-as String,
+as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

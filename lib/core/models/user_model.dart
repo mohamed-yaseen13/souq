@@ -13,6 +13,7 @@ abstract class UserModel with _$UserModel {
     @Default(0) int activeAccountIndex,
     @Default('') String imageUrl,
     @Default('') String address,
+    @Default(0) int createdAt,
   }) = _UserModel;
 
   const UserModel._();
