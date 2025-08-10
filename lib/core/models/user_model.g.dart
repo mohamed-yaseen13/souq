@@ -21,7 +21,7 @@ Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'accounts': instance.accounts,
+      'accounts': instance.accounts.map((k, e) => MapEntry(k, e.toJson())),
       'activeAccountIndex': instance.activeAccountIndex,
       'imageUrl': instance.imageUrl,
       'address': instance.address,
