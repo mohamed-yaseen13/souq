@@ -20,30 +20,35 @@ class SignupRepo {
       password: request.password,
     );
 
-    print(
-      'Providers: ${userCred.user!.providerData.map((p) => p.providerId).join(', ')}',
-    );
-
     await Database.setUserToDatabase(
-      userCred.user!.uid,
-      request.name,
-      request.email,
+      id: userCred.user!.uid,
+      name: request.name,
+      email: request.email,
+      providerMethod: 'emailAndPassword',
     );
   }
 
   Future<void> signupWithGoogle() async {
     final credential = await GoogleCredential.getGoogleCredential();
 
+    final email = GoogleCredential.getEmailFromGoogleCredential(credential);
+
+    final bool emailExistsWithPassword =
+        await Database.checkIfEmailExistWithPasswordProvider(email);
+
+    if (emailExistsWithPassword) {
+      throw Exception(
+        "This email is already registered with email and password. Please Log in using your email and password instead.",
+      );
+    }
+
     final userCred = await auth.signInWithCredential(credential);
 
-    print(
-      'Providers: ${userCred.user!.providerData.map((p) => p.providerId).join(', ')}',
-    );
-
     await Database.setUserToDatabase(
-      userCred.user!.uid,
-      userCred.user!.displayName ?? '',
-      userCred.user!.email!,
+      id: userCred.user!.uid,
+      name: userCred.user!.displayName ?? '',
+      email: userCred.user!.email!,
+      providerMethod: 'google',
     );
   }
 }

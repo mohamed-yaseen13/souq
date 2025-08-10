@@ -9,6 +9,7 @@ part 'account_model.g.dart';
 abstract class AccountModel with _$AccountModel {
   const factory AccountModel({
     required String email,
+    required List<String> providerMethod,
     @Default('') String role,
     @Default('') String phone,
     @TimestampConverter() Timestamp? createdAt,

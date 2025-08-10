@@ -10,11 +10,17 @@ class Database {
           .collection(AppConstants.usersCollections)
           .doc(id);
 
-  static Future<void> setUserToDatabase(
-    String id,
-    String name,
-    String email,
-  ) async {
+  static DocumentReference<Map<String, dynamic>> getEmailRef(String email) =>
+      FirebaseFirestore.instance
+          .collection(AppConstants.emailsCollections)
+          .doc(email);
+
+  static Future<void> setUserToDatabase({
+    required String id,
+    required String name,
+    required String email,
+    required String providerMethod,
+  }) async {
     final index = SharedPref.getActiveAccountIndex();
 
     final userRef = getUserRef(id);
@@ -27,7 +33,9 @@ class Database {
       user = UserModel(
         id: id,
         name: name,
-        accounts: {'0': AccountModel(email: email)},
+        accounts: {
+          '0': AccountModel(email: email, providerMethod: [providerMethod]),
+        },
       );
 
       await userRef.set(user.toJson());
@@ -35,6 +43,11 @@ class Database {
       await userRef.update({
         'createdAt': FieldValue.serverTimestamp(),
         'accounts.${index.toString()}.createdAt': FieldValue.serverTimestamp(),
+      });
+
+      await getEmailRef(email.toLowerCase()).set({
+        'providerMethods': [providerMethod],
+        'createdAt': FieldValue.serverTimestamp(),
       });
     } else {
       user = UserModel.fromJson(userDoc.data()!);
@@ -56,13 +69,42 @@ class Database {
   }
 
   static Future<bool> checkIfEmailExist(String email) async {
-    final index = SharedPref.getActiveAccountIndex();
-
-    final snapshot = await FirebaseFirestore.instance
-        .collection(AppConstants.usersCollections)
-        .where('accounts.${index.toString()}.email', isEqualTo: email)
-        .limit(1)
+    final doc = await FirebaseFirestore.instance
+        .collection(AppConstants.emailsCollections)
+        .doc(email.toLowerCase())
         .get();
-    return snapshot.docs.isNotEmpty;
+    return doc.exists;
+  }
+
+  static Future<bool> checkIfEmailExistWithPasswordProvider(
+    String email,
+  ) async {
+    final doc = await FirebaseFirestore.instance
+        .collection(AppConstants.emailsCollections)
+        .doc(email.toLowerCase())
+        .get();
+    if (doc.exists) {
+      final data = doc.data();
+
+      final List<dynamic> providers = data!['providerMethods'];
+
+      return providers.contains('emailAndPassword');
+    }
+    return false;
+  }
+
+  static Future<bool> checkIfEmailExistWithGoogleProvider(String email) async {
+    final doc = await FirebaseFirestore.instance
+        .collection(AppConstants.emailsCollections)
+        .doc(email.toLowerCase())
+        .get();
+    if (doc.exists) {
+      final data = doc.data();
+
+      final List<dynamic> providers = data!['providerMethods'];
+
+      return providers.contains('google');
+    }
+    return false;
   }
 }
