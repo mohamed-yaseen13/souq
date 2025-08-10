@@ -1,25 +1,24 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:souq/core/models/account_model.dart';
 
+part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
-@JsonSerializable(explicitToJson: true)
-class UserModel {
-  final String id;
-  final String name;
-  final Map<String, AccountModel> accounts;
-  final int activeAccountIndex;
+@freezed
+abstract class UserModel with _$UserModel {
+  const factory UserModel({
+    required String id,
+    required String name,
+    required Map<String, AccountModel> accounts,
+    @Default(0) int activeAccountIndex,
+    @Default('') String imageUrl,
+    @Default('') String address,
+  }) = _UserModel;
 
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.accounts,
-    this.activeAccountIndex = 0,
-  });
+  const UserModel._();
 
   AccountModel get activeAccount => accounts[activeAccountIndex.toString()]!;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }
