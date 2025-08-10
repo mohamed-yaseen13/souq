@@ -7,7 +7,7 @@ part 'user_model.g.dart';
 class UserModel {
   final String id;
   final String name;
-  final List<AccountModel> accounts;
+  final Map<String, AccountModel> accounts;
   final int activeAccountIndex;
 
   UserModel({
@@ -17,7 +17,7 @@ class UserModel {
     this.activeAccountIndex = 0,
   });
 
-  AccountModel get activeAccount => accounts[activeAccountIndex];
+  AccountModel get activeAccount => accounts[activeAccountIndex.toString()]!;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

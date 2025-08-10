@@ -28,7 +28,7 @@ class SignupRepo {
     final user = UserModel(
       id: userCred.user!.uid,
       name: request.name,
-      accounts: [AccountModel(email: request.email, phone: '', role: '')],
+      accounts: {'0': AccountModel(email: request.email, phone: '', role: '')},
     );
 
     await firestore.collection('users').doc(user.id).set(user.toJson());
@@ -50,9 +50,9 @@ class SignupRepo {
       final user = UserModel(
         id: userCred.user!.uid,
         name: userCred.user!.displayName!,
-        accounts: [
-          AccountModel(email: userCred.user!.email!, phone: '', role: ''),
-        ],
+        accounts: {
+          '0': AccountModel(email: userCred.user!.email!, phone: '', role: ''),
+        },
       );
 
       await firestore
