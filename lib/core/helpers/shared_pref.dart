@@ -94,4 +94,17 @@ class SharedPref {
     await setUserEmail(user.activeAccount.email);
     await setUserRole(user.activeAccount.role);
   }
+
+  // email verified key
+  static const String emailVerifiedKey = 'emailVerifiedKey';
+
+  // set email verified
+  static Future<void> setEmailVerified() async {
+    await _prefs!.setBool(emailVerifiedKey, true);
+  }
+
+  // get email verified
+  static bool getEmailVerified() {
+    return _prefs!.getBool(emailVerifiedKey) ?? false;
+  }
 }

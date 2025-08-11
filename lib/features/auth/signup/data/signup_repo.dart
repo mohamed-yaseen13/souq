@@ -20,6 +20,8 @@ class SignupRepo {
       password: request.password,
     );
 
+    await auth.currentUser!.sendEmailVerification();
+
     await Database.setUserToDatabase(
       id: userCred.user!.uid,
       name: request.name,
