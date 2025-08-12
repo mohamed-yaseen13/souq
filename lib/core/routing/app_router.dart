@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/core/di/di.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/chat/chats_screen.dart';
-import 'package:souq/features/home/home_screen.dart';
+import 'package:souq/features/home/ui/home_screen.dart';
 import 'package:souq/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:souq/features/auth/login/ui/login_screen.dart';
 import 'package:souq/features/auth/on_boarding/logic/cubit/role_selection_cubit.dart';
@@ -13,7 +13,7 @@ import 'package:souq/features/auth/reset_password/ui/reset_password_screen.dart'
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
-import 'package:souq/features/profile/profile_screen.dart';
+import 'package:souq/features/profile/ui/profile_screen.dart';
 import 'package:souq/features/settings/settings_screen.dart';
 
 class AppRouter {
@@ -81,7 +81,7 @@ class AppRouter {
   }) {
     return PageRouteBuilder(
       settings: settings,
-      transitionDuration: const Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 500),
       pageBuilder: (_, animation, __) => page,
       transitionsBuilder: (_, animation, __, child) {
         const begin = Offset(1.0, 0.0);

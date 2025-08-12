@@ -86,13 +86,41 @@ class SharedPref {
     return _prefs!.getInt(activeAccountIndexKey) ?? 0;
   }
 
+  // user phone number key
+  static const String userPhoneNumberKey = 'userPhoneNumberKey';
+
+  // set user phone number
+  static Future<void> setUserPhoneNumber(String phoneNumber) async {
+    await _prefs!.setString(userPhoneNumberKey, phoneNumber);
+  }
+
+  // get user phone number
+  static String getUserPhoneNumber() {
+    return _prefs!.getString(userPhoneNumberKey) ?? '';
+  }
+
+  // user address kay
+  static const String userAddressKey = 'userAddressKey';
+
+  // set user address
+  static Future<void> setUserAddress(String address) async {
+    await _prefs!.setString(userAddressKey, address);
+  }
+
+  // get user address
+  static String getUserAddress() {
+    return _prefs!.getString(userAddressKey) ?? '';
+  }
+
   // save user data
   static Future<void> saveUserData({required UserModel user}) async {
     await setIsUserLoggedIn();
     await setUserId(user.id);
     await setUserName(user.name);
+    await setUserAddress(user.address);
     await setUserEmail(user.activeAccount.email);
     await setUserRole(user.activeAccount.role);
+    await setUserPhoneNumber(user.activeAccount.phone);
   }
 
   // email verified key
