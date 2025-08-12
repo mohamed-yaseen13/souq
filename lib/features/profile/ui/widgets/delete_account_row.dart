@@ -11,7 +11,7 @@ class DeleteAccountRow extends StatelessWidget {
       children: [
         Text('Delete Account', style: AppTextStyles.redColor20FontText),
         Spacer(),
-        Icon(Icons.keyboard_arrow_right, size: 32.sp, color: Colors.grey),
+        Icon(Icons.delete_forever, size: 32.sp, color: Colors.grey),
       ],
     );
   }

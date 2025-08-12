@@ -14,6 +14,7 @@ import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
 import 'package:souq/features/profile/ui/profile_screen.dart';
+import 'package:souq/features/profile/ui/widgets/edit_address_screen.dart';
 import 'package:souq/features/profile/ui/widgets/edit_phone_numder_screen.dart';
 import 'package:souq/features/profile/ui/widgets/edit_picture_and_name_screen.dart';
 import 'package:souq/features/settings/settings_screen.dart';
@@ -81,6 +82,12 @@ class AppRouter {
       case AppRoutes.editPhoneNumberScreen:
         return MaterialPageRoute(
           builder: (_) => EditPhoneNumderScreen(),
+          settings: settings,
+        );
+
+      case AppRoutes.editAddressScreen:
+        return MaterialPageRoute(
+          builder: (_) => EditAddressScreen(),
           settings: settings,
         );
 

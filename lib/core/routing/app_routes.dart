@@ -20,4 +20,6 @@ class AppRoutes {
   static const String editPictureAndNameScreen = 'editPictureAndNameScreen';
 
   static const String editPhoneNumberScreen = 'editPhoneNumberScreen';
+
+  static const String editAddressScreen = 'editAddressScreen';
 }

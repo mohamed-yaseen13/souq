@@ -11,7 +11,7 @@ class LogoutRow extends StatelessWidget {
       children: [
         Text('Logout', style: AppTextStyles.redColor20FontText),
         Spacer(),
-        Icon(Icons.keyboard_arrow_right, size: 32.sp, color: Colors.grey),
+        Icon(Icons.logout, size: 32.sp, color: Colors.grey),
       ],
     );
   }
