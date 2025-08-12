@@ -16,4 +16,8 @@ class AppRoutes {
   static const String profileScreen = 'profileScreen';
 
   static const String settingsScreen = 'settingsScreen';
+
+  static const String editPictureAndNameScreen = 'editPictureAndNameScreen';
+
+  static const String editPhoneNumberScreen = 'editPhoneNumberScreen';
 }

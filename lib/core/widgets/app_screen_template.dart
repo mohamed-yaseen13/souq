@@ -20,7 +20,16 @@ class AppScreenTemplate extends StatelessWidget {
             vertical: 24.h,
             horizontal: 18.w,
           ),
-          child: SingleChildScrollView(child: child),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: IntrinsicHeight(child: child),
+                ),
+              );
+            },
+          ),
         ),
       ),
       bottomNavigationBar: bottomNavigationBar,
