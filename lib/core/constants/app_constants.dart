@@ -42,3 +42,5 @@ class AppConstants {
 
   static const String emailsCollections = 'emails';
 }
+
+enum NavigationBarEnum { orders, chat, home, profile, settings }

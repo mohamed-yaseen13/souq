@@ -29,6 +29,10 @@ class SouqApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: startRoute,
           onGenerateRoute: AppRouter.generateRoute,
+          theme: ThemeData(
+            scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+            appBarTheme: AppBarTheme(color: const Color(0xFFF5F5F5)),
+          ),
         );
       },
     );
