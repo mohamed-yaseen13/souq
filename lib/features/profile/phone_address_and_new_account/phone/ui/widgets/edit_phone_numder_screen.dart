@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
 import 'package:souq/core/widgets/app_text_form_field.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/phone/data/phone_request_model.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/phone/logic/cubit/phone_cubit.dart';
 
 class EditPhoneNumderScreen extends StatefulWidget {
   const EditPhoneNumderScreen({super.key});
@@ -15,11 +18,12 @@ class EditPhoneNumderScreen extends StatefulWidget {
 
 class _EditPhoneNumderScreenState extends State<EditPhoneNumderScreen> {
   late TextEditingController phoneNumberController;
+  late String userPhoneNumber;
   @override
   void initState() {
     super.initState();
 
-    final String userPhoneNumber = SharedPref.getUserPhoneNumber();
+    userPhoneNumber = SharedPref.getUserPhoneNumber();
 
     phoneNumberController = TextEditingController(text: userPhoneNumber);
   }
@@ -50,7 +54,17 @@ class _EditPhoneNumderScreenState extends State<EditPhoneNumderScreen> {
               },
             ),
             Spacer(),
-            ElevatedButton(onPressed: () {}, child: Text('Verify')),
+            ElevatedButton(
+              onPressed: () {
+                if (userPhoneNumber != phoneNumberController.text) {
+                  final request = PhoneRequestModel(
+                    phoneNumber: phoneNumberController.text,
+                  );
+                  context.read<PhoneCubit>().verifyPhoneNumber(request);
+                }
+              },
+              child: Text('Verify'),
+            ),
           ],
         ),
       ),

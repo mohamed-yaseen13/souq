@@ -4,7 +4,7 @@ import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/widgets/app_container.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/add_account_row.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/address_row.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/phone_number_row.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/phone/ui/phone_number_row.dart';
 
 class PhoneAddressAndNewAccountContainer extends StatelessWidget {
   const PhoneAddressAndNewAccountContainer({super.key});

@@ -9,6 +9,8 @@ import 'package:souq/features/auth/reset_password/data/reset_password_repo.dart'
 import 'package:souq/features/auth/reset_password/logic/cubit/reset_password_cubit.dart';
 import 'package:souq/features/auth/signup/data/signup_repo.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/phone/data/phone_repo.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/phone/logic/cubit/phone_cubit.dart';
 import 'package:souq/features/profile/picture_and_name/data/picture_and_name_repo.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
 
@@ -59,4 +61,11 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<PictureAndNameCubit>(
     () => PictureAndNameCubit(getIt<PictureAndNameRepo>()),
   );
+
+  // phone
+  getIt.registerLazySingleton<PhoneRepo>(
+    () => PhoneRepo(auth: getIt<FirebaseAuth>()),
+  );
+
+  getIt.registerFactory<PhoneCubit>(() => PhoneCubit(getIt<PhoneRepo>()));
 }

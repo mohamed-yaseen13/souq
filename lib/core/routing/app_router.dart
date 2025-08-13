@@ -13,11 +13,12 @@ import 'package:souq/features/auth/reset_password/ui/reset_password_screen.dart'
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/phone/logic/cubit/phone_cubit.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
 import 'package:souq/features/profile/ui/profile_screen.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/add_new_account_screen.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/edit_address_screen.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/edit_phone_numder_screen.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/phone/ui/widgets/edit_phone_numder_screen.dart';
 import 'package:souq/features/profile/picture_and_name/ui/widgets/edit_picture_and_name_screen.dart';
 import 'package:souq/features/profile/picture_and_name/ui/widgets/view_image_screen.dart';
 import 'package:souq/features/settings/settings_screen.dart';
@@ -93,7 +94,10 @@ class AppRouter {
 
       case AppRoutes.editPhoneNumberScreen:
         return MaterialPageRoute(
-          builder: (_) => EditPhoneNumderScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<PhoneCubit>(),
+            child: EditPhoneNumderScreen(),
+          ),
           settings: settings,
         );
 
