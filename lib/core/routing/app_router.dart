@@ -17,7 +17,7 @@ import 'package:souq/features/profile/phone_address_and_new_account/phone/logic/
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
 import 'package:souq/features/profile/ui/profile_screen.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/add_new_account_screen.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/edit_address_screen.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/address/ui/widgets/edit_address_screen.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/phone/ui/widgets/edit_phone_numder_screen.dart';
 import 'package:souq/features/profile/picture_and_name/ui/widgets/edit_picture_and_name_screen.dart';
 import 'package:souq/features/profile/picture_and_name/ui/widgets/view_image_screen.dart';
