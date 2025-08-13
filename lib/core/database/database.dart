@@ -107,4 +107,22 @@ class Database {
     }
     return false;
   }
+
+  static Future<void> setUserImage() async {
+    final id = SharedPref.getUserId();
+    await getUserRef(id).update({'imageUrl': 'exist'});
+    await SharedPref.setUserImage(true);
+  }
+
+  static Future<void> changeUserName(String name) async {
+    final id = SharedPref.getUserId();
+    await getUserRef(id).update({'name': name});
+    await SharedPref.setUserName(name);
+  }
+
+  static Future<void> deleteUserImage() async {
+    final id = SharedPref.getUserId();
+    await getUserRef(id).update({'imageUrl': ''});
+    await SharedPref.setUserImage(false);
+  }
 }

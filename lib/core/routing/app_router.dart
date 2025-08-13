@@ -13,6 +13,7 @@ import 'package:souq/features/auth/reset_password/ui/reset_password_screen.dart'
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
+import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
 import 'package:souq/features/profile/ui/profile_screen.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/add_new_account_screen.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/edit_address_screen.dart';
@@ -70,14 +71,23 @@ class AppRouter {
         return _animatedRoute(page: OrdersScreen(), settings: settings);
 
       case AppRoutes.profileScreen:
-        return _animatedRoute(page: ProfileScreen(), settings: settings);
+        return _animatedRoute(
+          page: BlocProvider(
+            create: (context) => getIt<PictureAndNameCubit>(),
+            child: ProfileScreen(),
+          ),
+          settings: settings,
+        );
 
       case AppRoutes.settingsScreen:
         return _animatedRoute(page: SettingsScreen(), settings: settings);
 
       case AppRoutes.editPictureAndNameScreen:
         return MaterialPageRoute(
-          builder: (_) => EditPictureAndNameScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<PictureAndNameCubit>(),
+            child: EditPictureAndNameScreen(),
+          ),
           settings: settings,
         );
 
@@ -100,9 +110,8 @@ class AppRouter {
         );
 
       case AppRoutes.viewImageScreen:
-        final args = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => ViewImageScreen(imagePath: args),
+          builder: (_) => ViewImageScreen(),
           settings: settings,
         );
 

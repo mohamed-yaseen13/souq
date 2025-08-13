@@ -135,4 +135,31 @@ class SharedPref {
   static bool getEmailVerified() {
     return _prefs!.getBool(emailVerifiedKey) ?? false;
   }
+
+  // user iamge key
+  static const String userImageKey = 'userImageKey';
+
+  // set user images
+  static Future<void> setUserImage(bool value) async {
+    await _prefs!.setBool(userImageKey, value);
+  }
+
+  // get user image
+  static bool getUserImage() {
+    return _prefs!.getBool(userImageKey) ?? false;
+  }
+
+  // user picture number key
+  static const String userPictureNumberKey = 'userPictureNumberKey';
+
+  // get user picture number
+  static int getUserPictureNumber() {
+    return _prefs!.getInt(userPictureNumberKey) ?? 0;
+  }
+
+  // increment user picture number
+  static Future<void> incrementUserPictureNumber() async {
+    final int userPictureNumber = SharedPref.getUserPictureNumber();
+    await _prefs!.setInt(userPictureNumberKey, userPictureNumber + 1);
+  }
 }

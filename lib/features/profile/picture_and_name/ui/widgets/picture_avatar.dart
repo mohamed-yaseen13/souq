@@ -1,13 +1,23 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
+import 'package:souq/features/profile/picture_and_name/services/image_service.dart';
 
 class PictureAvatar extends StatefulWidget {
-  const PictureAvatar({super.key});
+  final File? initialImage;
+  final ValueChanged<File?> onImageChanged;
+
+  const PictureAvatar({
+    super.key,
+    this.initialImage,
+    required this.onImageChanged,
+  });
 
   @override
   State<PictureAvatar> createState() => _PictureAvatarState();
@@ -15,6 +25,12 @@ class PictureAvatar extends StatefulWidget {
 
 class _PictureAvatarState extends State<PictureAvatar> {
   File? _selectedImage;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedImage = widget.initialImage;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,55 +55,28 @@ class _PictureAvatarState extends State<PictureAvatar> {
             ],
           );
           if (value == 'remove') {
-            // Handle remove image
+            context.read<PictureAndNameCubit>().deleteUserPicture();
           } else if (value == 'view') {
-            final imagePath = _selectedImage != null
-                ? _selectedImage!.path
-                : 'assets/images/sell.png';
-
-            // ignore: use_build_context_synchronously
-            context.pushNamed(AppRoutes.viewImageScreen, arguments: imagePath);
+            context.pushNamed(AppRoutes.viewImageScreen);
           } else if (value == 'change') {
-            final picker = ImagePicker();
-            final pickedFile = await picker.pickImage(
-              source: ImageSource.gallery,
-            );
-
-            if (pickedFile != null) {
-              CroppedFile? croppedFile;
-              try {
-                croppedFile = await ImageCropper().cropImage(
-                  sourcePath: pickedFile.path,
-                  aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-                  uiSettings: [
-                    AndroidUiSettings(
-                      toolbarTitle: 'Crop Image',
-                      toolbarColor: Colors.red,
-                      toolbarWidgetColor: Colors.white,
-                      lockAspectRatio: true,
-                      cropStyle: CropStyle.circle,
-                    ),
-                    IOSUiSettings(title: 'Crop Image'),
-                  ],
-                );
-              } catch (e) {
-                print(e.toString());
-              }
-
-              if (croppedFile != null) {
-                setState(() {
-                  _selectedImage = File(croppedFile!.path);
-                });
-              }
+            final newImage = await ImageService.pickAndCropImage(context);
+            if (!mounted) return;
+            if (newImage != null) {
+              setState(() {
+                _selectedImage = newImage;
+              });
+              widget.onImageChanged(newImage);
             }
           }
         },
         child: CircleAvatar(
           radius: 100.sp,
           backgroundColor: Colors.white,
-          backgroundImage: _selectedImage != null
-              ? FileImage(_selectedImage!)
-              : const AssetImage('assets/images/sell.png') as ImageProvider,
+          child: ClipOval(
+            child: _selectedImage != null
+                ? Image.file(_selectedImage!)
+                : ImageService.getUserImage(),
+          ),
         ),
       ),
     );

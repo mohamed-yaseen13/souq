@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:souq/core/constants/app_constants.dart';
 
 extension Navigation on BuildContext {
   Future<dynamic> pushNamed(String routeName, {Object? arguments}) {
@@ -30,4 +31,13 @@ extension StringExtension on String? {
 
 extension ListExtension<T> on List<T>? {
   bool isNullOrEmpty() => this == null || this!.isEmpty;
+}
+
+extension RoleParsing on String {
+  Role toRole() {
+    return Role.values.firstWhere(
+      (role) => role.name == this,
+      orElse: () => Role.customer, // default fallback
+    );
+  }
 }

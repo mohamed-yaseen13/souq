@@ -1,3 +1,4 @@
+import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:souq/features/auth/login/data/login_repo.dart';
@@ -8,6 +9,8 @@ import 'package:souq/features/auth/reset_password/data/reset_password_repo.dart'
 import 'package:souq/features/auth/reset_password/logic/cubit/reset_password_cubit.dart';
 import 'package:souq/features/auth/signup/data/signup_repo.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
+import 'package:souq/features/profile/picture_and_name/data/picture_and_name_repo.dart';
+import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -40,5 +43,20 @@ Future<void> setupGetIt() async {
 
   getIt.registerFactory<RoleSelectionCubit>(
     () => RoleSelectionCubit(getIt<RoleSelectionRepo>()),
+  );
+
+  // cloudinary object
+  getIt.registerLazySingleton<Cloudinary>(
+    () => Cloudinary.fromStringUrl(
+      'cloudinary://389364851217256:cbBpwEs-4RrWns10zx0Gj3bXO3w@dg1wipov1',
+    ),
+  );
+
+  getIt.registerLazySingleton<PictureAndNameRepo>(
+    () => PictureAndNameRepo(cloudinary: getIt<Cloudinary>()),
+  );
+
+  getIt.registerFactory<PictureAndNameCubit>(
+    () => PictureAndNameCubit(getIt<PictureAndNameRepo>()),
   );
 }
