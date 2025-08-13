@@ -4,6 +4,7 @@ import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
 import 'package:souq/core/widgets/name_text_form_field.dart';
+import 'package:souq/features/profile/picture_and_name/ui/widgets/picture_avatar.dart';
 
 class EditPictureAndNameScreen extends StatefulWidget {
   const EditPictureAndNameScreen({super.key});
@@ -19,9 +20,7 @@ class _EditPictureAndNameScreenState extends State<EditPictureAndNameScreen> {
   @override
   void initState() {
     super.initState();
-
     final String username = SharedPref.getUserName();
-
     nameController = TextEditingController(text: username);
   }
 
@@ -32,13 +31,7 @@ class _EditPictureAndNameScreenState extends State<EditPictureAndNameScreen> {
         padding: EdgeInsets.symmetric(vertical: 64.h),
         child: Column(
           children: [
-            Center(
-              child: CircleAvatar(
-                radius: 100.sp,
-                backgroundColor: Colors.white,
-                child: Image.asset('assets/images/sell.png'),
-              ),
-            ),
+            PictureAvatar(),
             verticalSpace(64),
             NameTextFormField(nameController: nameController),
             Spacer(),

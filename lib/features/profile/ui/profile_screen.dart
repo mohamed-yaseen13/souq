@@ -4,9 +4,9 @@ import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_navigation_bar.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
-import 'package:souq/features/profile/ui/widgets/delete_account_and_logout_container.dart';
-import 'package:souq/features/profile/ui/widgets/phone_address_and_new_account_container.dart';
-import 'package:souq/features/profile/ui/widgets/picture_and_name_container.dart';
+import 'package:souq/features/profile/delete_account_and_logout/ui/delete_account_and_logout_container.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/ui/phone_address_and_new_account_container.dart';
+import 'package:souq/features/profile/picture_and_name/ui/picture_and_name_container.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

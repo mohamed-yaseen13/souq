@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/styles/app_colors.dart';
 import 'package:souq/core/widgets/app_container.dart';
-import 'package:souq/features/profile/ui/widgets/delete_account_row.dart';
-import 'package:souq/features/profile/ui/widgets/logout_row.dart';
+import 'package:souq/features/profile/delete_account_and_logout/ui/widgets/delete_account_row.dart';
+import 'package:souq/features/profile/delete_account_and_logout/ui/widgets/logout_row.dart';
 
 class DeleteAccountAndLogoutContainer extends StatelessWidget {
   const DeleteAccountAndLogoutContainer({super.key});

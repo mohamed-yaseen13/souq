@@ -24,4 +24,6 @@ class AppRoutes {
   static const String editAddressScreen = 'editAddressScreen';
 
   static const String addNewAccountScreen = 'addNewAccountScreen';
+
+  static const String viewImageScreen = 'viewImageScreen';
 }
