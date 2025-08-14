@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/widgets/app_container.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/ui/widgets/add_account_row.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/ui/add_account_row.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/address/ui/address_row.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/phone/ui/phone_number_row.dart';
 

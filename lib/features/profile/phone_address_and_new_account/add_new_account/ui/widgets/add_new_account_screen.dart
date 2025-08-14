@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/styles/app_colors.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
 import 'package:souq/core/widgets/email_text_form_field.dart';
-import 'package:souq/core/widgets/name_text_form_field.dart';
-import 'package:souq/core/widgets/password_text_form_field.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/ui/widgets/add_account_button.dart';
 
 class AddNewAccountScreen extends StatefulWidget {
   const AddNewAccountScreen({super.key});
@@ -15,9 +15,8 @@ class AddNewAccountScreen extends StatefulWidget {
 }
 
 class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
-  final _nameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +28,12 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
           children: [
             Text('Add New Account', style: AppTextStyles.orangeColor32FontText),
             verticalSpace(12),
-            NameTextFormField(nameController: _nameController),
-            verticalSpace(24),
             EmailTextFormField(emailController: _emailController),
-            verticalSpace(24),
-            PasswordTextFormField(passwordController: _passwordController),
             verticalSpace(64),
             Center(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('Add Account'),
+              child: AddAccountButton(
+                formKey: _formKey,
+                emailController: _emailController,
               ),
             ),
             verticalSpace(24),
@@ -48,14 +43,14 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: Divider(color: Color(0xFFEDF1F3), thickness: 1),
+                      child: Divider(color: AppColors.orange, thickness: 1),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
                       child: Text('Or'),
                     ),
                     Expanded(
-                      child: Divider(color: Color(0xFFEDF1F3), thickness: 1),
+                      child: Divider(color: AppColors.green, thickness: 1),
                     ),
                   ],
                 ),

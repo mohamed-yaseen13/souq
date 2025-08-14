@@ -125,4 +125,9 @@ class Database {
     await getUserRef(id).update({'imageUrl': ''});
     await SharedPref.setUserImage(false);
   }
+
+  //static Future<void> addNewAccount(String email) async {
+  //  final id = SharedPref.getUserId();
+  //  final userRef = getUserRef(id);
+  //}
 }
