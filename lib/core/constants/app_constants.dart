@@ -41,6 +41,8 @@ class AppConstants {
   static const String usersCollections = 'users';
 
   static const String emailsCollections = 'emails';
+
+  static const String otpCollections = 'otps';
 }
 
 enum NavigationBarEnum { orders, chat, home, profile, settings }

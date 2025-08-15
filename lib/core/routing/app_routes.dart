@@ -26,4 +26,8 @@ class AppRoutes {
   static const String addNewAccountScreen = 'addNewAccountScreen';
 
   static const String viewImageScreen = 'viewImageScreen';
+
+  static const String otpScreen = 'otpScreen';
+
+  static const String signupTestScreen = 'signupTestScreen';
 }

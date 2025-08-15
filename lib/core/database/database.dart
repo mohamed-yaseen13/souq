@@ -15,6 +15,11 @@ class Database {
           .collection(AppConstants.emailsCollections)
           .doc(email);
 
+  static DocumentReference<Map<String, dynamic>> getOtpRef(String email) =>
+      FirebaseFirestore.instance
+          .collection(AppConstants.otpCollections)
+          .doc(email);
+
   static Future<void> setUserToDatabase({
     required String id,
     required String name,
@@ -130,4 +135,20 @@ class Database {
   //  final id = SharedPref.getUserId();
   //  final userRef = getUserRef(id);
   //}
+
+  static Future<void> saveOtpToDatabase(String email, String otp) async {
+    final expiresAt = DateTime.now().add(const Duration(minutes: 5));
+
+    await getOtpRef(
+      email,
+    ).set({'otp': otp, "expiresAt": Timestamp.fromDate(expiresAt)});
+  }
+
+  static Future<bool> isOtpCorrect(String email, String otp) async {
+    final doc = await getOtpRef(email).get();
+    final String savedOtp = doc.data()!['otp'];
+    final Timestamp expiresAtTs = doc.data()!['expiresAt'];
+    final DateTime expiresAt = expiresAtTs.toDate();
+    return savedOtp == otp && DateTime.now().isBefore(expiresAt);
+  }
 }
