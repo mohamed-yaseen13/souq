@@ -27,7 +27,8 @@ class SouqApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.signupTestScreen,
+          initialRoute: AppRoutes.loginTestScreen,
+          //initialRoute: AppRoutes.signupTestScreen,
           //initialRoute: startRoute,
           onGenerateRoute: AppRouter.generateRoute,
           theme: ThemeData(

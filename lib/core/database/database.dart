@@ -166,14 +166,32 @@ class Database {
     // --- Encrypt password before saving ---
     const String secretKey = "1234567890abcdef1234567890abcdef";
     final key = encrypt.Key.fromUtf8(secretKey);
-    final iv = encrypt.IV.fromLength(16);
+    final iv = encrypt.IV.fromSecureRandom(16);
     final encrypter = encrypt.Encrypter(encrypt.AES(key));
-    final encryptedPassword = encrypter.encrypt(password, iv: iv).base64;
+    final encrypted = encrypter.encrypt(password, iv: iv);
 
-    await getPasswordsRef(email).set({'password': encryptedPassword});
+    await getPasswordsRef(email).set({
+      'password': encrypted.base64,
+      'iv': iv.base64, // save IV as well
+    });
   }
 
   static Future<void> deleteOtp(String email) async {
     await getOtpRef(email).delete();
+  }
+
+  static Future<String> getPasswordFromDatabase(String email) async {
+    final doc = await getPasswordsRef(email).get();
+
+    final encryptedPassword = doc['password'] as String;
+    final ivBase64 = doc['iv'] as String;
+
+    // --- Decrypt password ---
+    const String secretKey = "1234567890abcdef1234567890abcdef"; // same key
+    final key = encrypt.Key.fromUtf8(secretKey);
+    final iv = encrypt.IV.fromBase64(ivBase64);
+    final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+    return encrypter.decrypt64(encryptedPassword, iv: iv);
   }
 }

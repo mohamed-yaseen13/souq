@@ -30,4 +30,8 @@ class AppRoutes {
   static const String otpScreen = 'otpScreen';
 
   static const String signupTestScreen = 'signupTestScreen';
+
+  static const String otpLoginScreen = 'otpLoginScreen';
+
+  static const String loginTestScreen = 'loginTestScreen';
 }

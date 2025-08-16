@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/core/di/di.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/features/auth/login_test/data/login_test_repo.dart';
+import 'package:souq/features/auth/login_test/logic/login_test_cubit.dart';
+import 'package:souq/features/auth/login_test/ui/login_test_screen.dart';
+import 'package:souq/features/auth/login_test/ui/widgets/otp_login_screen.dart';
 import 'package:souq/features/auth/signup_test/data/signup_test_repo.dart';
 import 'package:souq/features/auth/signup_test/logic/signup_test_cubit.dart';
 import 'package:souq/features/auth/signup_test/ui/signup_test_screen.dart';
@@ -139,6 +143,26 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => SignupTestCubit(SignupTestRepo()),
             child: OtpScreen(email: email!),
+          ),
+          settings: settings,
+        );
+
+      case AppRoutes.loginTestScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => LoginTestCubit(LoginTestRepo()),
+            child: LoginTestScreen(),
+          ),
+          settings: settings,
+        );
+
+      case AppRoutes.otpLoginScreen:
+        final args = settings.arguments as Map<String, String?>;
+        final email = args['email'];
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => LoginTestCubit(LoginTestRepo()),
+            child: OtpLoginScreen(email: email!),
           ),
           settings: settings,
         );
