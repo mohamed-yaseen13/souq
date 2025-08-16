@@ -43,6 +43,8 @@ class AppConstants {
   static const String emailsCollections = 'emails';
 
   static const String otpCollections = 'otps';
+
+  static const String passwordsCollection = 'passwords';
 }
 
 enum NavigationBarEnum { orders, chat, home, profile, settings }

@@ -44,8 +44,6 @@ class SignupTestScreen extends StatelessWidget {
                         arguments: {'email': state.email},
                       );
                       print(state.email);
-                    } else if (state.signedIn) {
-                      context.pushNamed(AppRoutes.home);
                     } else if (!state.error.isNullOrEmpty()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(state.error.toString())),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:souq/core/constants/app_constants.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/models/account_model.dart';
@@ -19,6 +20,12 @@ class Database {
       FirebaseFirestore.instance
           .collection(AppConstants.otpCollections)
           .doc(email);
+
+  static DocumentReference<Map<String, dynamic>> getPasswordsRef(
+    String email,
+  ) => FirebaseFirestore.instance
+      .collection(AppConstants.passwordsCollection)
+      .doc(email);
 
   static Future<void> setUserToDatabase({
     required String id,
@@ -150,5 +157,19 @@ class Database {
     final Timestamp expiresAtTs = doc.data()!['expiresAt'];
     final DateTime expiresAt = expiresAtTs.toDate();
     return savedOtp == otp && DateTime.now().isBefore(expiresAt);
+  }
+
+  static Future<void> savePasswordToDatabase(
+    String email,
+    String password,
+  ) async {
+    // --- Encrypt password before saving ---
+    const String secretKey = "1234567890abcdef1234567890abcdef";
+    final key = encrypt.Key.fromUtf8(secretKey);
+    final iv = encrypt.IV.fromLength(16);
+    final encrypter = encrypt.Encrypter(encrypt.AES(key));
+    final encryptedPassword = encrypter.encrypt(password, iv: iv).base64;
+
+    await getPasswordsRef(email).set({'password': encryptedPassword});
   }
 }
