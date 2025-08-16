@@ -73,5 +73,7 @@ class SignupTestRepo {
       email: email,
       providerMethod: 'email',
     );
+
+    await Database.deleteOtp(email);
   }
 }

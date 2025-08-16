@@ -172,4 +172,8 @@ class Database {
 
     await getPasswordsRef(email).set({'password': encryptedPassword});
   }
+
+  static Future<void> deleteOtp(String email) async {
+    await getOtpRef(email).delete();
+  }
 }
