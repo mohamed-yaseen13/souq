@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/spacing.dart';
-import 'package:souq/core/styles/app_colors.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
 import 'package:souq/core/widgets/email_text_form_field.dart';
@@ -35,31 +34,6 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
                 formKey: _formKey,
                 emailController: _emailController,
               ),
-            ),
-            verticalSpace(24),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Divider(color: AppColors.orange, thickness: 1),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: Text('Or'),
-                    ),
-                    Expanded(
-                      child: Divider(color: AppColors.green, thickness: 1),
-                    ),
-                  ],
-                ),
-                verticalSpace(24),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Continue with Google'),
-                ),
-              ],
             ),
           ],
         ),

@@ -18,7 +18,7 @@ class DeleteAccountAndLogoutContainer extends StatelessWidget {
         padding: EdgeInsetsGeometry.symmetric(vertical: 12.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [DeleteAccountRow(), verticalSpace(24), LogoutRow()],
+          children: [LogoutRow(), verticalSpace(24), DeleteAccountRow()],
         ),
       ),
     );
