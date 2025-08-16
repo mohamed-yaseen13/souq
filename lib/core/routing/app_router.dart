@@ -2,22 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/core/di/di.dart';
 import 'package:souq/core/routing/app_routes.dart';
-import 'package:souq/features/auth/login_test/data/login_test_repo.dart';
-import 'package:souq/features/auth/login_test/logic/login_test_cubit.dart';
-import 'package:souq/features/auth/login_test/ui/login_test_screen.dart';
-import 'package:souq/features/auth/login_test/ui/widgets/otp_login_screen.dart';
-import 'package:souq/features/auth/signup_test/data/signup_test_repo.dart';
-import 'package:souq/features/auth/signup_test/logic/signup_test_cubit.dart';
-import 'package:souq/features/auth/signup_test/ui/signup_test_screen.dart';
-import 'package:souq/features/auth/signup_test/ui/widgets/otp_screen.dart';
+import 'package:souq/features/auth/signup/ui/widgets/otp_signup_screen.dart';
 import 'package:souq/features/chat/chats_screen.dart';
 import 'package:souq/features/home/ui/home_screen.dart';
 import 'package:souq/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:souq/features/auth/login/ui/login_screen.dart';
 import 'package:souq/features/auth/on_boarding/logic/cubit/role_selection_cubit.dart';
 import 'package:souq/features/auth/on_boarding/ui/on_boarding_screen.dart';
-import 'package:souq/features/auth/reset_password/logic/cubit/reset_password_cubit.dart';
-import 'package:souq/features/auth/reset_password/ui/reset_password_screen.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
@@ -43,6 +34,17 @@ class AppRouter {
           settings: settings,
         );
 
+      case AppRoutes.otpSignupScreen:
+        final args = settings.arguments as Map<String, String?>;
+        final email = args['email'];
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+            child: OtpSignupScreen(email: email!),
+          ),
+          settings: settings,
+        );
+
       case AppRoutes.onBoardingScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -57,15 +59,6 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<LoginCubit>(),
             child: LoginScreen(),
-          ),
-          settings: settings,
-        );
-
-      case AppRoutes.resetPasswordScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<ResetPasswordCubit>(),
-            child: ResetPasswordScreen(),
           ),
           settings: settings,
         );
@@ -124,46 +117,6 @@ class AppRouter {
       case AppRoutes.viewImageScreen:
         return MaterialPageRoute(
           builder: (_) => ViewImageScreen(),
-          settings: settings,
-        );
-
-      case AppRoutes.signupTestScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => SignupTestCubit(SignupTestRepo()),
-            child: SignupTestScreen(),
-          ),
-          settings: settings,
-        );
-
-      case AppRoutes.otpScreen:
-        final args = settings.arguments as Map<String, String?>;
-        final email = args['email'];
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => SignupTestCubit(SignupTestRepo()),
-            child: OtpScreen(email: email!),
-          ),
-          settings: settings,
-        );
-
-      case AppRoutes.loginTestScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => LoginTestCubit(LoginTestRepo()),
-            child: LoginTestScreen(),
-          ),
-          settings: settings,
-        );
-
-      case AppRoutes.otpLoginScreen:
-        final args = settings.arguments as Map<String, String?>;
-        final email = args['email'];
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => LoginTestCubit(LoginTestRepo()),
-            child: OtpLoginScreen(email: email!),
-          ),
           settings: settings,
         );
 

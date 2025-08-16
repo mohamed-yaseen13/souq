@@ -35,7 +35,7 @@ class PictureAndNameRepo {
   ) async {
     if (request.imageFile != null) {
       await uploadImageToCloudinary(request.imageFile!);
-      await Database.setUserImage();
+      await Database.updateIsUserHasImage(true);
     }
 
     if (request.name != null) {
@@ -44,6 +44,6 @@ class PictureAndNameRepo {
   }
 
   Future<void> deleteUserPicture() async {
-    await Database.deleteUserImage();
+    await Database.updateIsUserHasImage(false);
   }
 }

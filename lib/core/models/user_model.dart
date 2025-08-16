@@ -13,7 +13,7 @@ abstract class UserModel with _$UserModel {
     required String name,
     required Map<String, AccountModel> accounts,
     @Default(0) int activeAccountIndex,
-    @Default('') String imageUrl,
+    @Default(false) bool isUserHasImage,
     @Default('') String address,
     @TimestampConverter() Timestamp? createdAt,
   }) = _UserModel;

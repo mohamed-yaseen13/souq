@@ -13,7 +13,7 @@ _UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
     (k, e) => MapEntry(k, AccountModel.fromJson(e as Map<String, dynamic>)),
   ),
   activeAccountIndex: (json['activeAccountIndex'] as num?)?.toInt() ?? 0,
-  imageUrl: json['imageUrl'] as String? ?? '',
+  isUserHasImage: json['isUserHasImage'] as bool? ?? false,
   address: json['address'] as String? ?? '',
   createdAt: _$JsonConverterFromJson<Object, Timestamp>(
     json['createdAt'],
@@ -27,7 +27,7 @@ Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
       'name': instance.name,
       'accounts': instance.accounts.map((k, e) => MapEntry(k, e.toJson())),
       'activeAccountIndex': instance.activeAccountIndex,
-      'imageUrl': instance.imageUrl,
+      'isUserHasImage': instance.isUserHasImage,
       'address': instance.address,
       'createdAt': _$JsonConverterToJson<Object, Timestamp>(
         instance.createdAt,

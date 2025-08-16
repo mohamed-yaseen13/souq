@@ -3,11 +3,11 @@ class AppRoutes {
 
   static const String signupScreen = 'signupScreen';
 
+  static const String otpSignupScreen = 'otpSignupScreen';
+
   static const String home = 'home';
 
   static const String loginScreen = 'loginScreen';
-
-  static const String resetPasswordScreen = 'resetPasswordScreen';
 
   static const String ordersScreen = 'ordersScreen';
 
@@ -26,12 +26,4 @@ class AppRoutes {
   static const String addNewAccountScreen = 'addNewAccountScreen';
 
   static const String viewImageScreen = 'viewImageScreen';
-
-  static const String otpScreen = 'otpScreen';
-
-  static const String signupTestScreen = 'signupTestScreen';
-
-  static const String otpLoginScreen = 'otpLoginScreen';
-
-  static const String loginTestScreen = 'loginTestScreen';
 }

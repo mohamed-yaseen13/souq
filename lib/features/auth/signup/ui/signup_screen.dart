@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
-import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
-import 'package:souq/features/auth/signup/ui/widgets/continue_with_google.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_state.dart';
 import 'package:souq/features/auth/signup/ui/widgets/already_have_an_account_row.dart';
@@ -42,14 +40,11 @@ class SignupScreen extends StatelessWidget {
                 ),
                 BlocConsumer<SignupCubit, SignupState>(
                   listener: (context, state) {
-                    if (state is SignupSuccess) {
-                      if (SharedPref.getUserRole().isEmpty) {
-                        context.pushReplacementNamed(
-                          AppRoutes.onBoardingScreen,
-                        );
-                      } else {
-                        context.pushReplacementNamed(AppRoutes.home);
-                      }
+                    if (state is SignupOtpSent) {
+                      context.pushReplacementNamed(
+                        AppRoutes.otpSignupScreen,
+                        arguments: {'email': state.email},
+                      );
                     } else if (state is SignupError) {
                       ScaffoldMessenger.of(
                         context,
@@ -57,13 +52,7 @@ class SignupScreen extends StatelessWidget {
                     }
                   },
                   builder: (context, state) {
-                    return Column(
-                      children: [
-                        SignupForm(signupState: state),
-                        verticalSpace(24),
-                        ContinueWithGoogle(signupState: state),
-                      ],
-                    );
+                    return SignupForm(signupState: state);
                   },
                 ),
                 verticalSpace(48),

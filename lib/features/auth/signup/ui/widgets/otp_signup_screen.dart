@@ -7,18 +7,19 @@ import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
-import 'package:souq/features/auth/signup_test/logic/signup_test_cubit.dart';
+import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
+import 'package:souq/features/auth/signup/logic/cubit/signup_state.dart';
 
-class OtpScreen extends StatefulWidget {
+class OtpSignupScreen extends StatefulWidget {
   final String email;
 
-  const OtpScreen({super.key, required this.email});
+  const OtpSignupScreen({super.key, required this.email});
 
   @override
-  State<OtpScreen> createState() => _OtpScreenState();
+  State<OtpSignupScreen> createState() => _OtpSignupScreenState();
 }
 
-class _OtpScreenState extends State<OtpScreen> {
+class _OtpSignupScreenState extends State<OtpSignupScreen> {
   late String otp;
 
   @override
@@ -36,12 +37,14 @@ class _OtpScreenState extends State<OtpScreen> {
     return AppScreenTemplate(
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 64.h, horizontal: 4.w),
-        child: BlocConsumer<SignupTestCubit, SignupTestState>(
+        child: BlocConsumer<SignupCubit, SignupState>(
           listener: (context, state) {
-            if (state.signedIn) {
-              context.pushNamed(AppRoutes.home);
-            } else if (!state.error.isNullOrEmpty()) {
-              print(state.error.toString());
+            if (state is SignupSignedUp) {
+              context.pushNamed(AppRoutes.onBoardingScreen);
+            } else if (state is SignupError) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.message)));
             }
           },
           builder: (context, state) {
@@ -71,13 +74,13 @@ class _OtpScreenState extends State<OtpScreen> {
                   },
                 ),
                 verticalSpace(64),
-                state.loading
+                state is SignupVerifyingOtp
                     ? CircularProgressIndicator()
                     : ElevatedButton(
                         onPressed: () {
-                          context.read<SignupTestCubit>().verifyOtp(
-                            otp,
-                            widget.email,
+                          context.read<SignupCubit>().verifyOtpThenSignup(
+                            email: widget.email,
+                            otp: otp,
                           );
                         },
                         child: Text('confirm'),

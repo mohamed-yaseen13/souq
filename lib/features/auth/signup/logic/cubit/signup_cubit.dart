@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/features/auth/signup/data/signup_repo.dart';
-import 'package:souq/features/auth/signup/data/signup_request_model.dart';
 import 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
@@ -8,23 +7,24 @@ class SignupCubit extends Cubit<SignupState> {
 
   SignupCubit(this.signupRepo) : super(const SignupState.initial());
 
-  void signupWithEmail(SignupRequestModel request) async {
-    emit(const SignupState.loading());
-
+  Future<void> sendOtp(String email) async {
+    emit(const SignupState.sendingOtp());
     try {
-      await signupRepo.signupWithEmail(request);
-      emit(SignupState.success());
+      await signupRepo.sendEmailOtp(email);
+      emit(SignupState.otpSent(email: email));
     } catch (e) {
       emit(SignupState.error(e.toString()));
     }
   }
 
-  void signupWithGoogle() async {
-    emit(const SignupState.loading());
-
+  Future<void> verifyOtpThenSignup({
+    required String email,
+    required String otp,
+  }) async {
+    emit(SignupState.verifyingOtp(email: email));
     try {
-      await signupRepo.signupWithGoogle();
-      emit(SignupState.success());
+      await signupRepo.verifyOtpThenSignup(email, otp);
+      emit(SignupState.signedUp(email: email));
     } catch (e) {
       emit(SignupState.error(e.toString()));
     }

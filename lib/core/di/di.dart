@@ -5,8 +5,6 @@ import 'package:souq/features/auth/login/data/login_repo.dart';
 import 'package:souq/features/auth/login/logic/cubit/login_cubit.dart';
 import 'package:souq/features/auth/on_boarding/data/role_selection_repo.dart';
 import 'package:souq/features/auth/on_boarding/logic/cubit/role_selection_cubit.dart';
-import 'package:souq/features/auth/reset_password/data/reset_password_repo.dart';
-import 'package:souq/features/auth/reset_password/logic/cubit/reset_password_cubit.dart';
 import 'package:souq/features/auth/signup/data/signup_repo.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/phone/data/phone_repo.dart';
@@ -31,14 +29,6 @@ Future<void> setupGetIt() async {
     () => LoginRepo(auth: getIt<FirebaseAuth>()),
   );
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt<LoginRepo>()));
-
-  //reset password
-  getIt.registerLazySingleton<ResetPasswordRepo>(
-    () => ResetPasswordRepo(auth: getIt<FirebaseAuth>()),
-  );
-  getIt.registerFactory<ResetPasswordCubit>(
-    () => ResetPasswordCubit(getIt<ResetPasswordRepo>()),
-  );
 
   //role selection
   getIt.registerLazySingleton<RoleSelectionRepo>(() => RoleSelectionRepo());

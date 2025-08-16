@@ -3,7 +3,6 @@ import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_state.dart';
 import 'package:souq/core/widgets/email_text_form_field.dart';
 import 'package:souq/core/widgets/name_text_form_field.dart';
-import 'package:souq/core/widgets/password_text_form_field.dart';
 import 'package:souq/features/auth/signup/ui/widgets/signup_button.dart';
 
 class SignupForm extends StatefulWidget {
@@ -19,7 +18,6 @@ class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +30,12 @@ class _SignupFormState extends State<SignupForm> {
           verticalSpace(24),
           EmailTextFormField(emailController: _emailController),
           verticalSpace(24),
-          PasswordTextFormField(passwordController: _passwordController),
-          verticalSpace(24),
-          widget.signupState is SignupLoading
+          widget.signupState is SignupSendingOtp
               ? const CircularProgressIndicator()
               : SignupButton(
                   formKey: _formKey,
                   nameController: _nameController,
                   emailController: _emailController,
-                  passwordController: _passwordController,
                 ),
         ],
       ),

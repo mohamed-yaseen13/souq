@@ -1,56 +1,51 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:souq/core/database/database.dart';
-import 'package:souq/core/helpers/google_credential.dart';
-import 'package:souq/features/auth/signup/data/signup_request_model.dart';
+import 'package:souq/core/helpers/shared_pref.dart';
+import 'package:souq/core/services/password_generator.dart';
+import 'package:souq/core/services/send_email_otp.dart';
 
 class SignupRepo {
   final FirebaseAuth auth;
 
   SignupRepo({required this.auth});
 
-  Future<void> signupWithEmail(SignupRequestModel request) async {
-    final bool emailExist = await Database.checkIfEmailExist(request.email);
+  Future<void> sendEmailOtp(String email) async {
+    final otp = await SendEmailOtp.sendEmailOtp(email);
+    await Database.saveOtpToDatabase(email, otp);
+  }
+
+  Future<void> verifyOtpThenSignup(String email, String otp) async {
+    final bool emailExist = await Database.checkIfEmailExist(email);
 
     if (emailExist) {
       throw Exception("Email Already Exist Try Login");
     }
 
-    final userCred = await auth.createUserWithEmailAndPassword(
-      email: request.email,
-      password: request.password,
-    );
-
-    await auth.currentUser!.sendEmailVerification();
-
-    await Database.setUserToDatabase(
-      id: userCred.user!.uid,
-      name: request.name,
-      email: request.email,
-      providerMethod: 'emailAndPassword',
-    );
-  }
-
-  Future<void> signupWithGoogle() async {
-    final credential = await GoogleCredential.getGoogleCredential();
-
-    final email = GoogleCredential.getEmailFromGoogleCredential(credential);
-
-    final bool emailExistsWithPassword =
-        await Database.checkIfEmailExistWithPasswordProvider(email);
-
-    if (emailExistsWithPassword) {
-      throw Exception(
-        "This email is already registered with email and password. Please Log in using your email and password instead.",
-      );
+    final bool isOtpCorrect = await Database.isOtpCorrect(email, otp);
+    if (!isOtpCorrect) {
+      throw Exception('Invalid OTP');
     }
 
-    final userCred = await auth.signInWithCredential(credential);
+    // --- Generate password ---
+    final password = PasswordGenerator.generatePassword();
 
-    await Database.setUserToDatabase(
-      id: userCred.user!.uid,
-      name: userCred.user!.displayName ?? '',
-      email: userCred.user!.email!,
-      providerMethod: 'google',
+    // --- Create user with raw password ---
+    final userRec = await auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
     );
+
+    await Database.savePasswordToDatabase(email, password);
+
+    // --- Save user info ---
+    final name = SharedPref.getUserName();
+    await Database.setUserToDatabase(
+      id: userRec.user!.uid,
+      name: name,
+      email: email,
+      providerMethod: 'email',
+    );
+
+    await Database.deleteOtp(email);
   }
 }

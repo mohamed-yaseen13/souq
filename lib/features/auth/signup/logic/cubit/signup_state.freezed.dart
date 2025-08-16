@@ -55,14 +55,15 @@ extension SignupStatePatterns on SignupState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( SignupLoading value)?  loading,TResult Function( SignupSuccess value)?  success,TResult Function( SignupEmailAlreadyExist value)?  emailAlreadyExist,TResult Function( SignupError value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( SignupSendingOtp value)?  sendingOtp,TResult Function( SignupOtpSent value)?  otpSent,TResult Function( SignupVerifyingOtp value)?  verifyingOtp,TResult Function( SignupSignedUp value)?  signedUp,TResult Function( SignupError value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case SignupLoading() when loading != null:
-return loading(_that);case SignupSuccess() when success != null:
-return success(_that);case SignupEmailAlreadyExist() when emailAlreadyExist != null:
-return emailAlreadyExist(_that);case SignupError() when error != null:
+return initial(_that);case SignupSendingOtp() when sendingOtp != null:
+return sendingOtp(_that);case SignupOtpSent() when otpSent != null:
+return otpSent(_that);case SignupVerifyingOtp() when verifyingOtp != null:
+return verifyingOtp(_that);case SignupSignedUp() when signedUp != null:
+return signedUp(_that);case SignupError() when error != null:
 return error(_that);case _:
   return orElse();
 
@@ -81,14 +82,15 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( SignupLoading value)  loading,required TResult Function( SignupSuccess value)  success,required TResult Function( SignupEmailAlreadyExist value)  emailAlreadyExist,required TResult Function( SignupError value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( SignupSendingOtp value)  sendingOtp,required TResult Function( SignupOtpSent value)  otpSent,required TResult Function( SignupVerifyingOtp value)  verifyingOtp,required TResult Function( SignupSignedUp value)  signedUp,required TResult Function( SignupError value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
-return initial(_that);case SignupLoading():
-return loading(_that);case SignupSuccess():
-return success(_that);case SignupEmailAlreadyExist():
-return emailAlreadyExist(_that);case SignupError():
+return initial(_that);case SignupSendingOtp():
+return sendingOtp(_that);case SignupOtpSent():
+return otpSent(_that);case SignupVerifyingOtp():
+return verifyingOtp(_that);case SignupSignedUp():
+return signedUp(_that);case SignupError():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -106,14 +108,15 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( SignupLoading value)?  loading,TResult? Function( SignupSuccess value)?  success,TResult? Function( SignupEmailAlreadyExist value)?  emailAlreadyExist,TResult? Function( SignupError value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( SignupSendingOtp value)?  sendingOtp,TResult? Function( SignupOtpSent value)?  otpSent,TResult? Function( SignupVerifyingOtp value)?  verifyingOtp,TResult? Function( SignupSignedUp value)?  signedUp,TResult? Function( SignupError value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case SignupLoading() when loading != null:
-return loading(_that);case SignupSuccess() when success != null:
-return success(_that);case SignupEmailAlreadyExist() when emailAlreadyExist != null:
-return emailAlreadyExist(_that);case SignupError() when error != null:
+return initial(_that);case SignupSendingOtp() when sendingOtp != null:
+return sendingOtp(_that);case SignupOtpSent() when otpSent != null:
+return otpSent(_that);case SignupVerifyingOtp() when verifyingOtp != null:
+return verifyingOtp(_that);case SignupSignedUp() when signedUp != null:
+return signedUp(_that);case SignupError() when error != null:
 return error(_that);case _:
   return null;
 
@@ -131,13 +134,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  success,TResult Function()?  emailAlreadyExist,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  sendingOtp,TResult Function( String email)?  otpSent,TResult Function( String email)?  verifyingOtp,TResult Function( String email)?  signedUp,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case SignupLoading() when loading != null:
-return loading();case SignupSuccess() when success != null:
-return success();case SignupEmailAlreadyExist() when emailAlreadyExist != null:
-return emailAlreadyExist();case SignupError() when error != null:
+return initial();case SignupSendingOtp() when sendingOtp != null:
+return sendingOtp();case SignupOtpSent() when otpSent != null:
+return otpSent(_that.email);case SignupVerifyingOtp() when verifyingOtp != null:
+return verifyingOtp(_that.email);case SignupSignedUp() when signedUp != null:
+return signedUp(_that.email);case SignupError() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -156,13 +160,14 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  success,required TResult Function()  emailAlreadyExist,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  sendingOtp,required TResult Function( String email)  otpSent,required TResult Function( String email)  verifyingOtp,required TResult Function( String email)  signedUp,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
-return initial();case SignupLoading():
-return loading();case SignupSuccess():
-return success();case SignupEmailAlreadyExist():
-return emailAlreadyExist();case SignupError():
+return initial();case SignupSendingOtp():
+return sendingOtp();case SignupOtpSent():
+return otpSent(_that.email);case SignupVerifyingOtp():
+return verifyingOtp(_that.email);case SignupSignedUp():
+return signedUp(_that.email);case SignupError():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -180,13 +185,14 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function()?  emailAlreadyExist,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  sendingOtp,TResult? Function( String email)?  otpSent,TResult? Function( String email)?  verifyingOtp,TResult? Function( String email)?  signedUp,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case SignupLoading() when loading != null:
-return loading();case SignupSuccess() when success != null:
-return success();case SignupEmailAlreadyExist() when emailAlreadyExist != null:
-return emailAlreadyExist();case SignupError() when error != null:
+return initial();case SignupSendingOtp() when sendingOtp != null:
+return sendingOtp();case SignupOtpSent() when otpSent != null:
+return otpSent(_that.email);case SignupVerifyingOtp() when verifyingOtp != null:
+return verifyingOtp(_that.email);case SignupSignedUp() when signedUp != null:
+return signedUp(_that.email);case SignupError() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -230,8 +236,8 @@ String toString() {
 /// @nodoc
 
 
-class SignupLoading implements SignupState {
-  const SignupLoading();
+class SignupSendingOtp implements SignupState {
+  const SignupSendingOtp();
   
 
 
@@ -241,7 +247,7 @@ class SignupLoading implements SignupState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupLoading);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupSendingOtp);
 }
 
 
@@ -250,7 +256,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SignupState.loading()';
+  return 'SignupState.sendingOtp()';
 }
 
 
@@ -262,66 +268,200 @@ String toString() {
 /// @nodoc
 
 
-class SignupSuccess implements SignupState {
-  const SignupSuccess();
+class SignupOtpSent implements SignupState {
+  const SignupOtpSent({required this.email});
   
 
+ final  String email;
 
-
+/// Create a copy of SignupState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SignupOtpSentCopyWith<SignupOtpSent> get copyWith => _$SignupOtpSentCopyWithImpl<SignupOtpSent>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupSuccess);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupOtpSent&&(identical(other.email, email) || other.email == email));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,email);
 
 @override
 String toString() {
-  return 'SignupState.success()';
+  return 'SignupState.otpSent(email: $email)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $SignupOtpSentCopyWith<$Res> implements $SignupStateCopyWith<$Res> {
+  factory $SignupOtpSentCopyWith(SignupOtpSent value, $Res Function(SignupOtpSent) _then) = _$SignupOtpSentCopyWithImpl;
+@useResult
+$Res call({
+ String email
+});
 
 
+
+
+}
+/// @nodoc
+class _$SignupOtpSentCopyWithImpl<$Res>
+    implements $SignupOtpSentCopyWith<$Res> {
+  _$SignupOtpSentCopyWithImpl(this._self, this._then);
+
+  final SignupOtpSent _self;
+  final $Res Function(SignupOtpSent) _then;
+
+/// Create a copy of SignupState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
+  return _then(SignupOtpSent(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
 
-class SignupEmailAlreadyExist implements SignupState {
-  const SignupEmailAlreadyExist();
+class SignupVerifyingOtp implements SignupState {
+  const SignupVerifyingOtp({required this.email});
   
 
+ final  String email;
 
-
+/// Create a copy of SignupState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SignupVerifyingOtpCopyWith<SignupVerifyingOtp> get copyWith => _$SignupVerifyingOtpCopyWithImpl<SignupVerifyingOtp>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupEmailAlreadyExist);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupVerifyingOtp&&(identical(other.email, email) || other.email == email));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,email);
 
 @override
 String toString() {
-  return 'SignupState.emailAlreadyExist()';
+  return 'SignupState.verifyingOtp(email: $email)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $SignupVerifyingOtpCopyWith<$Res> implements $SignupStateCopyWith<$Res> {
+  factory $SignupVerifyingOtpCopyWith(SignupVerifyingOtp value, $Res Function(SignupVerifyingOtp) _then) = _$SignupVerifyingOtpCopyWithImpl;
+@useResult
+$Res call({
+ String email
+});
 
 
+
+
+}
+/// @nodoc
+class _$SignupVerifyingOtpCopyWithImpl<$Res>
+    implements $SignupVerifyingOtpCopyWith<$Res> {
+  _$SignupVerifyingOtpCopyWithImpl(this._self, this._then);
+
+  final SignupVerifyingOtp _self;
+  final $Res Function(SignupVerifyingOtp) _then;
+
+/// Create a copy of SignupState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
+  return _then(SignupVerifyingOtp(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class SignupSignedUp implements SignupState {
+  const SignupSignedUp({required this.email});
+  
+
+ final  String email;
+
+/// Create a copy of SignupState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SignupSignedUpCopyWith<SignupSignedUp> get copyWith => _$SignupSignedUpCopyWithImpl<SignupSignedUp>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupSignedUp&&(identical(other.email, email) || other.email == email));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,email);
+
+@override
+String toString() {
+  return 'SignupState.signedUp(email: $email)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SignupSignedUpCopyWith<$Res> implements $SignupStateCopyWith<$Res> {
+  factory $SignupSignedUpCopyWith(SignupSignedUp value, $Res Function(SignupSignedUp) _then) = _$SignupSignedUpCopyWithImpl;
+@useResult
+$Res call({
+ String email
+});
+
+
+
+
+}
+/// @nodoc
+class _$SignupSignedUpCopyWithImpl<$Res>
+    implements $SignupSignedUpCopyWith<$Res> {
+  _$SignupSignedUpCopyWithImpl(this._self, this._then);
+
+  final SignupSignedUp _self;
+  final $Res Function(SignupSignedUp) _then;
+
+/// Create a copy of SignupState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
+  return _then(SignupSignedUp(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

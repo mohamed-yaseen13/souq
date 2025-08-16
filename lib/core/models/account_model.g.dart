@@ -9,9 +9,6 @@ part of 'account_model.dart';
 _AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
     _AccountModel(
       email: json['email'] as String,
-      providerMethod: (json['providerMethod'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
       role: json['role'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
       createdAt: _$JsonConverterFromJson<Object, Timestamp>(
@@ -23,7 +20,6 @@ _AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$AccountModelToJson(_AccountModel instance) =>
     <String, dynamic>{
       'email': instance.email,
-      'providerMethod': instance.providerMethod,
       'role': instance.role,
       'phone': instance.phone,
       'createdAt': _$JsonConverterToJson<Object, Timestamp>(

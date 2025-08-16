@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AccountModel {
 
- String get email; List<String> get providerMethod; String get role; String get phone;@TimestampConverter() Timestamp? get createdAt;
+ String get email; String get role; String get phone;@TimestampConverter() Timestamp? get createdAt;
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AccountModelCopyWith<AccountModel> get copyWith => _$AccountModelCopyWithImpl<A
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountModel&&(identical(other.email, email) || other.email == email)&&const DeepCollectionEquality().equals(other.providerMethod, providerMethod)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountModel&&(identical(other.email, email) || other.email == email)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,const DeepCollectionEquality().hash(providerMethod),role,phone,createdAt);
+int get hashCode => Object.hash(runtimeType,email,role,phone,createdAt);
 
 @override
 String toString() {
-  return 'AccountModel(email: $email, providerMethod: $providerMethod, role: $role, phone: $phone, createdAt: $createdAt)';
+  return 'AccountModel(email: $email, role: $role, phone: $phone, createdAt: $createdAt)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AccountModelCopyWith<$Res>  {
   factory $AccountModelCopyWith(AccountModel value, $Res Function(AccountModel) _then) = _$AccountModelCopyWithImpl;
 @useResult
 $Res call({
- String email, List<String> providerMethod, String role, String phone,@TimestampConverter() Timestamp? createdAt
+ String email, String role, String phone,@TimestampConverter() Timestamp? createdAt
 });
 
 
@@ -65,11 +65,10 @@ class _$AccountModelCopyWithImpl<$Res>
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? providerMethod = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,}) {
   return _then(_self.copyWith(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,providerMethod: null == providerMethod ? _self.providerMethod : providerMethod // ignore: cast_nullable_to_non_nullable
-as List<String>,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp?,
@@ -157,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  List<String> providerMethod,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AccountModel() when $default != null:
-return $default(_that.email,_that.providerMethod,_that.role,_that.phone,_that.createdAt);case _:
+return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
   return orElse();
 
 }
@@ -178,10 +177,10 @@ return $default(_that.email,_that.providerMethod,_that.role,_that.phone,_that.cr
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  List<String> providerMethod,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _AccountModel():
-return $default(_that.email,_that.providerMethod,_that.role,_that.phone,_that.createdAt);case _:
+return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +197,10 @@ return $default(_that.email,_that.providerMethod,_that.role,_that.phone,_that.cr
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  List<String> providerMethod,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _AccountModel() when $default != null:
-return $default(_that.email,_that.providerMethod,_that.role,_that.phone,_that.createdAt);case _:
+return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
   return null;
 
 }
@@ -213,17 +212,10 @@ return $default(_that.email,_that.providerMethod,_that.role,_that.phone,_that.cr
 @JsonSerializable()
 
 class _AccountModel implements AccountModel {
-  const _AccountModel({required this.email, required final  List<String> providerMethod, this.role = '', this.phone = '', @TimestampConverter() this.createdAt}): _providerMethod = providerMethod;
+  const _AccountModel({required this.email, this.role = '', this.phone = '', @TimestampConverter() this.createdAt});
   factory _AccountModel.fromJson(Map<String, dynamic> json) => _$AccountModelFromJson(json);
 
 @override final  String email;
- final  List<String> _providerMethod;
-@override List<String> get providerMethod {
-  if (_providerMethod is EqualUnmodifiableListView) return _providerMethod;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_providerMethod);
-}
-
 @override@JsonKey() final  String role;
 @override@JsonKey() final  String phone;
 @override@TimestampConverter() final  Timestamp? createdAt;
@@ -241,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccountModel&&(identical(other.email, email) || other.email == email)&&const DeepCollectionEquality().equals(other._providerMethod, _providerMethod)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccountModel&&(identical(other.email, email) || other.email == email)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,const DeepCollectionEquality().hash(_providerMethod),role,phone,createdAt);
+int get hashCode => Object.hash(runtimeType,email,role,phone,createdAt);
 
 @override
 String toString() {
-  return 'AccountModel(email: $email, providerMethod: $providerMethod, role: $role, phone: $phone, createdAt: $createdAt)';
+  return 'AccountModel(email: $email, role: $role, phone: $phone, createdAt: $createdAt)';
 }
 
 
@@ -261,7 +253,7 @@ abstract mixin class _$AccountModelCopyWith<$Res> implements $AccountModelCopyWi
   factory _$AccountModelCopyWith(_AccountModel value, $Res Function(_AccountModel) _then) = __$AccountModelCopyWithImpl;
 @override @useResult
 $Res call({
- String email, List<String> providerMethod, String role, String phone,@TimestampConverter() Timestamp? createdAt
+ String email, String role, String phone,@TimestampConverter() Timestamp? createdAt
 });
 
 
@@ -278,11 +270,10 @@ class __$AccountModelCopyWithImpl<$Res>
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? providerMethod = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,}) {
   return _then(_AccountModel(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,providerMethod: null == providerMethod ? _self._providerMethod : providerMethod // ignore: cast_nullable_to_non_nullable
-as List<String>,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp?,

@@ -14,13 +14,6 @@ class LoginRepo {
       throw Exception("Email Doesn't Exist");
     }
 
-    final bool emailExistWithGoogleProvider =
-        await Database.checkIfEmailExistWithGoogleProvider(request.email);
-
-    if (emailExistWithGoogleProvider) {
-      throw Exception('Try Login With Google Account');
-    }
-
     try {
       final userCred = await auth.signInWithEmailAndPassword(
         email: request.email,

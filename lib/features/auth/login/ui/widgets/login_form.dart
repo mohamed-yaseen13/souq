@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/features/auth/login/logic/cubit/login_state.dart';
-import 'package:souq/features/auth/login/ui/widgets/forgot_password_row.dart';
 import 'package:souq/features/auth/login/ui/widgets/login_button.dart';
 import 'package:souq/core/widgets/email_text_form_field.dart';
 import 'package:souq/core/widgets/password_text_form_field.dart';
@@ -30,8 +29,6 @@ class _LoginFormState extends State<LoginForm> {
           EmailTextFormField(emailController: _emailController),
           verticalSpace(24),
           PasswordTextFormField(passwordController: _passwordController),
-          verticalSpace(12),
-          ForgotPasswordRow(),
           verticalSpace(24),
           widget.loginState is LoginLoading
               ? const CircularProgressIndicator()
