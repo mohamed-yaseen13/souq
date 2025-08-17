@@ -10,17 +10,18 @@ class SignupRepo {
   SignupRepo({required this.auth});
 
   Future<void> sendEmailOtp(String email) async {
-    final otp = await SendEmailOtp.sendEmailOtp(email);
-    await Database.saveOtpToDatabase(email, otp);
-  }
-
-  Future<void> verifyOtpThenSignup(String email, String otp) async {
     final bool emailExist = await Database.checkIfEmailExist(email);
 
     if (emailExist) {
       throw Exception("Email Already Exist Try Login");
     }
 
+    final otp = await SendEmailOtp.sendEmailOtp(email);
+
+    await Database.saveOtpToDatabase(email, otp);
+  }
+
+  Future<void> verifyOtpThenSignup(String email, String otp) async {
     final bool isOtpCorrect = await Database.isOtpCorrect(email, otp);
     if (!isOtpCorrect) {
       throw Exception('Invalid OTP');
@@ -43,7 +44,6 @@ class SignupRepo {
       id: userRec.user!.uid,
       name: name,
       email: email,
-      providerMethod: 'email',
     );
 
     await Database.deleteOtp(email);

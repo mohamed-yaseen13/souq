@@ -29,29 +29,32 @@ class PictureAndNameContainer extends StatelessWidget {
             onTap: () {
               context.pushNamed(AppRoutes.editPictureAndNameScreen);
             },
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 40.sp,
-                  backgroundColor: Colors.white,
-                  child: ClipOval(child: ImageService.getUserImage()),
-                ),
-                horizontalSpace(8),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '$userRole $userName',
-                      style: AppTextStyles.whiteColor20FontText,
-                    ),
-                    verticalSpace(4),
-                    Text(userEmail),
-                  ],
-                ),
-                Spacer(),
-                Icon(Icons.edit, color: Colors.white),
-              ],
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 40.sp,
+                    backgroundColor: Colors.white,
+                    child: ClipOval(child: ImageService.getUserImage()),
+                  ),
+                  horizontalSpace(8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '$userRole $userName',
+                        style: AppTextStyles.whiteColor20FontText,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      verticalSpace(4),
+                      Text(userEmail),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );

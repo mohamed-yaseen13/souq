@@ -31,35 +31,25 @@ class Database {
     required String id,
     required String name,
     required String email,
-    required String providerMethod,
   }) async {
     final userRef = getUserRef(id);
 
-    final userDoc = await userRef.get();
+    final UserModel user = UserModel(
+      id: id,
+      name: name,
+      accounts: {'0': AccountModel(email: email)},
+    );
 
-    late UserModel user;
+    await userRef.set(user.toJson());
 
-    if (!userDoc.exists) {
-      user = UserModel(
-        id: id,
-        name: name,
-        accounts: {'0': AccountModel(email: email)},
-      );
+    await userRef.update({
+      'createdAt': FieldValue.serverTimestamp(),
+      'accounts.0.createdAt': FieldValue.serverTimestamp(),
+    });
 
-      await userRef.set(user.toJson());
-
-      await userRef.update({
-        'createdAt': FieldValue.serverTimestamp(),
-        'accounts.0.createdAt': FieldValue.serverTimestamp(),
-      });
-
-      await getEmailRef(
-        email.toLowerCase(),
-      ).set({'createdAt': FieldValue.serverTimestamp()});
-    } else {
-      user = UserModel.fromJson(userDoc.data()!);
-    }
     await SharedPref.saveUserData(user: user);
+
+    await getEmailRef(email).set({'createdAt': FieldValue.serverTimestamp()});
   }
 
   static Future<void> getUserFromDatabaseToSaveAtSharedPrefs(String id) async {
@@ -95,10 +85,26 @@ class Database {
     await SharedPref.setUserName(name);
   }
 
-  //static Future<void> addNewAccount(String email) async {
-  //  final id = SharedPref.getUserId();
-  //  final userRef = getUserRef(id);
-  //}
+  static Future<void> addNewAccount(String email) async {
+    final newAccount = AccountModel(email: email);
+
+    final id = SharedPref.getUserId();
+    final userRef = getUserRef(id);
+    final userdoc = await userRef.get();
+
+    final data = userdoc.data()!;
+
+    final accounts = Map<String, dynamic>.from(data['accounts'] ?? {});
+    final nextIndex = accounts.length.toString();
+
+    await userRef.update({
+      'accounts.$nextIndex': newAccount.toJson(),
+      'accounts.$nextIndex.createdAt': FieldValue.serverTimestamp(),
+      'activeAccountIndex': int.parse(nextIndex),
+    });
+
+    await SharedPref.setActiveAccountIndex(int.parse(nextIndex));
+  }
 
   static Future<void> saveOtpToDatabase(String email, String otp) async {
     final expiresAt = DateTime.now().add(const Duration(minutes: 5));

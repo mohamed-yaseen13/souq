@@ -12,6 +12,8 @@ import 'package:souq/features/auth/on_boarding/ui/on_boarding_screen.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_cubit.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/ui/widgets/otp_add_account_screen.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/phone/logic/cubit/phone_cubit.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
 import 'package:souq/features/profile/ui/profile_screen.dart';
@@ -110,7 +112,22 @@ class AppRouter {
 
       case AppRoutes.addNewAccountScreen:
         return MaterialPageRoute(
-          builder: (_) => AddNewAccountScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<AddAccountCubit>(),
+            child: AddNewAccountScreen(),
+          ),
+          settings: settings,
+        );
+
+      case AppRoutes.otpAddAccountScreen:
+        final args = settings.arguments as Map<String, String?>;
+        final email = args['email'];
+
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<AddAccountCubit>(),
+            child: OtpAddAccountScreen(email: email!),
+          ),
           settings: settings,
         );
 

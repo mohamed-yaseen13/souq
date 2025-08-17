@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_cubit.dart';
 
 class AddAccountButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -15,12 +17,7 @@ class AddAccountButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         if (formKey.currentState!.validate()) {
-          //final request = SignupRequestModel(
-          //  name: nameController.text,
-          //  email: emailController.text,
-          //  password: passwordController.text,
-          //);
-          //context.read<SignupCubit>().signupWithEmail(request);
+          context.read<AddAccountCubit>().sendOtp(emailController.text);
         }
       },
       child: const Text('Add Account'),
