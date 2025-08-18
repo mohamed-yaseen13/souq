@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:souq/core/database/database.dart';
+import 'package:souq/core/helpers/shared_pref.dart';
+import 'package:souq/core/services/generator.dart';
 import 'package:souq/core/services/send_email_otp.dart';
 
 class AddAccountRepo {
@@ -19,21 +21,28 @@ class AddAccountRepo {
   }
 
   Future<void> verifyOtpThenAddAccount(String email, String otp) async {
-    final bool emailExist = await Database.checkIfEmailExist(email);
-
-    if (emailExist) {
-      throw Exception("Email Already Exist Try Login");
-    }
-
     final bool isOtpCorrect = await Database.isOtpCorrect(email, otp);
     if (!isOtpCorrect) {
       throw Exception('Invalid OTP');
     }
 
-    await Database.addNewAccount(email);
+    final password = Generator.generatePassword();
 
-    // link that email with the first one to allow users to log in directly to
-    // the new account to their rec at firebase authentication
+    // --- Create user with raw password ---
+    final userRec = await auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    await Database.savePasswordToDatabase(email, password);
+
+    final name = SharedPref.getUserName();
+
+    await Database.addNewAccount(
+      email: email,
+      uid: userRec.user!.uid,
+      name: name,
+    );
 
     await Database.deleteOtp(email);
   }

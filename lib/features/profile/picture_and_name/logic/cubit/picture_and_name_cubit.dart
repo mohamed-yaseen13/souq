@@ -12,7 +12,7 @@ class PictureAndNameCubit extends Cubit<PictureAndNameState> {
     emit(const PictureAndNameState.loading());
 
     try {
-      await repo.setPictureAndNameToDatabase(request);
+      await repo.setImageAndNameToDatabase(request);
       emit(PictureAndNameState.success());
     } catch (e) {
       emit(PictureAndNameState.error(e.toString()));

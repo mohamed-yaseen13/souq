@@ -44,10 +44,10 @@ class ImageService {
     final bool isUserHasImage = SharedPref.getUserImage();
 
     if (isUserHasImage) {
-      final String userId = SharedPref.getUserId();
-      final int userPictureNumber = SharedPref.getUserPictureNumber();
+      final String accountId = SharedPref.getAccountId();
+      final int userPictureNumber = SharedPref.getAccountImageNumber();
 
-      return CldImageWidget(publicId: '$userId-$userPictureNumber');
+      return CldImageWidget(publicId: '$accountId-$userPictureNumber');
     } else {
       final String userRole = SharedPref.getUserRole();
       final roleEnum = userRole.toRole();

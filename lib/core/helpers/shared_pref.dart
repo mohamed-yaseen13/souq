@@ -112,30 +112,6 @@ class SharedPref {
     return _prefs!.getString(userAddressKey) ?? '';
   }
 
-  // save user data
-  static Future<void> saveUserData({required UserModel user}) async {
-    await setIsUserLoggedIn();
-    await setUserId(user.id);
-    await setUserName(user.name);
-    await setUserAddress(user.address);
-    await setUserEmail(user.activeAccount.email);
-    await setUserRole(user.activeAccount.role);
-    await setUserPhoneNumber(user.activeAccount.phone);
-  }
-
-  // email verified key
-  static const String emailVerifiedKey = 'emailVerifiedKey';
-
-  // set email verified
-  static Future<void> setEmailVerified() async {
-    await _prefs!.setBool(emailVerifiedKey, true);
-  }
-
-  // get email verified
-  static bool getEmailVerified() {
-    return _prefs!.getBool(emailVerifiedKey) ?? false;
-  }
-
   // user iamge key
   static const String userImageKey = 'userImageKey';
 
@@ -149,17 +125,46 @@ class SharedPref {
     return _prefs!.getBool(userImageKey) ?? false;
   }
 
-  // user picture number key
-  static const String userPictureNumberKey = 'userPictureNumberKey';
+  // user Image number key
+  static const String accountImageNumberKey = 'accountImageNumberKey';
 
-  // get user picture number
-  static int getUserPictureNumber() {
-    return _prefs!.getInt(userPictureNumberKey) ?? 0;
+  // set account Image Number
+  static Future<void> setAccountImageNumber(int number) async {
+    await _prefs!.setInt(accountImageNumberKey, number);
   }
 
-  // increment user picture number
-  static Future<void> incrementUserPictureNumber() async {
-    final int userPictureNumber = SharedPref.getUserPictureNumber();
-    await _prefs!.setInt(userPictureNumberKey, userPictureNumber + 1);
+  // get account image number
+  static int getAccountImageNumber() {
+    return _prefs!.getInt(accountImageNumberKey) ?? 0;
+  }
+
+  // account id key
+  static const String accountIdKey = 'accountIdKey';
+
+  // set account id
+  static Future<void> setAccountId(String id) async {
+    await _prefs!.setString(accountIdKey, id);
+  }
+
+  // get account id
+  static String getAccountId() {
+    return _prefs!.getString(accountIdKey) ?? '';
+  }
+
+  // save user data
+  static Future<void> saveUserData({
+    required UserModel user,
+    required String generatedUserId,
+  }) async {
+    await setIsUserLoggedIn();
+    await setUserId(generatedUserId);
+    await setUserName(user.activeAccount.name);
+    await setUserAddress(user.activeAccount.address);
+    await setUserEmail(user.activeAccount.email);
+    await setUserRole(user.activeAccount.role);
+    await setUserPhoneNumber(user.activeAccount.phone);
+    await setUserImage(user.activeAccount.isAccountHasImage);
+    await setAccountId(user.activeAccount.uid);
+    await setAccountImageNumber(user.activeAccount.accountImageNumber);
   }
 }

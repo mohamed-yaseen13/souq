@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:souq/core/database/database.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
-import 'package:souq/core/services/password_generator.dart';
+import 'package:souq/core/services/generator.dart';
 import 'package:souq/core/services/send_email_otp.dart';
 
 class SignupRepo {
@@ -28,7 +28,7 @@ class SignupRepo {
     }
 
     // --- Generate password ---
-    final password = PasswordGenerator.generatePassword();
+    final password = Generator.generatePassword();
 
     // --- Create user with raw password ---
     final userRec = await auth.createUserWithEmailAndPassword(
@@ -38,10 +38,13 @@ class SignupRepo {
 
     await Database.savePasswordToDatabase(email, password);
 
+    final generatedUserId = Generator.generateUserId();
+
     // --- Save user info ---
     final name = SharedPref.getUserName();
     await Database.setUserToDatabase(
-      id: userRec.user!.uid,
+      generatedUserId: generatedUserId,
+      uid: userRec.user!.uid,
       name: name,
       email: email,
     );

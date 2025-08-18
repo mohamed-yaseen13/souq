@@ -14,15 +14,15 @@ class LoginRepo {
       throw Exception("Email Doesn't Exist");
     }
 
-    try {
-      final userCred = await auth.signInWithEmailAndPassword(
-        email: request.email,
-        password: request.password,
-      );
-
-      await Database.getUserFromDatabaseToSaveAtSharedPrefs(userCred.user!.uid);
-    } on FirebaseAuthException {
-      throw Exception('Incorrect Password');
-    }
+    //try {
+    //  final userCred = await auth.signInWithEmailAndPassword(
+    //    email: request.email,
+    //    password: request.password,
+    //  );
+    //
+    //  await Database.getUserFromDatabaseToSaveAtSharedPrefs(userCred.user!.uid);
+    //} on FirebaseAuthException {
+    //  throw Exception('Incorrect Password');
+    //}
   }
 }

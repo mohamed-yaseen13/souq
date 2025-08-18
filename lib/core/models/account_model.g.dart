@@ -8,6 +8,8 @@ part of 'account_model.dart';
 
 _AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
     _AccountModel(
+      uid: json['uid'] as String,
+      name: json['name'] as String,
       email: json['email'] as String,
       role: json['role'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
@@ -15,10 +17,15 @@ _AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
         json['createdAt'],
         const TimestampConverter().fromJson,
       ),
+      isAccountHasImage: json['isAccountHasImage'] as bool? ?? false,
+      address: json['address'] as String? ?? '',
+      accountImageNumber: (json['accountImageNumber'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$AccountModelToJson(_AccountModel instance) =>
     <String, dynamic>{
+      'uid': instance.uid,
+      'name': instance.name,
       'email': instance.email,
       'role': instance.role,
       'phone': instance.phone,
@@ -26,6 +33,9 @@ Map<String, dynamic> _$AccountModelToJson(_AccountModel instance) =>
         instance.createdAt,
         const TimestampConverter().toJson,
       ),
+      'isAccountHasImage': instance.isAccountHasImage,
+      'address': instance.address,
+      'accountImageNumber': instance.accountImageNumber,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

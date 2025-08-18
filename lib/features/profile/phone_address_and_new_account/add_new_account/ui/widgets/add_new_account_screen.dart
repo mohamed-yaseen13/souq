@@ -7,6 +7,7 @@ import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
 import 'package:souq/core/widgets/email_text_form_field.dart';
+import 'package:souq/core/widgets/name_text_form_field.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_state.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/ui/widgets/add_account_button.dart';
@@ -20,6 +21,7 @@ class AddNewAccountScreen extends StatefulWidget {
 
 class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
 
   @override
@@ -50,7 +52,9 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
                     'Add New Account',
                     style: AppTextStyles.orangeColor32FontText,
                   ),
-                  verticalSpace(12),
+                  verticalSpace(24),
+                  NameTextFormField(nameController: _nameController),
+                  verticalSpace(24),
                   EmailTextFormField(emailController: _emailController),
                   verticalSpace(64),
                   Center(
@@ -58,6 +62,7 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
                         ? CircularProgressIndicator()
                         : AddAccountButton(
                             formKey: _formKey,
+                            nameController: _nameController,
                             emailController: _emailController,
                           ),
                   ),

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AccountModel {
 
- String get email; String get role; String get phone;@TimestampConverter() Timestamp? get createdAt;
+ String get uid; String get name; String get email; String get role; String get phone;@TimestampConverter() Timestamp? get createdAt; bool get isAccountHasImage; String get address; int get accountImageNumber;
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AccountModelCopyWith<AccountModel> get copyWith => _$AccountModelCopyWithImpl<A
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountModel&&(identical(other.email, email) || other.email == email)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isAccountHasImage, isAccountHasImage) || other.isAccountHasImage == isAccountHasImage)&&(identical(other.address, address) || other.address == address)&&(identical(other.accountImageNumber, accountImageNumber) || other.accountImageNumber == accountImageNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,role,phone,createdAt);
+int get hashCode => Object.hash(runtimeType,uid,name,email,role,phone,createdAt,isAccountHasImage,address,accountImageNumber);
 
 @override
 String toString() {
-  return 'AccountModel(email: $email, role: $role, phone: $phone, createdAt: $createdAt)';
+  return 'AccountModel(uid: $uid, name: $name, email: $email, role: $role, phone: $phone, createdAt: $createdAt, isAccountHasImage: $isAccountHasImage, address: $address, accountImageNumber: $accountImageNumber)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AccountModelCopyWith<$Res>  {
   factory $AccountModelCopyWith(AccountModel value, $Res Function(AccountModel) _then) = _$AccountModelCopyWithImpl;
 @useResult
 $Res call({
- String email, String role, String phone,@TimestampConverter() Timestamp? createdAt
+ String uid, String name, String email, String role, String phone,@TimestampConverter() Timestamp? createdAt, bool isAccountHasImage, String address, int accountImageNumber
 });
 
 
@@ -65,13 +65,18 @@ class _$AccountModelCopyWithImpl<$Res>
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? name = null,Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,Object? isAccountHasImage = null,Object? address = null,Object? accountImageNumber = null,}) {
   return _then(_self.copyWith(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as Timestamp?,
+as Timestamp?,isAccountHasImage: null == isAccountHasImage ? _self.isAccountHasImage : isAccountHasImage // ignore: cast_nullable_to_non_nullable
+as bool,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String,accountImageNumber: null == accountImageNumber ? _self.accountImageNumber : accountImageNumber // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -156,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uid,  String name,  String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt,  bool isAccountHasImage,  String address,  int accountImageNumber)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AccountModel() when $default != null:
-return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
+return $default(_that.uid,_that.name,_that.email,_that.role,_that.phone,_that.createdAt,_that.isAccountHasImage,_that.address,_that.accountImageNumber);case _:
   return orElse();
 
 }
@@ -177,10 +182,10 @@ return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uid,  String name,  String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt,  bool isAccountHasImage,  String address,  int accountImageNumber)  $default,) {final _that = this;
 switch (_that) {
 case _AccountModel():
-return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
+return $default(_that.uid,_that.name,_that.email,_that.role,_that.phone,_that.createdAt,_that.isAccountHasImage,_that.address,_that.accountImageNumber);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +202,10 @@ return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uid,  String name,  String email,  String role,  String phone, @TimestampConverter()  Timestamp? createdAt,  bool isAccountHasImage,  String address,  int accountImageNumber)?  $default,) {final _that = this;
 switch (_that) {
 case _AccountModel() when $default != null:
-return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
+return $default(_that.uid,_that.name,_that.email,_that.role,_that.phone,_that.createdAt,_that.isAccountHasImage,_that.address,_that.accountImageNumber);case _:
   return null;
 
 }
@@ -212,13 +217,18 @@ return $default(_that.email,_that.role,_that.phone,_that.createdAt);case _:
 @JsonSerializable()
 
 class _AccountModel implements AccountModel {
-  const _AccountModel({required this.email, this.role = '', this.phone = '', @TimestampConverter() this.createdAt});
+  const _AccountModel({required this.uid, required this.name, required this.email, this.role = '', this.phone = '', @TimestampConverter() this.createdAt, this.isAccountHasImage = false, this.address = '', this.accountImageNumber = 0});
   factory _AccountModel.fromJson(Map<String, dynamic> json) => _$AccountModelFromJson(json);
 
+@override final  String uid;
+@override final  String name;
 @override final  String email;
 @override@JsonKey() final  String role;
 @override@JsonKey() final  String phone;
 @override@TimestampConverter() final  Timestamp? createdAt;
+@override@JsonKey() final  bool isAccountHasImage;
+@override@JsonKey() final  String address;
+@override@JsonKey() final  int accountImageNumber;
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccountModel&&(identical(other.email, email) || other.email == email)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AccountModel&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.role, role) || other.role == role)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isAccountHasImage, isAccountHasImage) || other.isAccountHasImage == isAccountHasImage)&&(identical(other.address, address) || other.address == address)&&(identical(other.accountImageNumber, accountImageNumber) || other.accountImageNumber == accountImageNumber));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,role,phone,createdAt);
+int get hashCode => Object.hash(runtimeType,uid,name,email,role,phone,createdAt,isAccountHasImage,address,accountImageNumber);
 
 @override
 String toString() {
-  return 'AccountModel(email: $email, role: $role, phone: $phone, createdAt: $createdAt)';
+  return 'AccountModel(uid: $uid, name: $name, email: $email, role: $role, phone: $phone, createdAt: $createdAt, isAccountHasImage: $isAccountHasImage, address: $address, accountImageNumber: $accountImageNumber)';
 }
 
 
@@ -253,7 +263,7 @@ abstract mixin class _$AccountModelCopyWith<$Res> implements $AccountModelCopyWi
   factory _$AccountModelCopyWith(_AccountModel value, $Res Function(_AccountModel) _then) = __$AccountModelCopyWithImpl;
 @override @useResult
 $Res call({
- String email, String role, String phone,@TimestampConverter() Timestamp? createdAt
+ String uid, String name, String email, String role, String phone,@TimestampConverter() Timestamp? createdAt, bool isAccountHasImage, String address, int accountImageNumber
 });
 
 
@@ -270,13 +280,18 @@ class __$AccountModelCopyWithImpl<$Res>
 
 /// Create a copy of AccountModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? name = null,Object? email = null,Object? role = null,Object? phone = null,Object? createdAt = freezed,Object? isAccountHasImage = null,Object? address = null,Object? accountImageNumber = null,}) {
   return _then(_AccountModel(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,role: null == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as Timestamp?,
+as Timestamp?,isAccountHasImage: null == isAccountHasImage ? _self.isAccountHasImage : isAccountHasImage // ignore: cast_nullable_to_non_nullable
+as bool,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String,accountImageNumber: null == accountImageNumber ? _self.accountImageNumber : accountImageNumber // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

@@ -15,14 +15,14 @@ class PictureAndNameRepo {
   Future<void> uploadImageToCloudinary(File imageFile) async {
     cloudinary.config.urlConfig.secure = true;
 
-    final String userId = SharedPref.getUserId();
-    await SharedPref.incrementUserPictureNumber();
-    final int userPictureNumber = SharedPref.getUserPictureNumber();
+    final String accountId = SharedPref.getAccountId();
+    final int accountImageNumber = SharedPref.getAccountImageNumber();
+    await SharedPref.setAccountImageNumber(accountImageNumber + 1);
 
     await cloudinary.uploader().upload(
       imageFile,
       params: UploadParams(
-        publicId: '$userId-$userPictureNumber',
+        publicId: '$accountId-${accountImageNumber + 1}',
         uniqueFilename: false,
         overwrite: true,
         resourceType: 'image',
@@ -30,20 +30,20 @@ class PictureAndNameRepo {
     );
   }
 
-  Future<void> setPictureAndNameToDatabase(
+  Future<void> setImageAndNameToDatabase(
     PictureAndNameRequestModel request,
   ) async {
     if (request.imageFile != null) {
       await uploadImageToCloudinary(request.imageFile!);
-      await Database.updateIsUserHasImage(true);
+      await Database.updateIsAccountHasImage(true);
     }
 
     if (request.name != null) {
-      await Database.changeUserName(request.name!);
+      await Database.changeAccountName(request.name!);
     }
   }
 
   Future<void> deleteUserPicture() async {
-    await Database.updateIsUserHasImage(false);
+    await Database.updateIsAccountHasImage(false);
   }
 }
