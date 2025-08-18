@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/features/auth/login/data/login_repo.dart';
-import 'package:souq/features/auth/login/data/login_request_model.dart';
 import 'package:souq/features/auth/login/logic/cubit/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -8,12 +7,26 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this.loginRepo) : super(LoginState.initial());
 
-  void loginWithEmail(LoginRequestModel request) async {
-    emit(const LoginState.loading());
+  Future<void> sendOtp(String email) async {
+    emit(const LoginState.sendingOtp());
 
     try {
-      await loginRepo.loginWithEmail(request);
-      emit(LoginState.success());
+      await loginRepo.sendEmailOtp(email);
+      emit(LoginState.otpSent(email: email));
+    } catch (e) {
+      emit(LoginState.error(e.toString()));
+    }
+  }
+
+  Future<void> verifyOtpThenLogin({
+    required String email,
+    required String otp,
+  }) async {
+    emit(LoginState.verifyingOtp(email: email));
+
+    try {
+      await loginRepo.verifyOtpThenLogin(email, otp);
+      emit(LoginState.loggedIn(email: email));
     } catch (e) {
       emit(LoginState.error(e.toString()));
     }

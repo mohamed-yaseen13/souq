@@ -9,6 +9,8 @@ class AppRoutes {
 
   static const String loginScreen = 'loginScreen';
 
+  static const String otpLoginScreen = 'otpLoginScreen';
+
   static const String ordersScreen = 'ordersScreen';
 
   static const String chatsScreen = 'chatsScreen';

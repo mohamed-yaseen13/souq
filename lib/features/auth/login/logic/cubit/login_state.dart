@@ -6,9 +6,14 @@ part 'login_state.freezed.dart';
 class LoginState with _$LoginState {
   const factory LoginState.initial() = _Initial;
 
-  const factory LoginState.loading() = LoginLoading;
+  const factory LoginState.sendingOtp() = LoginsendingOtp;
 
-  const factory LoginState.success() = LoginSuccess;
+  const factory LoginState.otpSent({required String email}) = LoginOtpSent;
+
+  const factory LoginState.verifyingOtp({required String email}) =
+      LoginVerifyingOtp;
+
+  const factory LoginState.loggedIn({required String email}) = LoginLoggedIn;
 
   const factory LoginState.error(String message) = LoginError;
 }

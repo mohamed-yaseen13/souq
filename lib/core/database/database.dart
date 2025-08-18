@@ -22,8 +22,19 @@ class Database {
     return doc.exists;
   }
 
-  static Future<void> saveOtpToDatabase(String email, String otp) async {
+  static Future<void> saveOtpToDatabase(
+    String email,
+    String otp, {
+    bool isLogin = false,
+  }) async {
     final expiresAt = DateTime.now().add(const Duration(minutes: 5));
+
+    if (isLogin) {
+      await getEmailRef(
+        email,
+      ).update({'otp': otp, "expiresAt": Timestamp.fromDate(expiresAt)});
+      return;
+    }
 
     await getEmailRef(
       email,
@@ -139,24 +150,35 @@ class Database {
     await getEmailRef(email).update({'userId': id, 'accountIndex': nextIndex});
   }
 
-  //static Future<void> getUserFromDatabaseToSaveAtSharedPrefs(String id) async {
-  //  final userDoc = await getUserRef(id).get();
-  //  final user = UserModel.fromJson(userDoc.data()!);
-  //  await SharedPref.saveUserData(user: user);
-  //}
-  //
-  //static Future<String> getPasswordFromDatabase(String email) async {
-  //  final doc = await getPasswordsRef(email).get();
-  //
-  //  final encryptedPassword = doc['password'] as String;
-  //  final ivBase64 = doc['iv'] as String;
-  //
-  //  // --- Decrypt password ---
-  //  const String secretKey = "1234567890abcdef1234567890abcdef"; // same key
-  //  final key = encrypt.Key.fromUtf8(secretKey);
-  //  final iv = encrypt.IV.fromBase64(ivBase64);
-  //  final encrypter = encrypt.Encrypter(encrypt.AES(key));
-  //
-  //  return encrypter.decrypt64(encryptedPassword, iv: iv);
-  //}
+  static Future<String> getPasswordFromDatabase(String email) async {
+    final doc = await getEmailRef(email).get();
+
+    final encryptedPassword = doc['password'] as String;
+    final ivBase64 = doc['iv'] as String;
+
+    // --- Decrypt password ---
+    const String secretKey = "1234567890abcdef1234567890abcdef"; // same key
+    final key = encrypt.Key.fromUtf8(secretKey);
+    final iv = encrypt.IV.fromBase64(ivBase64);
+    final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+    return encrypter.decrypt64(encryptedPassword, iv: iv);
+  }
+
+  static Future<void> getUserFromDatabaseToSaveAtSharedPrefs(
+    String email,
+  ) async {
+    final emailDoc = await getEmailRef(email).get();
+    final generatedUserId = emailDoc['userId'] as String;
+    final accountIndex = emailDoc['accountIndex'] as String;
+
+    final userRef = getUserRef(generatedUserId);
+
+    await userRef.update({'activeAccountIndex': int.parse(accountIndex)});
+
+    final userDoc = await userRef.get();
+
+    final user = UserModel.fromJson(userDoc.data()!);
+    await SharedPref.saveUserData(user: user, generatedUserId: generatedUserId);
+  }
 }

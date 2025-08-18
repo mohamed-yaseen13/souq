@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/core/di/di.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/features/auth/login/ui/widgets/otp_login_screen.dart';
 import 'package:souq/features/auth/signup/ui/widgets/otp_signup_screen.dart';
 import 'package:souq/features/chat/chats_screen.dart';
 import 'package:souq/features/home/ui/home_screen.dart';
@@ -61,6 +62,17 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<LoginCubit>(),
             child: LoginScreen(),
+          ),
+          settings: settings,
+        );
+
+      case AppRoutes.otpLoginScreen:
+        final args = settings.arguments as Map<String, String?>;
+        final email = args['email'];
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: OtpLoginScreen(email: email!),
           ),
           settings: settings,
         );

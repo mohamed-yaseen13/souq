@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
-import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/auth/login/logic/cubit/login_cubit.dart';
@@ -32,14 +31,11 @@ class LoginScreen extends StatelessWidget {
                 ),
                 BlocConsumer<LoginCubit, LoginState>(
                   listener: (context, state) {
-                    if (state is LoginSuccess) {
-                      if (SharedPref.getUserRole().isEmpty) {
-                        context.pushReplacementNamed(
-                          AppRoutes.onBoardingScreen,
-                        );
-                      } else {
-                        context.pushReplacementNamed(AppRoutes.home);
-                      }
+                    if (state is LoginOtpSent) {
+                      context.pushNamed(
+                        AppRoutes.otpLoginScreen,
+                        arguments: {'email': state.email},
+                      );
                     } else if (state is LoginError) {
                       ScaffoldMessenger.of(
                         context,
