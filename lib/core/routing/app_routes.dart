@@ -30,4 +30,6 @@ class AppRoutes {
   static const String otpAddAccountScreen = 'otpAddAccountScreen';
 
   static const String viewImageScreen = 'viewImageScreen';
+
+  static const String test = 'test';
 }

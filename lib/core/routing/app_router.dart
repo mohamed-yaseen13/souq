@@ -24,6 +24,7 @@ import 'package:souq/features/profile/phone_address_and_new_account/phone/ui/wid
 import 'package:souq/features/profile/picture_and_name/ui/widgets/edit_picture_and_name_screen.dart';
 import 'package:souq/features/profile/picture_and_name/ui/widgets/view_image_screen.dart';
 import 'package:souq/features/settings/settings_screen.dart';
+import 'package:souq/test/test_email.dart';
 
 class AppRouter {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -146,6 +147,12 @@ class AppRouter {
       case AppRoutes.viewImageScreen:
         return MaterialPageRoute(
           builder: (_) => ViewImageScreen(),
+          settings: settings,
+        );
+
+      case AppRoutes.test:
+        return MaterialPageRoute(
+          builder: (_) => TestEmail(),
           settings: settings,
         );
 
