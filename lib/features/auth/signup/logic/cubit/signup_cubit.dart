@@ -7,7 +7,7 @@ class SignupCubit extends Cubit<SignupState> {
 
   SignupCubit(this.signupRepo) : super(const SignupState.initial());
 
-  Future<void> sendOtp(String email) async {
+  void sendOtp(String email) async {
     emit(const SignupState.sendingOtp());
     try {
       await signupRepo.sendEmailOtp(email);
@@ -17,10 +17,7 @@ class SignupCubit extends Cubit<SignupState> {
     }
   }
 
-  Future<void> verifyOtpThenSignup({
-    required String email,
-    required String otp,
-  }) async {
+  void verifyOtpThenSignup({required String email, required String otp}) async {
     emit(SignupState.verifyingOtp(email: email));
     try {
       await signupRepo.verifyOtpThenSignup(email, otp);

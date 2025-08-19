@@ -7,7 +7,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this.loginRepo) : super(LoginState.initial());
 
-  Future<void> sendOtp(String email) async {
+  void sendOtp(String email) async {
     emit(const LoginState.sendingOtp());
 
     try {
@@ -18,10 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<void> verifyOtpThenLogin({
-    required String email,
-    required String otp,
-  }) async {
+  void verifyOtpThenLogin({required String email, required String otp}) async {
     emit(LoginState.verifyingOtp(email: email));
 
     try {

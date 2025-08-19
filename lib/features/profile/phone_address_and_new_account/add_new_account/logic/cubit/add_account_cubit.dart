@@ -7,7 +7,7 @@ class AddAccountCubit extends Cubit<AddAccountState> {
 
   AddAccountCubit(this.addAccountRepo) : super(AddAccountState.initial());
 
-  Future<void> sendOtp(String email) async {
+  void sendOtp(String email) async {
     emit(const AddAccountState.sendingOtp());
     try {
       await addAccountRepo.sendEmailOtp(email);
@@ -17,7 +17,7 @@ class AddAccountCubit extends Cubit<AddAccountState> {
     }
   }
 
-  Future<void> verifyOtpThenAddAccount({
+  void verifyOtpThenAddAccount({
     required String email,
     required String otp,
   }) async {

@@ -7,7 +7,7 @@ class AccountsCubit extends Cubit<AccountsState> {
 
   AccountsCubit(this.accountRepo) : super(AccountsState.initial());
 
-  Future<void> getUserAccounts() async {
+  void getUserAccounts() async {
     emit(const AccountsState.loading());
 
     try {
