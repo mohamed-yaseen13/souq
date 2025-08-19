@@ -13,6 +13,8 @@ import 'package:souq/features/auth/on_boarding/ui/on_boarding_screen.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/accounts/logic/cubit/accounts_cubit.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/accounts/ui/widgets/user_accounts.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/ui/widgets/otp_add_account_screen.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/phone/logic/cubit/phone_cubit.dart';
@@ -147,6 +149,15 @@ class AppRouter {
       case AppRoutes.viewImageScreen:
         return MaterialPageRoute(
           builder: (_) => ViewImageScreen(),
+          settings: settings,
+        );
+
+      case AppRoutes.userAccounts:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<AccountsCubit>(),
+            child: UserAccounts(),
+          ),
           settings: settings,
         );
 

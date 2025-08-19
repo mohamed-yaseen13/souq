@@ -7,6 +7,8 @@ import 'package:souq/features/auth/on_boarding/data/role_selection_repo.dart';
 import 'package:souq/features/auth/on_boarding/logic/cubit/role_selection_cubit.dart';
 import 'package:souq/features/auth/signup/data/signup_repo.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/accounts/data/account_repo.dart';
+import 'package:souq/features/profile/phone_address_and_new_account/accounts/logic/cubit/accounts_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/data/add_account_repo.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/phone/data/phone_repo.dart';
@@ -68,5 +70,12 @@ Future<void> setupGetIt() async {
 
   getIt.registerFactory<AddAccountCubit>(
     () => AddAccountCubit(getIt<AddAccountRepo>()),
+  );
+
+  // user accounts
+  getIt.registerLazySingleton<AccountRepo>(() => AccountRepo());
+
+  getIt.registerFactory<AccountsCubit>(
+    () => AccountsCubit(getIt<AccountRepo>()),
   );
 }

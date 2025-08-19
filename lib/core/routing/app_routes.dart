@@ -31,5 +31,7 @@ class AppRoutes {
 
   static const String viewImageScreen = 'viewImageScreen';
 
+  static const String userAccounts = 'userAccounts';
+
   static const String test = 'test';
 }

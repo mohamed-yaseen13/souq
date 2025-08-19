@@ -27,6 +27,7 @@ class ProfileScreen extends StatelessWidget {
           PhoneAddressAndNewAccountContainer(),
           verticalSpace(24),
           DeleteAccountAndLogoutContainer(),
+          verticalSpace(32),
         ],
       ),
     );

@@ -181,4 +181,23 @@ class Database {
     final user = UserModel.fromJson(userDoc.data()!);
     await SharedPref.saveUserData(user: user, generatedUserId: generatedUserId);
   }
+
+  static Future<Map<int, AccountModel>> getUserAccountsMap(
+    String userId,
+  ) async {
+    final snap = await Database.getUserRef(userId).get();
+    final data = snap.data();
+
+    final raw = Map<String, dynamic>.from(data?['accounts'] ?? {});
+
+    final result = <int, AccountModel>{};
+    for (final entry in raw.entries) {
+      final key = int.tryParse(entry.key);
+      if (key == null) continue;
+
+      final valueMap = Map<String, dynamic>.from(entry.value as Map);
+      result[key] = AccountModel.fromJson(valueMap);
+    }
+    return result;
+  }
 }
