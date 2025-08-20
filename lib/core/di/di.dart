@@ -7,6 +7,10 @@ import 'package:souq/features/on_boarding/data/role_selection_repo.dart';
 import 'package:souq/features/on_boarding/logic/cubit/role_selection_cubit.dart';
 import 'package:souq/features/auth/signup/data/signup_repo.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
+import 'package:souq/features/profile/delete_account_and_logout/delete_account/data/delete_account_repo.dart';
+import 'package:souq/features/profile/delete_account_and_logout/delete_account/logic/cubit/delete_account_cubit.dart';
+import 'package:souq/features/profile/delete_account_and_logout/logout/data/logout_repo.dart';
+import 'package:souq/features/profile/delete_account_and_logout/logout/logic/cubit/logout_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/accounts/data/account_repo.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/accounts/logic/cubit/accounts_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/data/add_account_repo.dart';
@@ -77,5 +81,21 @@ Future<void> setupGetIt() async {
 
   getIt.registerFactory<AccountsCubit>(
     () => AccountsCubit(getIt<AccountRepo>()),
+  );
+
+  // logout
+  getIt.registerLazySingleton<LogoutRepo>(
+    () => LogoutRepo(auth: getIt<FirebaseAuth>()),
+  );
+
+  getIt.registerFactory<LogoutCubit>(() => LogoutCubit(getIt<LogoutRepo>()));
+
+  // delete account
+  getIt.registerLazySingleton<DeleteAccountRepo>(
+    () => DeleteAccountRepo(auth: getIt<FirebaseAuth>()),
+  );
+
+  getIt.registerFactory<DeleteAccountCubit>(
+    () => DeleteAccountCubit(getIt<DeleteAccountRepo>()),
   );
 }

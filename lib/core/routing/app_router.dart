@@ -13,6 +13,8 @@ import 'package:souq/features/on_boarding/ui/on_boarding_screen.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
+import 'package:souq/features/profile/delete_account_and_logout/delete_account/logic/cubit/delete_account_cubit.dart';
+import 'package:souq/features/profile/delete_account_and_logout/logout/logic/cubit/logout_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/accounts/logic/cubit/accounts_cubit.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/accounts/ui/widgets/user_accounts.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_cubit.dart';
@@ -91,8 +93,12 @@ class AppRouter {
 
       case AppRoutes.profileScreen:
         return _animatedRoute(
-          page: BlocProvider(
-            create: (context) => getIt<PictureAndNameCubit>(),
+          page: MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<PictureAndNameCubit>()),
+              BlocProvider(create: (context) => getIt<LogoutCubit>()),
+              BlocProvider(create: (context) => getIt<DeleteAccountCubit>()),
+            ],
             child: ProfileScreen(),
           ),
           settings: settings,

@@ -38,6 +38,7 @@ class _OtpLoginScreenState extends State<OtpLoginScreen> {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(state.message)));
+              print(state.message);
             }
           },
           builder: (context, state) {

@@ -167,4 +167,9 @@ class SharedPref {
     await setAccountId(user.activeAccount.uid);
     await setAccountImageNumber(user.activeAccount.accountImageNumber);
   }
+
+  // logout
+  static Future<void> clear() async {
+    await _prefs?.clear();
+  }
 }

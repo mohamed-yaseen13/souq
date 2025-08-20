@@ -200,4 +200,39 @@ class Database {
     }
     return result;
   }
+
+  static Future<void> deleteAccount() async {
+    final String userId = SharedPref.getUserId();
+    final String accountId = SharedPref.getAccountId();
+
+    final userRef = getUserRef(userId);
+
+    final userDoc = await userRef.get();
+
+    final userData = userDoc.data()!;
+
+    final accountsMap = Map<String, dynamic>.from(userData['accounts'] ?? {});
+    final userAccounts = accountsMap.values
+        .map((e) => Map<String, dynamic>.from(e))
+        .toList();
+
+    if (userAccounts.length == 1) {
+      await userRef.delete();
+    } else {
+      final updatedAccounts = userAccounts
+          .where((acc) => acc['uid'] != accountId)
+          .toList();
+
+      final updatedAccountsMap = {
+        for (int i = 0; i < updatedAccounts.length; i++)
+          i.toString(): updatedAccounts[i],
+      };
+
+      await userRef.update({'accounts': updatedAccountsMap});
+    }
+
+    final email = SharedPref.getUserEmail();
+
+    await getEmailRef(email).delete();
+  }
 }
