@@ -25,7 +25,7 @@ class _LoginFormState extends State<LoginForm> {
         children: [
           verticalSpace(24),
           EmailTextFormField(emailController: _emailController),
-          verticalSpace(24),
+          verticalSpace(64),
           widget.loginState is LoginsendingOtp
               ? const CircularProgressIndicator()
               : LoginButton(

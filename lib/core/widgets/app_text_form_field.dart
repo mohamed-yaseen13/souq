@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:souq/core/styles/app_text_styles.dart';
 
 class AppTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -7,7 +8,9 @@ class AppTextFormField extends StatelessWidget {
   final Function(String?) validator;
   final bool isObscureText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final TextInputType? textInputType;
+  final bool readOnly;
 
   const AppTextFormField({
     super.key,
@@ -17,6 +20,8 @@ class AppTextFormField extends StatelessWidget {
     this.isObscureText = false,
     this.suffixIcon,
     this.textInputType,
+    this.prefixIcon,
+    this.readOnly = false,
   });
 
   @override
@@ -24,8 +29,9 @@ class AppTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label),
+        Text(label, style: AppTextStyles.blackColor18FontText),
         TextFormField(
+          readOnly: readOnly,
           keyboardType: textInputType,
           obscureText: isObscureText,
           controller: controller,
@@ -52,6 +58,7 @@ class AppTextFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.sp),
             ),
             suffixIcon: suffixIcon,
+            prefixIcon: prefixIcon,
           ),
           validator: (value) {
             return validator(value);

@@ -40,17 +40,24 @@ class ImageService {
     return File(croppedFile.path.replaceFirst('file://', ''));
   }
 
-  static Widget getUserImage() {
-    final bool isUserHasImage = SharedPref.getUserImage();
+  static Widget getUserImage({
+    bool? isAccountHasImage,
+    String? accountId,
+    int? accountImageNumber,
+    String? userRole,
+  }) {
+    final bool _isAccountHasImage =
+        isAccountHasImage ?? SharedPref.getUserImage();
 
-    if (isUserHasImage) {
-      final String accountId = SharedPref.getAccountId();
-      final int userPictureNumber = SharedPref.getAccountImageNumber();
+    if (_isAccountHasImage) {
+      final String _accountId = accountId ?? SharedPref.getAccountId();
+      final int _accountImageNumber =
+          accountImageNumber ?? SharedPref.getAccountImageNumber();
 
-      return CldImageWidget(publicId: '$accountId-$userPictureNumber');
+      return CldImageWidget(publicId: '$_accountId-$_accountImageNumber');
     } else {
-      final String userRole = SharedPref.getUserRole();
-      final roleEnum = userRole.toRole();
+      final String _userRole = userRole ?? SharedPref.getUserRole();
+      final roleEnum = _userRole.toRole();
       return Image.asset(roleEnum.imagePath);
     }
   }

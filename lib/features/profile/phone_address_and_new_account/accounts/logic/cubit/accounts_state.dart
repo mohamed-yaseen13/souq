@@ -9,8 +9,12 @@ class AccountsState with _$AccountsState {
 
   const factory AccountsState.loading() = AccountsLoading;
 
+  const factory AccountsState.switchLoading() = AccountsSwitchLoading;
+
   const factory AccountsState.success(List<AccountModel> accounts) =
       AccountsSuccess;
+
+  const factory AccountsState.switchSuccess() = AccountsSwitchSuccess;
 
   const factory AccountsState.error(String message) = AccountsError;
 }

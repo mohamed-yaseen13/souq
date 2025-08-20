@@ -77,7 +77,9 @@ Future<void> setupGetIt() async {
   );
 
   // user accounts
-  getIt.registerLazySingleton<AccountRepo>(() => AccountRepo());
+  getIt.registerLazySingleton<AccountRepo>(
+    () => AccountRepo(auth: getIt<FirebaseAuth>()),
+  );
 
   getIt.registerFactory<AccountsCubit>(
     () => AccountsCubit(getIt<AccountRepo>()),

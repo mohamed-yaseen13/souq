@@ -5,6 +5,7 @@ import 'package:souq/core/constants/app_constants.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/core/widgets/app_button.dart';
 import 'package:souq/features/on_boarding/logic/cubit/role_selection_cubit.dart';
 import 'package:souq/features/on_boarding/logic/cubit/role_selection_state.dart';
 import 'package:souq/features/on_boarding/ui/widgets/role_card.dart';
@@ -68,15 +69,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           verticalSpace(8),
                           state is RoleSelectionLoading
                               ? CircularProgressIndicator()
-                              : ElevatedButton(
+                              : AppButton(
                                   onPressed: selectedRole == null
-                                      ? null
+                                      ? () {}
                                       : () {
                                           context
                                               .read<RoleSelectionCubit>()
                                               .setRole(selectedRole!.name);
                                         },
-                                  child: Text('Get Started'),
+                                  desc: 'Get Started',
                                 ),
                         ],
                       );

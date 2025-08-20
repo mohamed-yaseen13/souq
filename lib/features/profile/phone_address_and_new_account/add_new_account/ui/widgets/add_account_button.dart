@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
+import 'package:souq/core/widgets/app_button.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_cubit.dart';
 
 class AddAccountButton extends StatelessWidget {
@@ -17,14 +18,14 @@ class AddAccountButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return AppButton(
       onPressed: () async {
         if (formKey.currentState!.validate()) {
           context.read<AddAccountCubit>().sendOtp(emailController.text);
           await SharedPref.setUserName(nameController.text);
         }
       },
-      child: const Text('Add Account'),
+      desc: 'Add Account',
     );
   }
 }

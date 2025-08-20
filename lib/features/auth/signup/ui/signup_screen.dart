@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_state.dart';
 import 'package:souq/features/auth/signup/ui/widgets/already_have_an_account_row.dart';
@@ -22,21 +23,11 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Sign up',
-                  style: TextStyle(
-                    fontSize: 32.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text('Sign up', style: AppTextStyles.blackColor32FontText),
                 verticalSpace(4),
                 Text(
                   'Create an account to continue!',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
-                  ),
+                  style: AppTextStyles.greyColor12Font500WeightText,
                 ),
                 BlocConsumer<SignupCubit, SignupState>(
                   listener: (context, state) {
@@ -55,7 +46,7 @@ class SignupScreen extends StatelessWidget {
                     return SignupForm(signupState: state);
                   },
                 ),
-                verticalSpace(48),
+                verticalSpace(32),
                 AlreadyHaveAnAccountRow(),
               ],
             ),

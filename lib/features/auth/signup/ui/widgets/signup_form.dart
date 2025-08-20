@@ -29,7 +29,7 @@ class _SignupFormState extends State<SignupForm> {
           NameTextFormField(nameController: _nameController),
           verticalSpace(24),
           EmailTextFormField(emailController: _emailController),
-          verticalSpace(24),
+          verticalSpace(64),
           widget.signupState is SignupSendingOtp
               ? const CircularProgressIndicator()
               : SignupButton(

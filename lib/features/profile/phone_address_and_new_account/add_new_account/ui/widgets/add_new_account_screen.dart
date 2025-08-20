@@ -40,6 +40,7 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(state.message)));
+              print(state.message);
             }
           },
           builder: (context, state) {

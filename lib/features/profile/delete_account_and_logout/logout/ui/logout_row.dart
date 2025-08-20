@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
+import 'package:souq/core/widgets/app_dialog.dart';
 import 'package:souq/features/profile/delete_account_and_logout/logout/logic/cubit/logout_cubit.dart';
 import 'package:souq/features/profile/delete_account_and_logout/logout/logic/cubit/logout_state.dart';
 
@@ -12,21 +13,46 @@ class LogoutRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LogoutCubit, LogoutState>(
+    return BlocConsumer<LogoutCubit, LogoutState>(
+      listener: (context, state) async {
+        if (state is LogoutSuccess) {
+          if (context.mounted) {
+            context.pushReplacementNamed(AppRoutes.signupScreen);
+          }
+        }
+        if (state is LogoutError) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
       builder: (context, state) {
         return InkWell(
           onTap: () async {
-            await context.read<LogoutCubit>().logout();
-            if (context.mounted) {
-              context.pushReplacementNamed(AppRoutes.signupScreen);
+            final shouldLogout = await showDialog<bool>(
+              context: context,
+              barrierDismissible: true,
+              builder: (context) {
+                return AppDialog(
+                  desc: 'Log Out',
+                  title: "Are you sure you want to\nlogout?",
+                );
+              },
+            );
+            if (shouldLogout == true && context.mounted) {
+              await context.read<LogoutCubit>().logout();
             }
           },
           child: Row(
             children: [
               Text('Logout', style: AppTextStyles.redColor20FontText),
-              Spacer(),
+              const Spacer(),
               state is LogoutLoading
-                  ? CircularProgressIndicator()
+                  ? const SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
                   : Icon(Icons.logout, size: 32.sp, color: Colors.grey),
             ],
           ),

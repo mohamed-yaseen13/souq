@@ -43,12 +43,32 @@ class _AppNavigationBarState extends State<AppNavigationBar> {
       destinations: [
         NavigationDestination(
           icon: Icon(Icons.production_quantity_limits),
+          selectedIcon: Icon(
+            Icons.production_quantity_limits,
+            color: AppColors.purple,
+          ),
           label: 'Orders',
         ),
-        NavigationDestination(icon: Icon(Icons.chat), label: 'Chats'),
-        NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-        NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
-        NavigationDestination(icon: Icon(Icons.settings), label: 'Settings'),
+        NavigationDestination(
+          icon: Icon(Icons.chat),
+          selectedIcon: Icon(Icons.chat, color: AppColors.purple),
+          label: 'Chats',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.home),
+          selectedIcon: Icon(Icons.home, color: AppColors.purple),
+          label: 'Home',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.person),
+          selectedIcon: Icon(Icons.person, color: AppColors.purple),
+          label: 'Profile',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.settings),
+          selectedIcon: Icon(Icons.settings, color: AppColors.purple),
+          label: 'Settings',
+        ),
       ],
       selectedIndex: _enumToIndex(widget.selectedScreen),
       onDestinationSelected: (index) {
@@ -58,9 +78,8 @@ class _AppNavigationBarState extends State<AppNavigationBar> {
           context.pushReplacementNamed(_enumToRoute(selected));
         }
       },
-      backgroundColor: AppColors.green,
-      surfaceTintColor: AppColors.orange,
-      indicatorColor: AppColors.orange,
+      backgroundColor: AppColors.white,
+      indicatorColor: AppColors.white,
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/routing/app_router.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/core/styles/app_colors.dart';
 
 class SouqApp extends StatelessWidget {
   const SouqApp({super.key});
@@ -30,8 +31,8 @@ class SouqApp extends StatelessWidget {
           initialRoute: startRoute,
           onGenerateRoute: AppRouter.generateRoute,
           theme: ThemeData(
-            scaffoldBackgroundColor: const Color(0xFFF5F5F5),
-            appBarTheme: AppBarTheme(color: const Color(0xFFF5F5F5)),
+            scaffoldBackgroundColor: AppColors.white,
+            appBarTheme: AppBarTheme(color: AppColors.white),
           ),
         );
       },

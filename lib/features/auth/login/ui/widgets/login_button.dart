@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:souq/core/widgets/app_button.dart';
 import 'package:souq/features/auth/login/logic/cubit/login_cubit.dart';
 
 class LoginButton extends StatelessWidget {
@@ -14,13 +15,13 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return AppButton(
+      desc: 'Login',
       onPressed: () {
         if (formKey.currentState!.validate()) {
           context.read<LoginCubit>().sendOtp(emailController.text);
         }
       },
-      child: const Text('Login'),
     );
   }
 }

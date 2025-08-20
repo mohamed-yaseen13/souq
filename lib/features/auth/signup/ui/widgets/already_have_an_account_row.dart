@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
+import 'package:souq/core/styles/app_text_styles.dart';
 
 class AlreadyHaveAnAccountRow extends StatelessWidget {
   const AlreadyHaveAnAccountRow({super.key});
@@ -14,11 +14,7 @@ class AlreadyHaveAnAccountRow extends StatelessWidget {
       children: [
         Text(
           'Already have an account?',
-          style: TextStyle(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w500,
-            color: Colors.grey,
-          ),
+          style: AppTextStyles.greyColor12Font500WeightText,
         ),
         horizontalSpace(4),
         InkWell(
@@ -27,11 +23,7 @@ class AlreadyHaveAnAccountRow extends StatelessWidget {
           },
           child: Text(
             'Login',
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF4D81E7),
-            ),
+            style: AppTextStyles.blueColor12Font500WeightText,
           ),
         ),
       ],

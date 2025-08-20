@@ -17,4 +17,15 @@ class AccountsCubit extends Cubit<AccountsState> {
       emit(AccountsState.error(e.toString()));
     }
   }
+
+  Future<void> switchAccount(String email) async {
+    emit(const AccountsState.switchLoading());
+
+    try {
+      await accountRepo.switchAccount(email);
+      emit(AccountsState.switchSuccess());
+    } catch (e) {
+      emit(AccountsState.error(e.toString()));
+    }
+  }
 }

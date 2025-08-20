@@ -37,6 +37,7 @@ class _OtpSignupScreenState extends State<OtpSignupScreen> {
           },
           builder: (context, state) {
             return OtpForm(
+              email: widget.email,
               onCompleted: (value) => setState(() => otp = value),
               isLoading: state is SignupVerifyingOtp,
               onConfirm: () {

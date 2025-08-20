@@ -166,6 +166,7 @@ class SharedPref {
     await setUserImage(user.activeAccount.isAccountHasImage);
     await setAccountId(user.activeAccount.uid);
     await setAccountImageNumber(user.activeAccount.accountImageNumber);
+    await setActiveAccountIndex(user.activeAccountIndex);
   }
 
   // logout

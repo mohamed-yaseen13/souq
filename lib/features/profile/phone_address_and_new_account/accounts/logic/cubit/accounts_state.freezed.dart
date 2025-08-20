@@ -55,13 +55,15 @@ extension AccountsStatePatterns on AccountsState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( AccountsLoading value)?  loading,TResult Function( AccountsSuccess value)?  success,TResult Function( AccountsError value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( AccountsLoading value)?  loading,TResult Function( AccountsSwitchLoading value)?  switchLoading,TResult Function( AccountsSuccess value)?  success,TResult Function( AccountsSwitchSuccess value)?  switchSuccess,TResult Function( AccountsError value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case AccountsLoading() when loading != null:
-return loading(_that);case AccountsSuccess() when success != null:
-return success(_that);case AccountsError() when error != null:
+return loading(_that);case AccountsSwitchLoading() when switchLoading != null:
+return switchLoading(_that);case AccountsSuccess() when success != null:
+return success(_that);case AccountsSwitchSuccess() when switchSuccess != null:
+return switchSuccess(_that);case AccountsError() when error != null:
 return error(_that);case _:
   return orElse();
 
@@ -80,13 +82,15 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( AccountsLoading value)  loading,required TResult Function( AccountsSuccess value)  success,required TResult Function( AccountsError value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( AccountsLoading value)  loading,required TResult Function( AccountsSwitchLoading value)  switchLoading,required TResult Function( AccountsSuccess value)  success,required TResult Function( AccountsSwitchSuccess value)  switchSuccess,required TResult Function( AccountsError value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case AccountsLoading():
-return loading(_that);case AccountsSuccess():
-return success(_that);case AccountsError():
+return loading(_that);case AccountsSwitchLoading():
+return switchLoading(_that);case AccountsSuccess():
+return success(_that);case AccountsSwitchSuccess():
+return switchSuccess(_that);case AccountsError():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -104,13 +108,15 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( AccountsLoading value)?  loading,TResult? Function( AccountsSuccess value)?  success,TResult? Function( AccountsError value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( AccountsLoading value)?  loading,TResult? Function( AccountsSwitchLoading value)?  switchLoading,TResult? Function( AccountsSuccess value)?  success,TResult? Function( AccountsSwitchSuccess value)?  switchSuccess,TResult? Function( AccountsError value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case AccountsLoading() when loading != null:
-return loading(_that);case AccountsSuccess() when success != null:
-return success(_that);case AccountsError() when error != null:
+return loading(_that);case AccountsSwitchLoading() when switchLoading != null:
+return switchLoading(_that);case AccountsSuccess() when success != null:
+return success(_that);case AccountsSwitchSuccess() when switchSuccess != null:
+return switchSuccess(_that);case AccountsError() when error != null:
 return error(_that);case _:
   return null;
 
@@ -128,12 +134,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<AccountModel> accounts)?  success,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  switchLoading,TResult Function( List<AccountModel> accounts)?  success,TResult Function()?  switchSuccess,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case AccountsLoading() when loading != null:
-return loading();case AccountsSuccess() when success != null:
-return success(_that.accounts);case AccountsError() when error != null:
+return loading();case AccountsSwitchLoading() when switchLoading != null:
+return switchLoading();case AccountsSuccess() when success != null:
+return success(_that.accounts);case AccountsSwitchSuccess() when switchSuccess != null:
+return switchSuccess();case AccountsError() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +160,14 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<AccountModel> accounts)  success,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  switchLoading,required TResult Function( List<AccountModel> accounts)  success,required TResult Function()  switchSuccess,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case AccountsLoading():
-return loading();case AccountsSuccess():
-return success(_that.accounts);case AccountsError():
+return loading();case AccountsSwitchLoading():
+return switchLoading();case AccountsSuccess():
+return success(_that.accounts);case AccountsSwitchSuccess():
+return switchSuccess();case AccountsError():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +185,14 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<AccountModel> accounts)?  success,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  switchLoading,TResult? Function( List<AccountModel> accounts)?  success,TResult? Function()?  switchSuccess,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case AccountsLoading() when loading != null:
-return loading();case AccountsSuccess() when success != null:
-return success(_that.accounts);case AccountsError() when error != null:
+return loading();case AccountsSwitchLoading() when switchLoading != null:
+return switchLoading();case AccountsSuccess() when success != null:
+return success(_that.accounts);case AccountsSwitchSuccess() when switchSuccess != null:
+return switchSuccess();case AccountsError() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -245,6 +257,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'AccountsState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class AccountsSwitchLoading implements AccountsState {
+  const AccountsSwitchLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountsSwitchLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AccountsState.switchLoading()';
 }
 
 
@@ -324,6 +368,38 @@ as List<AccountModel>,
 
 
 }
+
+/// @nodoc
+
+
+class AccountsSwitchSuccess implements AccountsState {
+  const AccountsSwitchSuccess();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AccountsSwitchSuccess);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AccountsState.switchSuccess()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 

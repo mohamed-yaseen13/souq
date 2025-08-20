@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/widgets/app_button.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
+import 'package:souq/core/widgets/email_text_form_field.dart';
 import 'package:souq/core/widgets/name_text_form_field.dart';
 import 'package:souq/features/profile/picture_and_name/data/picture_and_name_request_model.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
@@ -25,12 +27,15 @@ class _EditPictureAndNameScreenState extends State<EditPictureAndNameScreen> {
   late String originalName;
   File? originalImage;
   File? currentImage;
+  late TextEditingController emailController;
 
   @override
   void initState() {
     super.initState();
     originalName = SharedPref.getUserName();
     nameController = TextEditingController(text: originalName);
+    final String email = SharedPref.getUserEmail();
+    emailController = TextEditingController(text: email);
     nameController.addListener(() {
       setState(() {});
     });
@@ -101,14 +106,19 @@ class _EditPictureAndNameScreenState extends State<EditPictureAndNameScreen> {
                   ),
                   verticalSpace(64),
                   NameTextFormField(nameController: nameController),
+                  verticalSpace(12),
+                  EmailTextFormField(
+                    emailController: emailController,
+                    readOnly: true,
+                  ),
                   Spacer(),
                   state is PictureAndNameLoading
                       ? CircularProgressIndicator()
-                      : ElevatedButton(
+                      : AppButton(
                           onPressed: () {
                             _onSave();
                           },
-                          child: Text('Save'),
+                          desc: 'Save Changes',
                         ),
                 ],
               );
