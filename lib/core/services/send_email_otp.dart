@@ -41,6 +41,10 @@ class SendEmailOtp {
         ? 'service_zbm0vb8'
         : 'service_s4p7bdl';
 
+    final String fromEmail = provider == 'Google'
+        ? '01221316865m@gmail.com'
+        : 'es-mohamedlotfy2025@alexu.edu.eg';
+
     final url = Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
 
     final otp = (100000 + Random().nextInt(900000)).toString();
@@ -61,6 +65,7 @@ class SendEmailOtp {
           "passcode": otp,
           "time": formattedTime,
           "to_email": email,
+          "from_email": fromEmail,
         },
       }),
     );
