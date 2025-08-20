@@ -5,9 +5,9 @@ import 'package:souq/core/constants/app_constants.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
-import 'package:souq/features/auth/on_boarding/logic/cubit/role_selection_cubit.dart';
-import 'package:souq/features/auth/on_boarding/logic/cubit/role_selection_state.dart';
-import 'package:souq/features/auth/on_boarding/ui/widgets/role_card.dart';
+import 'package:souq/features/on_boarding/logic/cubit/role_selection_cubit.dart';
+import 'package:souq/features/on_boarding/logic/cubit/role_selection_state.dart';
+import 'package:souq/features/on_boarding/ui/widgets/role_card.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});

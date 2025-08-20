@@ -30,5 +30,7 @@ class LoginRepo {
     await auth.signInWithEmailAndPassword(email: email, password: password);
 
     await Database.getUserFromDatabaseToSaveAtSharedPrefs(email);
+
+    await Database.deleteOtp(email);
   }
 }
