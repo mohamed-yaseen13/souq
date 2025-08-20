@@ -17,6 +17,16 @@ class PictureAndNameRepo {
 
     final String accountId = SharedPref.getAccountId();
     final int accountImageNumber = SharedPref.getAccountImageNumber();
+
+    final String oldPublicId = '$accountId-$accountImageNumber';
+    await cloudinary.uploader().destroy(
+      DestroyParams(
+        publicId: oldPublicId,
+        resourceType: 'image',
+        invalidate: true,
+      ),
+    );
+
     await SharedPref.setAccountImageNumber(accountImageNumber + 1);
 
     await cloudinary.uploader().upload(
@@ -45,5 +55,17 @@ class PictureAndNameRepo {
 
   Future<void> deleteUserPicture() async {
     await Database.updateIsAccountHasImage(false);
+    final String accountId = SharedPref.getAccountId();
+    final int accountImageNumber = SharedPref.getAccountImageNumber();
+
+    final String oldPublicId = '$accountId-$accountImageNumber';
+
+    await cloudinary.uploader().destroy(
+      DestroyParams(
+        publicId: oldPublicId,
+        resourceType: 'image',
+        invalidate: true,
+      ),
+    );
   }
 }
