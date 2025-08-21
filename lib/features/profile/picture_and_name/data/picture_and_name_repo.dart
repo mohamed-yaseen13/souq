@@ -3,30 +3,18 @@ import 'package:cloudinary_api/uploader/cloudinary_uploader.dart';
 // ignore: implementation_imports
 import 'package:cloudinary_api/src/request/model/uploader_params.dart';
 import 'package:cloudinary_url_gen/cloudinary.dart';
-import 'package:nsfw_detector_flutter/nsfw_detector_flutter.dart';
 import 'package:souq/core/database/database.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
+import 'package:souq/core/services/review_images.dart';
 import 'package:souq/features/profile/picture_and_name/data/picture_and_name_request_model.dart';
 
 class PictureAndNameRepo {
   final Cloudinary cloudinary;
-  late final NsfwDetector _nsfwDetector;
 
-  PictureAndNameRepo({required this.cloudinary}) {
-    _initNsfwDetector();
-  }
-
-  Future<void> _initNsfwDetector() async {
-    _nsfwDetector = await NsfwDetector.load(threshold: 0.01);
-  }
+  PictureAndNameRepo({required this.cloudinary});
 
   Future<void> uploadImageToCloudinary(File imageFile) async {
-    final result = await _nsfwDetector.detectNSFWFromFile(imageFile);
-
-    if (result?.isNsfw == true) {
-      print("Upload rejected: NSFW image detected.");
-      throw Exception("Upload rejected: NSFW image detected.");
-    }
+    await ReviewImages.reviewImages(imageFile);
 
     cloudinary.config.urlConfig.secure = true;
 
