@@ -23,7 +23,6 @@ class PictureAndNameContainer extends StatelessWidget {
         final String userRole = SharedPref.getUserRole();
         final String userEmail = SharedPref.getUserEmail();
         return AppContainer(
-          height: 100,
           color: AppColors.green,
           child: InkWell(
             onTap: () {

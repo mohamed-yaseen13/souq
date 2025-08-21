@@ -13,18 +13,19 @@ import 'package:souq/features/on_boarding/ui/on_boarding_screen.dart';
 import 'package:souq/features/auth/signup/logic/cubit/signup_cubit.dart';
 import 'package:souq/features/auth/signup/ui/signup_screen.dart';
 import 'package:souq/features/orders/orders_screen.dart';
-import 'package:souq/features/profile/delete_account_and_logout/delete_account/logic/cubit/delete_account_cubit.dart';
-import 'package:souq/features/profile/delete_account_and_logout/logout/logic/cubit/logout_cubit.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/accounts/logic/cubit/accounts_cubit.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/accounts/ui/widgets/user_accounts.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/logic/cubit/add_account_cubit.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/ui/widgets/otp_add_account_screen.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/phone/logic/cubit/phone_cubit.dart';
+import 'package:souq/features/profile/delete_account/logic/cubit/delete_account_cubit.dart';
+import 'package:souq/features/profile/add_new_account/logout/logic/cubit/logout_cubit.dart';
+import 'package:souq/features/profile/accounts/logic/cubit/accounts_cubit.dart';
+import 'package:souq/features/profile/accounts/ui/widgets/user_accounts.dart';
+import 'package:souq/features/profile/add_new_account/logic/cubit/add_account_cubit.dart';
+import 'package:souq/features/profile/add_new_account/ui/widgets/otp_add_account_screen.dart';
+import 'package:souq/features/profile/phone_number/logic/cubit/phone_cubit.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
+import 'package:souq/features/profile/products/ui/widgets/seller_products_screen.dart';
 import 'package:souq/features/profile/ui/profile_screen.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/add_new_account/ui/widgets/add_new_account_screen.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/address/ui/widgets/edit_address_screen.dart';
-import 'package:souq/features/profile/phone_address_and_new_account/phone/ui/widgets/edit_phone_numder_screen.dart';
+import 'package:souq/features/profile/add_new_account/ui/widgets/add_new_account_screen.dart';
+import 'package:souq/features/profile/address/ui/widgets/edit_address_screen.dart';
+import 'package:souq/features/profile/phone_number/ui/widgets/edit_phone_numder_screen.dart';
 import 'package:souq/features/profile/picture_and_name/ui/widgets/edit_picture_and_name_screen.dart';
 import 'package:souq/features/profile/picture_and_name/ui/widgets/view_image_screen.dart';
 import 'package:souq/features/settings/settings_screen.dart';
@@ -164,6 +165,12 @@ class AppRouter {
             create: (context) => getIt<AccountsCubit>(),
             child: UserAccounts(),
           ),
+          settings: settings,
+        );
+
+      case AppRoutes.sellerProductsScreen:
+        return MaterialPageRoute(
+          builder: (_) => SellerProductsScreen(),
           settings: settings,
         );
 

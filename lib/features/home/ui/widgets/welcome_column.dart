@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/shared_pref.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/core/styles/app_colors.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/services/image_service.dart';
@@ -20,25 +22,31 @@ class WelcomeColumn extends StatelessWidget {
         verticalSpace(16),
         Row(
           children: [
-            CircleAvatar(
-              radius: 25.sp,
-              backgroundColor: Colors.white,
-              child: ClipOval(child: ImageService.getUserImage()),
+            InkWell(
+              onTap: () => context.pushNamed(AppRoutes.viewImageScreen),
+              child: CircleAvatar(
+                radius: 25.sp,
+                backgroundColor: Colors.white,
+                child: ClipOval(child: ImageService.getUserImage()),
+              ),
             ),
             horizontalSpace(8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hi, $userName',
-                  style: AppTextStyles.blackColor18FontText,
-                ),
-                verticalSpace(4),
-                Text(
-                  "Let's go shopping",
-                  style: AppTextStyles.greyColor12Font500WeightText,
-                ),
-              ],
+            InkWell(
+              onTap: () => context.pushNamed(AppRoutes.profileScreen),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Hi, $userName',
+                    style: AppTextStyles.blackColor18FontText,
+                  ),
+                  verticalSpace(4),
+                  Text(
+                    "Let's go shopping",
+                    style: AppTextStyles.greyColor12Font500WeightText,
+                  ),
+                ],
+              ),
             ),
             Spacer(),
             Image.asset(
