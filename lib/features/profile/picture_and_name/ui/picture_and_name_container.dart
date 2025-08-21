@@ -10,7 +10,7 @@ import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_container.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_state.dart';
-import 'package:souq/features/profile/picture_and_name/services/image_service.dart';
+import 'package:souq/core/services/image_service.dart';
 
 class PictureAndNameContainer extends StatelessWidget {
   const PictureAndNameContainer({super.key});

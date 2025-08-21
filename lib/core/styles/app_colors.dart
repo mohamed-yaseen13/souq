@@ -10,4 +10,6 @@ class AppColors {
   static const Color lightPurplr = Color.fromARGB(255, 217, 208, 238);
 
   static const Color white = Color(0xFFF5F5F5);
+
+  static const Color black = Color(0xFF3C3C3C);
 }

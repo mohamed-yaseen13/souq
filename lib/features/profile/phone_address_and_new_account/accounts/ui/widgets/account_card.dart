@@ -8,7 +8,7 @@ import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_container.dart';
 import 'package:souq/core/widgets/app_dialog.dart';
 import 'package:souq/features/profile/phone_address_and_new_account/accounts/logic/cubit/accounts_cubit.dart';
-import 'package:souq/features/profile/picture_and_name/services/image_service.dart';
+import 'package:souq/core/services/image_service.dart';
 
 class AccountCard extends StatelessWidget {
   final String name;

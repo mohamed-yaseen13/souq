@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/routing/app_routes.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
-import 'package:souq/features/profile/picture_and_name/services/image_service.dart';
+import 'package:souq/core/services/image_service.dart';
 
 class PictureAvatar extends StatefulWidget {
   final File? initialImage;

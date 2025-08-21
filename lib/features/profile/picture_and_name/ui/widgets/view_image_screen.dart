@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:souq/features/profile/picture_and_name/services/image_service.dart';
+import 'package:souq/core/services/image_service.dart';
 
 class ViewImageScreen extends StatelessWidget {
   const ViewImageScreen({super.key});
