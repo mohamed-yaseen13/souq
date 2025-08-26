@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/extensions.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/routing/app_routes.dart';
-import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
 import 'package:souq/features/profile/accounts/logic/cubit/accounts_cubit.dart';
 import 'package:souq/features/profile/accounts/logic/cubit/accounts_state.dart';
@@ -27,6 +26,7 @@ class _UserAccountsState extends State<UserAccounts> {
   @override
   Widget build(BuildContext context) {
     return AppScreenTemplate(
+      title: 'Your Accounts',
       child: Center(
         child: BlocConsumer<AccountsCubit, AccountsState>(
           listener: (context, state) {
@@ -46,20 +46,7 @@ class _UserAccountsState extends State<UserAccounts> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () => context.pop(),
-                        child: Icon(Icons.arrow_back, size: 25.sp),
-                      ),
-                      horizontalSpace(24),
-                      Text(
-                        'Your Accounts',
-                        style: AppTextStyles.blackColor32FontText,
-                      ),
-                    ],
-                  ),
-                  verticalSpace(32),
+                  verticalSpace(16),
                   ...state.accounts.asMap().entries.map((entry) {
                     final acc = entry.value;
                     final index = entry.key;

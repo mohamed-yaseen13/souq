@@ -33,7 +33,7 @@ class PictureAndNameContainer extends StatelessWidget {
               child: Row(
                 children: [
                   CircleAvatar(
-                    radius: 40.sp,
+                    radius: 40.r,
                     backgroundColor: Colors.white,
                     child: ClipOval(child: ImageService.getUserImage()),
                   ),

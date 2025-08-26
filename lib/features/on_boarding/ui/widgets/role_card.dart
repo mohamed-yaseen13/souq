@@ -20,7 +20,7 @@ class RoleCard extends StatelessWidget {
       padding: EdgeInsets.all(12.sp),
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
-        borderRadius: BorderRadius.circular(16.sp),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: InkWell(
         onTap: onTap,

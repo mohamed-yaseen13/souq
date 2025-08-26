@@ -28,17 +28,17 @@ class OtpForm extends StatelessWidget {
       textStyle: TextStyle(fontSize: 20.sp, color: Colors.black),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(12.sp),
+        borderRadius: BorderRadius.circular(12.r),
       ),
     );
 
     return Column(
       children: [
         CircleAvatar(
-          radius: 70.sp,
-          backgroundColor: AppColors.lightPurplr,
+          radius: 70.r,
+          backgroundColor: AppColors.lightPurple,
           child: CircleAvatar(
-            radius: 50.sp,
+            radius: 50.r,
             backgroundColor: AppColors.purple,
             child: Icon(Icons.mail_lock, color: Colors.white, size: 40.sp),
           ),
@@ -59,7 +59,7 @@ class OtpForm extends StatelessWidget {
           focusedPinTheme: defaultPinTheme.copyWith(
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.purple),
-              borderRadius: BorderRadius.circular(12.sp),
+              borderRadius: BorderRadius.circular(12.r),
             ),
           ),
           showCursor: true,

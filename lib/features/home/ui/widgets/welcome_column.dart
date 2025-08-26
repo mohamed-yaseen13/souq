@@ -25,7 +25,7 @@ class WelcomeColumn extends StatelessWidget {
             InkWell(
               onTap: () => context.pushNamed(AppRoutes.viewImageScreen),
               child: CircleAvatar(
-                radius: 25.sp,
+                radius: 25.r,
                 backgroundColor: Colors.white,
                 child: ClipOval(child: ImageService.getUserImage()),
               ),

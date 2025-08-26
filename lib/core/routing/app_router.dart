@@ -21,6 +21,7 @@ import 'package:souq/features/profile/add_new_account/logic/cubit/add_account_cu
 import 'package:souq/features/profile/add_new_account/ui/widgets/otp_add_account_screen.dart';
 import 'package:souq/features/profile/phone_number/logic/cubit/phone_cubit.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
+import 'package:souq/features/profile/products/ui/widgets/add_product_screen.dart';
 import 'package:souq/features/profile/products/ui/widgets/seller_products_screen.dart';
 import 'package:souq/features/profile/ui/profile_screen.dart';
 import 'package:souq/features/profile/add_new_account/ui/widgets/add_new_account_screen.dart';
@@ -171,6 +172,12 @@ class AppRouter {
       case AppRoutes.sellerProductsScreen:
         return MaterialPageRoute(
           builder: (_) => SellerProductsScreen(),
+          settings: settings,
+        );
+
+      case AppRoutes.addProductScreen:
+        return MaterialPageRoute(
+          builder: (_) => AddProductScreen(),
           settings: settings,
         );
 

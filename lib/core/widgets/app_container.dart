@@ -20,7 +20,7 @@ class AppContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: color ?? Colors.white,
         shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(8.sp),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: Padding(
         padding: EdgeInsetsGeometry.symmetric(

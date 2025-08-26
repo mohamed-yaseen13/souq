@@ -27,6 +27,7 @@ class _AddNewAccountScreenState extends State<AddNewAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScreenTemplate(
+      title: 'Add Account',
       child: Padding(
         padding: EdgeInsetsGeometry.symmetric(vertical: 24.h),
         child: BlocConsumer<AddAccountCubit, AddAccountState>(

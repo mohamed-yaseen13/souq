@@ -52,6 +52,7 @@ class _EditPictureAndNameScreenState extends State<EditPictureAndNameScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScreenTemplate(
+      title: 'Edit Your Info',
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 64.h),
         child: PopScope(

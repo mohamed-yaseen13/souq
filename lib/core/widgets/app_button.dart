@@ -16,7 +16,7 @@ class AppButton extends StatelessWidget {
         foregroundColor: Colors.white,
         padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 16.h),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.sp),
+          borderRadius: BorderRadius.circular(25.r),
         ),
         minimumSize: Size(350.w, 60.h),
       ),

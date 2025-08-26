@@ -41,6 +41,25 @@ class AppConstants {
   static const String usersCollections = 'users';
 
   static const String emailsCollections = 'emails';
+
+  static const List<String> categories = [
+    'Electronics',
+    'Fashion',
+    'Home & Garden',
+    'Sports',
+  ];
+
+  static const List<String> conditions = ['New', 'Like New', 'Good', 'Fair'];
+
+  static const List<String> availableColors = [
+    'Red',
+    'Blue',
+    'Black',
+    'White',
+    'Green',
+  ];
+
+  static const List<String> availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 }
 
 enum NavigationBarEnum { orders, chat, home, profile, settings }

@@ -42,20 +42,20 @@ class AppTextFormField extends StatelessWidget {
               vertical: 12.h,
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFEDF1F3), width: 2.sp),
-              borderRadius: BorderRadius.circular(12.sp),
+              borderSide: BorderSide(color: Color(0xFFEDF1F3), width: 2.w),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFEDF1F3), width: 2.sp),
-              borderRadius: BorderRadius.circular(12.sp),
+              borderSide: BorderSide(color: Color(0xFFEDF1F3), width: 2.w),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 2.sp),
-              borderRadius: BorderRadius.circular(12.sp),
+              borderSide: BorderSide(color: Colors.red, width: 2.w),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 2.sp),
-              borderRadius: BorderRadius.circular(12.sp),
+              borderSide: BorderSide(color: Colors.red, width: 2.w),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,

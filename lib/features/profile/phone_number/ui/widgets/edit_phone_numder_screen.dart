@@ -34,6 +34,7 @@ class _EditPhoneNumderScreenState extends State<EditPhoneNumderScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScreenTemplate(
+      title: 'Edit Your Phone Number',
       child: Padding(
         padding: EdgeInsetsGeometry.symmetric(vertical: 48.h),
         child: BlocConsumer<PhoneCubit, PhoneState>(

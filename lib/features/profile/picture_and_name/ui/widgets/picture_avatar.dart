@@ -70,7 +70,7 @@ class _PictureAvatarState extends State<PictureAvatar> {
           }
         },
         child: CircleAvatar(
-          radius: 100.sp,
+          radius: 100.r,
           backgroundColor: Colors.white,
           child: ClipOval(
             child: _selectedImage != null

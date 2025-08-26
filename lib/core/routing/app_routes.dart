@@ -35,5 +35,7 @@ class AppRoutes {
 
   static const String sellerProductsScreen = 'sellerProductsScreen';
 
+  static const String addProductScreen = 'addProductScreen';
+
   static const String test = 'test';
 }

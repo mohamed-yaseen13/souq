@@ -23,7 +23,7 @@ class ProductsRow extends StatelessWidget {
             size: 25.sp,
           ),
           horizontalSpace(12),
-          Text('Your Products', style: AppTextStyles.blackColor18FontText),
+          Text('Your Shop', style: AppTextStyles.blackColor18FontText),
           Spacer(),
           Icon(Icons.keyboard_arrow_right, size: 32.sp, color: Colors.grey),
         ],

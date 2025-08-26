@@ -32,7 +32,7 @@ class SouqApp extends StatelessWidget {
           onGenerateRoute: AppRouter.generateRoute,
           theme: ThemeData(
             scaffoldBackgroundColor: AppColors.white,
-            appBarTheme: AppBarTheme(color: AppColors.white),
+            appBarTheme: AppBarTheme(backgroundColor: AppColors.white),
           ),
         );
       },
