@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/widgets/app_text_form_field.dart';
 import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/products_text_form_field.dart';
 
 class AdditionalDetailsSection extends StatelessWidget {
   final TextEditingController warrantyController;
@@ -20,13 +20,13 @@ class AdditionalDetailsSection extends StatelessWidget {
       icon: Icons.info_outline,
       child: Column(
         children: [
-          ProductsTextFormField(
+          AppTextFormField(
             controller: warrantyController,
             label: 'Warranty Information',
             placeholder: 'e.g., 1 year manufacturer warranty',
           ),
           verticalSpace(16),
-          ProductsTextFormField(
+          AppTextFormField(
             controller: returnPolicyController,
             label: 'Return Policy',
             placeholder: 'Describe your return policy...',

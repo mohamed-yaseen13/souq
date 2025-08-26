@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/styles/app_colors.dart';
+import 'package:souq/core/styles/app_text_styles.dart';
+import 'package:souq/core/widgets/app_container.dart';
 
 class ToggleField extends StatelessWidget {
   final String label;
@@ -21,33 +23,19 @@ class ToggleField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: TextStyle(
-            color: Color(0xFF6B7280),
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        Text(label, style: AppTextStyles.blackColor14FontText),
         verticalSpace(4),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-          decoration: BoxDecoration(
-            color: const Color(0xFFF9FAFB),
-            border: Border.all(color: const Color(0xFFE5E7EB), width: 2.w),
-            borderRadius: BorderRadius.circular(12.r),
-          ),
+        AppContainer(
+          isThereBorder: true,
+          color: AppColors.inputColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                description,
-                style: TextStyle(color: Color(0xFF374151), fontSize: 14.sp),
-              ),
+              Text(description, style: TextStyle(color: Color(0xFF9CA3AF))),
               Switch(
                 value: value,
                 onChanged: onChanged,
-                activeThumbColor: const Color(0xFF6366F1),
+                activeThumbColor: AppColors.darkPurple,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
             ],

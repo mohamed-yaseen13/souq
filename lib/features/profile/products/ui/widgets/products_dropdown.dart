@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/styles/app_text_styles.dart';
+import 'package:souq/core/widgets/app_input_decoration.dart';
 
 class ProductsDropdown extends StatelessWidget {
   final String label;
@@ -25,17 +26,13 @@ class ProductsDropdown extends StatelessWidget {
       children: [
         RichText(
           text: TextSpan(
-            style: TextStyle(
-              color: Color(0xFF6B7280),
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-            ),
+            style: AppTextStyles.blackColor14FontText,
             children: [
               TextSpan(text: label),
               if (isRequired)
-                const TextSpan(
+                TextSpan(
                   text: ' *',
-                  style: TextStyle(color: Color(0xFFEF4444)),
+                  style: AppTextStyles.redColor16Font500WeightText,
                 ),
             ],
           ),
@@ -43,26 +40,7 @@ class ProductsDropdown extends StatelessWidget {
         verticalSpace(4),
         DropdownButtonFormField<String>(
           initialValue: value,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: const Color(0xFFF9FAFB),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: Color(0xFFE5E7EB), width: 2.w),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: Color(0xFFE5E7EB), width: 2.w),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(color: Color(0xFF6366F1), width: 2.w),
-            ),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 16.w,
-              vertical: 12.h,
-            ),
-          ),
+          decoration: appInputDecoration(),
           items: items.map((item) {
             return DropdownMenuItem<String>(value: item, child: Text(item));
           }).toList(),

@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
+import 'package:souq/core/widgets/app_input_decoration.dart';
 
 class AppTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
-  final Function(String?) validator;
+  final Function(String?)? validator;
   final bool isObscureText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final TextInputType? textInputType;
   final bool readOnly;
+  final String? placeholder;
+  final bool isRequired;
+  final int maxLines;
 
   const AppTextFormField({
     super.key,
     required this.controller,
     required this.label,
-    required this.validator,
+    this.validator,
     this.isObscureText = false,
     this.suffixIcon,
     this.textInputType,
     this.prefixIcon,
+    this.placeholder,
     this.readOnly = false,
+    this.isRequired = false,
+    this.maxLines = 1,
   });
 
   @override
@@ -29,40 +36,40 @@ class AppTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppTextStyles.blackColor18FontText),
+        RichText(
+          text: TextSpan(
+            style: AppTextStyles.blackColor14FontText,
+            children: [
+              TextSpan(text: label),
+              if (isRequired)
+                TextSpan(
+                  text: ' *',
+                  style: AppTextStyles.redColor16Font500WeightText,
+                ),
+            ],
+          ),
+        ),
+        verticalSpace(4),
         TextFormField(
           readOnly: readOnly,
           keyboardType: textInputType,
           obscureText: isObscureText,
           controller: controller,
-          decoration: InputDecoration(
-            isDense: true,
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 12.w,
-              vertical: 12.h,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFEDF1F3), width: 2.w),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFEDF1F3), width: 2.w),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 2.w),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 2.w),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            suffixIcon: suffixIcon,
+          maxLines: maxLines,
+          decoration: appInputDecoration(
+            hintText: placeholder,
             prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
           ),
-          validator: (value) {
-            return validator(value);
-          },
+          validator: isRequired
+              ? (value) =>
+                    value?.isEmpty == true ? 'This field is required' : null
+              : (value) {
+                  if (validator != null) {
+                    return validator!(value);
+                  }
+                  return null;
+                },
         ),
       ],
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/widgets/app_text_form_field.dart';
 import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/products_text_form_field.dart';
 import 'package:souq/features/profile/products/ui/widgets/toggle_field.dart';
 
 class ShippingSection extends StatelessWidget {
@@ -28,20 +28,20 @@ class ShippingSection extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: ProductsTextFormField(
+                child: AppTextFormField(
                   controller: weightController,
                   label: 'Weight (kg)',
                   placeholder: '0.5',
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  textInputType: TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
               horizontalSpace(12),
               Expanded(
-                child: ProductsTextFormField(
+                child: AppTextFormField(
                   controller: shippingCostController,
                   label: 'Shipping Cost',
                   placeholder: '9.99',
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  textInputType: TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
             ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/widgets/app_text_form_field.dart';
 import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/products_text_form_field.dart';
 
 class PricingSection extends StatelessWidget {
   final TextEditingController priceController;
@@ -25,31 +25,31 @@ class PricingSection extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: ProductsTextFormField(
+                child: AppTextFormField(
                   controller: priceController,
                   label: 'Price',
                   placeholder: '0.00',
                   isRequired: true,
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  textInputType: TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
               horizontalSpace(12),
               Expanded(
-                child: ProductsTextFormField(
+                child: AppTextFormField(
                   controller: stockController,
                   label: 'Stock Quantity',
                   placeholder: '1',
-                  keyboardType: TextInputType.number,
+                  textInputType: TextInputType.number,
                 ),
               ),
             ],
           ),
           verticalSpace(16),
-          ProductsTextFormField(
+          AppTextFormField(
             controller: originalPriceController,
             label: 'Original Price',
             placeholder: 'Original price (for discounts)',
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            textInputType: TextInputType.numberWithOptions(decimal: true),
           ),
         ],
       ),

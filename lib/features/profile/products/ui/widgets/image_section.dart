@@ -2,6 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/styles/app_colors.dart';
+import 'package:souq/core/styles/app_text_styles.dart';
+import 'package:souq/core/widgets/app_container.dart';
+import 'package:souq/features/profile/products/ui/widgets/camera_container.dart';
 import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
 
 class ImageSection extends StatelessWidget {
@@ -21,39 +25,17 @@ class ImageSection extends StatelessWidget {
       icon: Icons.camera_alt,
       child: GestureDetector(
         onTap: onTap,
-        child: Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 20.w),
-          decoration: BoxDecoration(
-            border: Border.all(color: Color(0xFFD1D5DB), width: 2.w),
-            borderRadius: BorderRadius.circular(12.r),
-            color: const Color(0xFFF9FAFB),
-          ),
+        child: AppContainer(
+          verticalPadding: 30.h,
+          isThereBorder: true,
+          color: AppColors.inputColor,
           child: Column(
             children: [
-              Container(
-                width: 48.w,
-                height: 48.h,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE5E7EB),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.camera_alt,
-                  size: 20.sp,
-                  color: Color(0xFF6B7280),
-                ),
-              ),
+              CameraContainer(),
               verticalSpace(12),
-              Text(
-                'Add product photos',
-                style: TextStyle(color: Color(0xFF6B7280), fontSize: 14.sp),
-              ),
+              Text('Add product photos', style: AppTextStyles.hintStyle),
               verticalSpace(8),
-              Text(
-                'Upload up to 10 images',
-                style: TextStyle(color: Color(0xFF9CA3AF), fontSize: 12.sp),
-              ),
+              Text('Upload up to 10 images', style: AppTextStyles.hintStyle),
               if (selectedImages.isNotEmpty) ...[
                 verticalSpace(16),
                 SizedBox(

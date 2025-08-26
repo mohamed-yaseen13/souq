@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:souq/core/widgets/app_text_form_field.dart';
 import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/products_text_form_field.dart';
 import 'package:souq/features/profile/products/ui/widgets/variants_row.dart';
 
 class VariantsSection extends StatelessWidget {
@@ -33,7 +33,7 @@ class VariantsSection extends StatelessWidget {
       icon: Icons.palette,
       child: Column(
         children: [
-          ProductsTextFormField(
+          AppTextFormField(
             controller: colorsController,
             label: 'Available Colors',
             placeholder: 'e.g., Red, Blue, Black',
@@ -45,7 +45,7 @@ class VariantsSection extends StatelessWidget {
             onSelected: onColorSelected,
           ),
           const SizedBox(height: 16),
-          ProductsTextFormField(
+          AppTextFormField(
             controller: sizesController,
             label: 'Available Sizes',
             placeholder: 'e.g., S, M, L, XL',

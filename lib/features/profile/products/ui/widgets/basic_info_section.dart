@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:souq/core/helpers/spacing.dart';
+import 'package:souq/core/widgets/app_text_form_field.dart';
 import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
 import 'package:souq/features/profile/products/ui/widgets/products_dropdown.dart';
-import 'package:souq/features/profile/products/ui/widgets/products_text_form_field.dart';
 
 class BasicInfoSection extends StatelessWidget {
   final TextEditingController nameController;
@@ -34,21 +35,21 @@ class BasicInfoSection extends StatelessWidget {
       icon: Icons.edit_note,
       child: Column(
         children: [
-          ProductsTextFormField(
+          AppTextFormField(
             controller: nameController,
             label: 'Product Name',
             placeholder: 'Enter product name',
             isRequired: true,
           ),
-          const SizedBox(height: 16),
-          ProductsTextFormField(
+          verticalSpace(16),
+          AppTextFormField(
             controller: descriptionController,
             label: 'Description',
             placeholder: 'Describe your product in detail...',
             isRequired: true,
             maxLines: 4,
           ),
-          const SizedBox(height: 16),
+          verticalSpace(16),
           ProductsDropdown(
             label: 'Category',
             value: selectedCategory,
@@ -56,13 +57,13 @@ class BasicInfoSection extends StatelessWidget {
             onChanged: onCategoryChanged,
             isRequired: true,
           ),
-          const SizedBox(height: 16),
-          ProductsTextFormField(
+          verticalSpace(16),
+          AppTextFormField(
             controller: brandController,
             label: 'Brand',
             placeholder: 'Product brand',
           ),
-          const SizedBox(height: 16),
+          verticalSpace(16),
           ProductsDropdown(
             label: 'Condition',
             value: selectedCondition,

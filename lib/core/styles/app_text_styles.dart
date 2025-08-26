@@ -50,6 +50,12 @@ class AppTextStyles {
     color: Colors.grey,
   );
 
+  static TextStyle greyColor14Font500WeightText = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    color: Color(0xFF6B7280),
+  );
+
   static TextStyle blueColor12Font500WeightText = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w500,
@@ -68,4 +74,6 @@ class AppTextStyles {
     color: Color(0xFF2D3748),
     height: 1.5,
   );
+
+  static TextStyle hintStyle = TextStyle(color: Color(0xFF9CA3AF));
 }
