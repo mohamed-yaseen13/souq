@@ -38,9 +38,11 @@ enum Role {
 }
 
 class AppConstants {
-  static const String usersCollections = 'users';
+  static const String usersCollection = 'users';
 
-  static const String emailsCollections = 'emails';
+  static const String emailsCollection = 'emails';
+
+  static const String shopsCollection = 'shops';
 
   static const List<String> categories = [
     'Electronics',

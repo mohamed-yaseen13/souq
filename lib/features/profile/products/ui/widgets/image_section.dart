@@ -11,17 +11,19 @@ import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
 class ImageSection extends StatelessWidget {
   final Function()? onTap;
   final List<File> selectedImages;
+  final String desc;
 
   const ImageSection({
     super.key,
     required this.selectedImages,
     required this.onTap,
+    required this.desc,
   });
 
   @override
   Widget build(BuildContext context) {
     return FormSection(
-      title: 'Product Images',
+      title: '$desc Images',
       icon: Icons.camera_alt,
       child: GestureDetector(
         onTap: onTap,
@@ -33,7 +35,7 @@ class ImageSection extends StatelessWidget {
             children: [
               CameraContainer(),
               verticalSpace(12),
-              Text('Add product photos', style: AppTextStyles.hintStyle),
+              Text('Add $desc photos', style: AppTextStyles.hintStyle),
               verticalSpace(8),
               Text('Upload up to 10 images', style: AppTextStyles.hintStyle),
               if (selectedImages.isNotEmpty) ...[

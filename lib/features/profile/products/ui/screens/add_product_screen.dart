@@ -55,7 +55,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ImageSection(selectedImages: _selectedImages, onTap: _pickImages),
+            ImageSection(
+              desc: 'Product',
+              selectedImages: _selectedImages,
+              onTap: _pickImages,
+            ),
             verticalSpace(25),
             BasicInfoSection(
               nameController: _nameController,

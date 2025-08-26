@@ -9,12 +9,12 @@ class Database {
   static DocumentReference<Map<String, dynamic>> getUserRef(
     String generatedUserId,
   ) => FirebaseFirestore.instance
-      .collection(AppConstants.usersCollections)
+      .collection(AppConstants.usersCollection)
       .doc(generatedUserId);
 
   static DocumentReference<Map<String, dynamic>> getEmailRef(String email) =>
       FirebaseFirestore.instance
-          .collection(AppConstants.emailsCollections)
+          .collection(AppConstants.emailsCollection)
           .doc(email);
 
   static Future<bool> checkIfEmailExist(String email) async {
