@@ -5,13 +5,13 @@ import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/widgets/app_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
-import 'package:souq/features/profile/products/ui/widgets/additional_details_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/basic_info_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/additional_details_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/basic_info_section.dart';
 import 'dart:io';
-import 'package:souq/features/profile/products/ui/widgets/image_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/pricing_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/shipping_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/variants_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/image_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/pricing_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/shipping_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/variants_section.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});

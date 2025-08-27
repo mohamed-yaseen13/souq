@@ -13,7 +13,7 @@ import 'package:souq/features/profile/add_new_account/ui/add_account_row.dart';
 import 'package:souq/features/profile/address/ui/address_row.dart';
 import 'package:souq/features/profile/phone_number/ui/phone_number_row.dart';
 import 'package:souq/features/profile/picture_and_name/ui/picture_and_name_container.dart';
-import 'package:souq/features/profile/products/ui/products_row.dart';
+import 'package:souq/features/profile/seller_shop/ui/products_row.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

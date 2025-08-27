@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/widgets/app_text_form_field.dart';
-import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
-import 'package:souq/features/profile/products/ui/widgets/products_dropdown.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/form_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/products_dropdown.dart';
 
 class BasicInfoSection extends StatelessWidget {
   final TextEditingController nameController;

@@ -5,8 +5,8 @@ import 'package:souq/core/helpers/spacing.dart';
 import 'package:souq/core/styles/app_colors.dart';
 import 'package:souq/core/styles/app_text_styles.dart';
 import 'package:souq/core/widgets/app_container.dart';
-import 'package:souq/features/profile/products/ui/widgets/camera_container.dart';
-import 'package:souq/features/profile/products/ui/widgets/form_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/camera_container.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/form_section.dart';
 
 class ImageSection extends StatelessWidget {
   final Function()? onTap;

@@ -21,9 +21,9 @@ import 'package:souq/features/profile/add_new_account/logic/cubit/add_account_cu
 import 'package:souq/features/profile/add_new_account/ui/widgets/otp_add_account_screen.dart';
 import 'package:souq/features/profile/phone_number/logic/cubit/phone_cubit.dart';
 import 'package:souq/features/profile/picture_and_name/logic/cubit/picture_and_name_cubit.dart';
-import 'package:souq/features/profile/products/ui/screens/add_product_screen.dart';
-import 'package:souq/features/profile/products/ui/screens/edit_shop_info_screen.dart';
-import 'package:souq/features/profile/products/ui/screens/seller_products_screen.dart';
+import 'package:souq/features/profile/seller_shop/ui/screens/add_product_screen.dart';
+import 'package:souq/features/profile/seller_shop/ui/screens/edit_shop_info_screen.dart';
+import 'package:souq/features/profile/seller_shop/ui/screens/seller_products_screen.dart';
 import 'package:souq/features/profile/ui/profile_screen.dart';
 import 'package:souq/features/profile/add_new_account/ui/widgets/add_new_account_screen.dart';
 import 'package:souq/features/profile/address/ui/widgets/edit_address_screen.dart';

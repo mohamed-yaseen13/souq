@@ -6,7 +6,7 @@ import 'package:souq/core/widgets/app_button.dart';
 import 'package:souq/core/widgets/app_screen_template.dart';
 import 'package:souq/core/widgets/app_text_form_field.dart';
 import 'package:souq/core/widgets/name_text_form_field.dart';
-import 'package:souq/features/profile/products/ui/widgets/image_section.dart';
+import 'package:souq/features/profile/seller_shop/ui/widgets/image_section.dart';
 
 class EditShopInfoScreen extends StatefulWidget {
   const EditShopInfoScreen({super.key});
